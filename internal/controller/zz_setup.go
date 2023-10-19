@@ -9,6 +9,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	groupassignment "github.com/healthcarecom/provider-okta/internal/controller/app/groupassignment"
 	group "github.com/healthcarecom/provider-okta/internal/controller/group/group"
 	memberships "github.com/healthcarecom/provider-okta/internal/controller/groupmembership/memberships"
 	providerconfig "github.com/healthcarecom/provider-okta/internal/controller/providerconfig"
@@ -19,6 +20,7 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		groupassignment.Setup,
 		group.Setup,
 		memberships.Setup,
 		providerconfig.Setup,

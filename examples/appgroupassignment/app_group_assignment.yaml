@@ -1,0 +1,9 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: GroupAssignment
+metadata:
+  name: example-app-assignment
+spec:
+  forProvider:
+    groupIdRef:
+      name: example-group
+    appId: "appId"
