@@ -1,4 +1,4 @@
-apiVersion: group.upbound.io/v1alpha1
+apiVersion: group.okta.upbound.io/v1alpha1
 kind: Group
 metadata:
   name: example-group

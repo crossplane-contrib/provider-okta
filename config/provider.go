@@ -11,6 +11,8 @@ import (
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/healthcarecom/provider-okta/config/group"
+	"github.com/healthcarecom/provider-okta/config/group_memberships"
+	"github.com/healthcarecom/provider-okta/config/user"
 )
 
 const (
@@ -27,7 +29,6 @@ var providerMetadata string
 // GetProvider returns provider configuration
 func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
-		ujconfig.WithRootGroup("upbound.io"),
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
 		ujconfig.WithFeaturesPackage("internal/features"),
 		ujconfig.WithDefaultResourceOptions(
@@ -37,6 +38,8 @@ func GetProvider() *ujconfig.Provider {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		group.Configure,
+		user.Configure,
+		group_memberships.Configure,
 	} {
 		configure(pc)
 	}

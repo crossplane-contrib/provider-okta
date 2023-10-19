@@ -1,0 +1,12 @@
+apiVersion: user.okta.upbound.io/v1alpha1
+kind: User
+metadata:
+  name: "example-user"
+spec:
+  forProvider:
+    login: "user@example.com"
+    email: "user@example.com"
+    firstName: "Example"
+    lastName: "User"
+  providerConfigRef:
+    name: default

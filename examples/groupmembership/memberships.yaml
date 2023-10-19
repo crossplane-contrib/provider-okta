@@ -1,0 +1,12 @@
+apiVersion: groupmembership.okta.upbound.io/v1alpha1
+kind: Memberships
+metadata:
+  name: example-group-membership
+spec:
+  forProvider:
+    groupIdRef:
+      name: example-group
+    usersRefs:
+      - name: "example-user"
+
+

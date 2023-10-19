@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
-  name: groups.group.upbound.io
+  name: memberships.groupmembership.okta.upbound.io
 spec:
-  group: group.upbound.io
+  group: groupmembership.okta.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - okta
-    kind: Group
-    listKind: GroupList
-    plural: groups
-    singular: group
+    kind: Memberships
+    listKind: MembershipsList
+    plural: memberships
+    singular: memberships
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Group is the Schema for the Groups API. <no value>
+        description: Memberships is the Schema for the Membershipss API. Resource
+          to manage a set of memberships for a specific group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: GroupSpec defines the desired state of Group
+            description: MembershipsSpec defines the desired state of Memberships
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,20 +68,171 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  customProfileAttributes:
-                    description: JSON formatted custom attributes for a group. It
-                      must be JSON due to various types Okta allows.
+                  groupId:
+                    description: Okta group ID. ID of a Okta group.
                     type: string
-                  description:
-                    description: Group description
-                    type: string
-                  name:
-                    description: Group name
-                    type: string
-                  skipUsers:
-                    description: Ignore users sync. This is a temporary solution until
-                      'users' field is supported in all the app-like resources
+                  groupIdRef:
+                    description: Reference to a Group in group to populate groupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  groupIdSelector:
+                    description: Selector for a Group in group to populate groupId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  trackAllUsers:
+                    description: The resource will concern itself with all users added/deleted
+                      to the group; even those managed outside of the resource. The
+                      resource concerns itself with all users added/deleted to the
+                      group; even those managed outside of the resource.
                     type: boolean
+                  users:
+                    description: The list of Okta user IDs which the group should
+                      have membership managed for. The list of Okta user IDs which
+                      the group should have membership managed for.
+                    items:
+                      type: string
+                    type: array
+                  usersRefs:
+                    description: References to User in user to populate users.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: Resolution specifies whether resolution
+                                of this reference is required. The default is 'Required',
+                                which means the reconcile will fail if the reference
+                                cannot be resolved. 'Optional' means this reference
+                                will be a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: Resolve specifies when this reference should
+                                be resolved. The default is 'IfNotPresent', which
+                                will attempt to resolve the reference only when the
+                                corresponding field is not present. Use 'Always' to
+                                resolve the reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  usersSelector:
+                    description: Selector for a list of User in user to populate users.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicy:
                 default: FullControl
@@ -268,30 +420,29 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: name is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
-            description: GroupStatus defines the observed state of Group.
+            description: MembershipsStatus defines the observed state of Memberships.
             properties:
               atProvider:
                 properties:
-                  customProfileAttributes:
-                    description: JSON formatted custom attributes for a group. It
-                      must be JSON due to various types Okta allows.
-                    type: string
-                  description:
-                    description: Group description
+                  groupId:
+                    description: Okta group ID. ID of a Okta group.
                     type: string
                   id:
                     type: string
-                  name:
-                    description: Group name
-                    type: string
-                  skipUsers:
-                    description: Ignore users sync. This is a temporary solution until
-                      'users' field is supported in all the app-like resources
+                  trackAllUsers:
+                    description: The resource will concern itself with all users added/deleted
+                      to the group; even those managed outside of the resource. The
+                      resource concerns itself with all users added/deleted to the
+                      group; even those managed outside of the resource.
                     type: boolean
+                  users:
+                    description: The list of Okta user IDs which the group should
+                      have membership managed for. The list of Okta user IDs which
+                      the group should have membership managed for.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
