@@ -1,0 +1,19 @@
+apiVersion: groupmembership.okta.upbound.io/v1alpha1
+kind: Memberships
+metadata:
+  annotations:
+    meta.upbound.io/example-id: groupmembership/v1alpha1/memberships
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    groupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    usersRefs:
+    - name: test1
+    - name: test2
+
+---
+

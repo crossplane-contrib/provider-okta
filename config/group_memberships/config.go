@@ -2,6 +2,7 @@ package group_memberships
 
 import "github.com/upbound/upjet/pkg/config"
 
+// Configure configures individual resources by adding custom ResourceConfigurators.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("okta_group_memberships", func(r *config.Resource) {
 		r.ShortGroup = "groupMembership"
