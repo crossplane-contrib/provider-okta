@@ -1,9 +1,2587 @@
-name: hashicorp/null
+name: okta/okta
 resources:
-    null_resource Resource - terraform-provider-null:
+    okta_admin_role_custom':
         subCategory: ""
-        description: The null_resource resource implements the standard resource lifecycle but takes no further action. The triggers argument allows specifying an arbitrary set of values that, when changed, will cause the resource to be replaced.
-        name: null_resource Resource - terraform-provider-null
-        title: null_resource Resource - terraform-provider-null
+        description: Manages custom roles.
+        name: okta_admin_role_custom'
+        title: okta_admin_role_custom'
+        argumentDocs:
+            description: '- (Required) A human-readable description of the new Role.'
+            id: '- Custom Role ID'
+            label: '- (Required) The name given to the new Role.'
+            permissions: |-
+                - (Optional) The permissions that the new Role grants. At least one
+                permission must be specified when creating custom role. Valid values: "okta.authzServers.manage",
+                "okta.authzServers.read",
+                "okta.apps.assignment.manage",
+                "okta.apps.manage",
+                "okta.apps.read",
+                "okta.customizations.manage",
+                "okta.customizations.read",
+                "okta.groups.appAssignment.manage",
+                "okta.groups.create",
+                "okta.groups.manage",
+                "okta.groups.members.manage",
+                "okta.groups.read",
+                "okta.profilesources.import.run",
+                "okta.users.appAssignment.manage",
+                "okta.users.create",
+                "okta.users.credentials.expirePassword",
+                "okta.users.credentials.manage",
+                "okta.users.credentials.resetFactors",
+                "okta.users.credentials.resetPassword",
+                "okta.users.groupMembership.manage",
+                "okta.users.lifecycle.activate",
+                "okta.users.lifecycle.clearSessions",
+                "okta.users.lifecycle.deactivate",
+                "okta.users.lifecycle.delete",
+                "okta.users.lifecycle.manage",
+                "okta.users.lifecycle.suspend",
+                "okta.users.lifecycle.unlock",
+                "okta.users.lifecycle.unsuspend",
+                "okta.users.manage",
+                "okta.users.read",
+                "okta.users.userprofile.manage",
+                "okta.workflows.invoke".,
+        importStatements: []
+    okta_admin_role_custom_assignments':
+        subCategory: ""
+        description: Manages custom roles assignments
+        name: okta_admin_role_custom_assignments'
+        title: okta_admin_role_custom_assignments'
+        argumentDocs:
+            custom_role_id: '- (Required) ID of the Custom Role.'
+            id: '- ID of this resource in resource_set_id/custom_role_id format.'
+            members: |-
+                - (Optional) The hrefs that point to User(s) and/or Group(s) that receive the Role. At least one
+                permission must be specified when creating custom role.
+            resource_set_id: '- (Required) ID of the target Resource Set.'
+        importStatements: []
+    okta_admin_role_targets':
+        subCategory: ""
+        description: Manages targets for administrator roles.
+        name: okta_admin_role_targets'
+        title: okta_admin_role_targets'
+        argumentDocs:
+            apps: '- (Optional) List of app names (name represents set of app instances) or a combination of app name and app instance ID (like ''salesforce'' or ''facebook.0oapsqQ6dv19pqyEo0g3'').'
+            groups: (Optional) List of group IDs. Conflicts with apps.
+            role_id: (Computed) Role ID.
+            role_type: '- (Required) Name of the role associated with the user. See API Docs.'
+            user_id: '- (Required) ID of the user.'
+        importStatements: []
+    okta_app_access_policy_assignment':
+        subCategory: ""
+        description: Assigns an access policy to an application.
+        name: okta_app_access_policy_assignment'
+        title: okta_app_access_policy_assignment'
+        argumentDocs:
+            app_id: '- (Required) The application ID; this value is immutable and can not be updated.'
+            id: '- The ID of the resource. This ID is simply the application ID.'
+            policy_id: '- (Required) The access policy ID.'
+        importStatements: []
+    okta_app_auto_login':
+        subCategory: ""
+        description: Creates an Auto Login Okta Application.
+        name: okta_app_auto_login'
+        title: okta_app_auto_login'
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            app_settings_json: '- (Optional) Application settings in JSON format.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            credentials_scheme: '- (Optional) One of: "EDIT_USERNAME_AND_PASSWORD", "ADMIN_SETS_CREDENTIALS", "EDIT_PASSWORD_ONLY", "EXTERNAL_PASSWORD_SYNC", or "SHARED_USERNAME_AND_PASSWORD".'
+            enduser_note: '- (Optional) Application notes for end users.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            label: '- (Required) The Application''s display name.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_url: '- Direct link of application logo.'
+            name: '- Name assigned to the application by Okta.'
+            preconfigured_app: '- (Optional) Tells Okta to use an existing application in their application catalog, as opposed to a custom application.'
+            reveal_password: '- (Optional) Allow user to reveal password. It can not be set to true if credentials_scheme is "ADMIN_SETS_CREDENTIALS", "SHARED_USERNAME_AND_PASSWORD" or "EXTERNAL_PASSWORD_SYNC".'
+            shared_password: '- (Optional) Shared password, required for certain schemes'
+            shared_username: '- (Optional) Shared username, required for certain schemes'
+            sign_on_mode: '- Sign-on mode of the application.'
+            sign_on_redirect_url: '- (Optional) Redirect URL; if going to the login page URL redirects to another page, then enter that URL here'
+            sign_on_url: '- (Required) App login page URL'
+            status: '- (Optional) The status of the application, by default, it is "ACTIVE".'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            user_name_template: '- (Optional) Username template. Default: "${source.login}"'
+            user_name_template_push_status: '- (Optional) Push username on update. Valid values: "PUSH" and "DONT_PUSH".'
+            user_name_template_suffix: '- (Optional) Username template suffix.'
+            user_name_template_type: '- (Optional) Username template type. Default: "BUILT_IN".'
+        importStatements: []
+    okta_app_basic_auth:
+        subCategory: ""
+        description: Creates a Basic Auth Application.
+        name: okta_app_basic_auth
+        title: okta_app_basic_auth
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "auth_url": "https://example.com/auth.html",
+                  "label": "Example",
+                  "url": "https://example.com/login.html"
+                }
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            auth_url: '- (Required) The URL of the authenticating site for this app.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            enduser_note: '- (Optional) Application notes for end users.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            id: '- ID of the Application.'
+            label: '- (Required) The Application''s display name.'
+            logo: '- (Optional) Local path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_url: '- Direct link of application logo.'
+            status: '- (Optional) Status of application. ("ACTIVE" or "INACTIVE").'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            url: '- (Required) The URL of the sign-in page for this app.'
+        importStatements: []
+    okta_app_bookmark':
+        subCategory: ""
+        description: Creates a Bookmark Application.
+        name: okta_app_bookmark'
+        title: okta_app_bookmark'
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            authentication_policy: '- (Optional) The ID of the associated app_signon_policy. If this property is removed from the application the default sign-on-policy will be associated with this application.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            enduser_note: '- (Optional) Application notes for end users.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            id: '- ID of the Application.'
+            label: '- (Required) The Application''s display name.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_url: '- Direct link of application logo.'
+            request_integration: '- (Optional) Would you like Okta to add an integration for this app?'
+            status: '- (Optional) Status of application. ("ACTIVE" or "INACTIVE").'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            url: '- (Optional) The URL of the bookmark.'
+        importStatements: []
+    okta_app_group_assignment':
+        subCategory: ""
+        description: Assigns a group to an application.
+        name: okta_app_group_assignment'
+        title: okta_app_group_assignment'
+        argumentDocs:
+            app_id: '- (Required) The ID of the application to assign a group to.'
+            group_id: '- (Required) The ID of the group to assign the app to.'
+            id: '- ID of the group assignment.'
+            priority: '- (Optional)  Priority of group assignment.'
+            profile: '- (Optional) JSON document containing application profile'
+            retain_assignment: '- (Optional) Retain the group assignment on destroy. If set to true, the resource will be removed from state but not from the Okta app.'
+            timeouts.create: '- Create timeout if syncing users/groups (default 1 hour).'
+            timeouts.read: '- Read timeout if syncing users/groups (default 1 hour).'
+            timeouts.update: '- Update timeout if syncing users/groups (default 1 hour).'
+        importStatements: []
+    okta_app_group_assignments':
+        subCategory: ""
+        description: Assigns groups to an application.
+        name: okta_app_group_assignments'
+        title: okta_app_group_assignments'
+        argumentDocs:
+            app_id: '- (Required) The ID of the application to assign a group to.'
+            group: '- (Required) A group to assign the app to.'
+            id: '- ID of the group to assign.'
+            priority: '- (Optional) Priority of group assignment'
+            profile: '- (Optional) JSON document containing application profile'
+        importStatements: []
+    okta_app_oauth':
+        subCategory: ""
+        description: Creates an OIDC Application.
+        name: okta_app_oauth'
+        title: okta_app_oauth'
+        argumentDocs:
+            DEPRECATED: ': This field is being replaced by client_id. Please use that field instead.",'
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            app_settings_json: '- (Optional) Application settings in JSON format.'
+            authentication_policy: '- (Optional) The ID of the associated app_signon_policy. If this property is removed from the application the default sign-on-policy will be associated with this application.'
+            auto_key_rotation: |-
+                - (Optional) Requested key rotation mode.  If
+                auto_key_rotation isn't specified, the client automatically opts in for Okta's
+                key rotation. You can update this property via the API or via the administrator
+                UI.
+                See: https://developer.okta.com/docs/reference/api/apps/#oauth-credential-object
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            client_basic_secret: '- (Optional) OAuth client secret key, this can be set when token_endpoint_auth_method is "client_secret_basic".'
+            client_id: '- (Optional) OAuth client ID. If set during creation, app is created with this id. See: https://developer.okta.com/docs/reference/api/apps/#oauth-credential-object'
+            client_secret: '- The client secret of the application. See: https://developer.okta.com/docs/reference/api/apps/#oauth-credential-object'
+            client_uri: '- (Optional) URI to a web page providing information about the client.'
+            consent_method: '- (Optional) Indicates whether user consent is required or implicit. Valid values: "REQUIRED", "TRUSTED". Default value is "TRUSTED".'
+            custom_client_id: '- (Optional) This property allows you to set your client_id during creation. NOTE: updating after creation will be a no-op, use client_id for that behavior instead.'
+            enduser_note: '- (Optional) Application notes for end users.'
+            filter_type: '- (Optional) Groups claim filter. Can only be set if type is "FILTER". Valid values: "EQUALS", "STARTS_WITH", "CONTAINS", "REGEX".'
+            grant_types: |-
+                - (Optional) List of OAuth 2.0 grant types. Conditional validation params found here.
+                Defaults to minimum requirements per app type. Valid values: "authorization_code", "implicit", "password", "refresh_token", "client_credentials",
+                "urn:ietf:params:oauth:grant-type:saml2-bearer" (Early Access Property), "urn:ietf:params:oauth:grant-type:token-exchange" (Early Access Property),
+                "interaction_code" (OIE only).
+            groups_claim: '- (Optional) Groups claim for an OpenID Connect client application. IMPORTANT: this argument is ignored when Okta API authentication is done with OAuth 2.0 credentials'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            id: '- ID of the application.'
+            implicit_assignment: '- (Optional) Early Access Property. Enables Federation Broker Mode. When this mode is enabled, users and groups arguments are ignored.'
+            issuer_mode: '- (Read-Only) Issuer Mode is inherited from the Issuer Mode on the OAuth app itself.'
+            jwks: '- (Optional) JSON Web Key set. Multiple jwks are supportedAdmin Console JWK Reference. Use kty=RSA e=[value] n=[value] for RSA jwks, and kty=EC x=[value] y=[value] for EC jwks'
+            jwks_uri: '- (Optional) URL of the custom authorization server''s JSON Web Key Set document.'
+            label: '- (Required) The Application''s display name.'
+            login_mode: '- (Optional) The type of Idp-Initiated login that the client supports, if any. Valid values: "DISABLED", "SPEC", "OKTA". Default is "DISABLED".'
+            login_scopes: '- (Optional) List of scopes to use for the request. Valid values: "openid", "profile", "email", "address", "phone". Required when login_mode is NOT DISABLED.'
+            login_uri: '- (Optional) URI that initiates login. Required when login_mode is NOT DISABLED.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_uri: '- (Optional) URI that references a logo for the client.'
+            logo_url: '- Direct link of application logo.'
+            name: '- (Required) Name of the claim that will be used in the token.'
+            omit_secret: '- (Optional) This tells the provider not to persist the application''s secret to state. Your app''s client_secret will be recreated if this ever changes from true => false.'
+            pkce_required: |-
+                - (Optional) Require Proof Key for Code Exchange (PKCE) for
+                additional verification.  If pkce_required isn't specified when adding a new
+                application, Okta sets it to true by default for "browser" and "native"
+                application types.
+                See https://developer.okta.com/docs/reference/api/apps/#oauth-credential-object
+            policy_uri: '- (Optional) URI to web page providing client policy document.'
+            post_logout_redirect_uris: '- (Optional) List of URIs for redirection after logout.'
+            profile: '- (Optional) Custom JSON that represents an OAuth application''s profile.'
+            redirect_uris: '- (Optional) List of URIs for use in the redirect-based flow. This is required for all application types except service.'
+            refresh_token_leeway: '- (Optional) Grace period for token rotation. Valid values: 0 to 60 seconds.'
+            refresh_token_rotation: '- (Optional) Refresh token rotation behavior. Valid values: "STATIC" or "ROTATE".'
+            response_types: |-
+                - (Optional) List of OAuth 2.0 response type strings. Array
+                values of "code", "token", "id_token". The grant_types and response_types
+                values described are partially orthogonal, as they refer to arguments
+                passed to different endpoints in the OAuth 2.0 protocol (opens new window).
+                However, they are related in that the grant_types available to a client
+                influence the response_types that the client is allowed to use, and vice versa.
+                For instance, a grant_types value that includes authorization_code implies a
+                response_types value that includes code, as both values are defined as part of
+                the OAuth 2.0 authorization code grant.
+                See: https://developer.okta.com/docs/reference/api/apps/#add-oauth-2-0-client-application
+            sign_on_mode: '- Sign-on mode of application.'
+            status: '- (Optional) The status of the application, by default, it is "ACTIVE".'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            token_endpoint_auth_method: |-
+                - (Optional) Requested authentication method for
+                the token endpoint. It can be set to "none", "client_secret_post",
+                "client_secret_basic", "client_secret_jwt", "private_key_jwt".  Use
+                pkce_required to require PKCE for your confidential clients using the
+                Authorization Code flow. If "token_endpoint_auth_method" is "none",
+                pkce_required needs to be true. If pkce_required isn't specified when
+                adding a new application, Okta sets it to true by default for "browser" and
+                "native" application types.
+                See https://developer.okta.com/docs/reference/api/apps/#oauth-credential-object
+            tos_uri: '- (Optional) URI to web page providing client tos (terms of service).'
+            type: '- (Required) Groups claim type. Valid values: "FILTER", "EXPRESSION".'
+            user_name_template: '- (Optional) Username template. Default: "${source.login}"'
+            user_name_template_push_status: '- (Optional) Push username on update. Valid values: "PUSH" and "DONT_PUSH".'
+            user_name_template_suffix: '- (Optional) Username template suffix.'
+            user_name_template_type: '- (Optional) Username template type. Default: "BUILT_IN".'
+            value: '- (Required) Value of the claim. Can be an Okta Expression Language statement that evaluates at the time the token is minted.'
+            wildcard_redirect: '- (Optional) Early Access Property. Indicates if the client is allowed to use wildcard matching of redirect_uris. Valid values: "DISABLED", "SUBDOMAIN". Default value is "DISABLED".'
+        importStatements: []
+    okta_app_oauth_api_scope':
+        subCategory: ""
+        description: Manages API scopes for OAuth applications.
+        name: okta_app_oauth_api_scope'
+        title: okta_app_oauth_api_scope'
+        argumentDocs:
+            app_id: '- (Required) ID of the application.'
+            issuer: '- (Required) The issuer of your Org Authorization Server, your Org URL.'
+            scopes: '- (Required) List of scopes for which consent is granted.'
+        importStatements: []
+    okta_app_oauth_post_logout_redirect_uri':
+        subCategory: ""
+        description: Manager app OAuth post logout redirect URI
+        name: okta_app_oauth_post_logout_redirect_uri'
+        title: okta_app_oauth_post_logout_redirect_uri'
+        argumentDocs:
+            app_id: '- (Required) OAuth application ID.'
+            id: '- ID of the resource, equals to uri.'
+            uri: '- (Required) Post Logout Redirect URI to append to Okta OIDC application.'
+        importStatements: []
+    okta_app_oauth_redirect_uri':
+        subCategory: ""
+        description: Manager app OAuth redirect URI
+        name: okta_app_oauth_redirect_uri'
+        title: okta_app_oauth_redirect_uri'
+        argumentDocs:
+            app_id: '- (Required) OAuth application ID.'
+            id: '- ID of the resource, equals to uri.'
+            uri: '- (Required) Redirect URI to append to Okta OIDC application.'
+        importStatements: []
+    okta_app_oauth_role_assignment':
+        subCategory: ""
+        description: Manages assignment of an admin role to an OAuth application
+        name: okta_app_oauth_role_assignment'
+        title: okta_app_oauth_role_assignment'
+        argumentDocs:
+            client_id: '- (Required) Client ID for the role to be assigned to'
+            id: '- Role Assignment ID'
+            label: '- Label of the role assignment'
+            resource_set: '- (Optional) Resource set for the custom role to assign, must be the ID of the created resource set.'
+            role: '- (Optional) Custom Role ID'
+            status: '- Status of the role assignment'
+            type: '- (Required) Role type to assign. This can be one of the standard Okta roles, such as HELP_DESK_ADMIN, or CUSTOM. Using custom requires the resource_set and role attributes to be set.'
+        importStatements: []
+    okta_app_saml:
+        subCategory: ""
+        description: Creates a SAML Application.
+        name: okta_app_saml
+        title: okta_app_saml
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "attribute_statements": [
+                    {
+                      "filter_type": "REGEX",
+                      "filter_value": ".*",
+                      "name": "groups",
+                      "type": "GROUP"
+                    }
+                  ],
+                  "audience": "https://example.com/audience",
+                  "authn_context_class_ref": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+                  "destination": "https://example.com",
+                  "digest_algorithm": "SHA256",
+                  "honor_force_authn": false,
+                  "label": "example",
+                  "recipient": "https://example.com",
+                  "response_signed": true,
+                  "signature_algorithm": "RSA_SHA256",
+                  "sso_url": "https://example.com",
+                  "subject_name_id_format": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+                  "subject_name_id_template": "${user.userName}"
+                }
+            - name: test
+              manifest: |-
+                {
+                  "attribute_statements": [
+                    {
+                      "filter_type": "REGEX",
+                      "filter_value": ".*",
+                      "name": "groups",
+                      "type": "GROUP"
+                    }
+                  ],
+                  "audience": "https://audience.com",
+                  "authn_context_class_ref": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+                  "depends_on": [
+                    "${okta_inline_hook.test}"
+                  ],
+                  "destination": "https://its-about-the-journey.com",
+                  "digest_algorithm": "SHA256",
+                  "honor_force_authn": false,
+                  "inline_hook_id": "${okta_inline_hook.test.id}",
+                  "label": "testAcc_replace_with_uuid",
+                  "recipient": "https://here.com",
+                  "response_signed": true,
+                  "signature_algorithm": "RSA_SHA256",
+                  "sso_url": "https://google.com",
+                  "subject_name_id_format": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+                  "subject_name_id_template": "${user.userName}"
+                }
+              references:
+                inline_hook_id: okta_inline_hook.test.id
+              dependencies:
+                okta_inline_hook.test: |-
+                    {
+                      "auth": {
+                        "key": "Authorization",
+                        "type": "HEADER",
+                        "value": "secret"
+                      },
+                      "channel": {
+                        "method": "POST",
+                        "type": "HTTP",
+                        "uri": "https://example.com/test1",
+                        "version": "1.0.0"
+                      },
+                      "name": "testAcc_replace_with_uuid",
+                      "status": "ACTIVE",
+                      "type": "com.okta.saml.tokens.transform",
+                      "version": "1.0.2"
+                    }
+            - name: test
+              manifest: |-
+                {
+                  "app_settings_json": "{\n    \"groupFilter\": \"app1.*\",\n    \"siteURL\": \"https://www.okta.com\"\n}\n",
+                  "label": "SharePoint (On-Premise)",
+                  "preconfigured_app": "sharepoint_onpremise",
+                  "saml_version": "1.1",
+                  "status": "ACTIVE",
+                  "user_name_template": "${source.login}",
+                  "user_name_template_type": "BUILT_IN"
+                }
+            - name: office365
+              manifest: |-
+                {
+                  "app_links_json": "  {\n      \"calendar\": false,\n      \"crm\": false,\n      \"delve\": false,\n      \"excel\": false,\n      \"forms\": false,\n      \"mail\": false,\n      \"newsfeed\": false,\n      \"onedrive\": false,\n      \"people\": false,\n      \"planner\": false,\n      \"powerbi\": false,\n      \"powerpoint\": false,\n      \"sites\": false,\n      \"sway\": false,\n      \"tasks\": false,\n      \"teams\": false,\n      \"video\": false,\n      \"word\": false,\n      \"yammer\": false,\n      \"login\": true\n  }\n",
+                  "app_settings_json": "    {\n       \"wsFedConfigureType\": \"AUTO\",\n       \"windowsTransportEnabled\": false,\n       \"domain\": \"okta.com\",\n       \"msftTenant\": \"okta\",\n       \"domains\": [],\n       \"requireAdminConsent\": false\n    }\n",
+                  "label": "Microsoft Office 365",
+                  "preconfigured_app": "office365",
+                  "saml_version": "1.1",
+                  "status": "ACTIVE"
+                }
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. Default is: false.'
+            acs_endpoints: '- (Optional) An array of ACS endpoints. You can configure a maximum of 100 endpoints.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            app_settings_json: '- (Optional) Application settings in JSON format.'
+            assertion_signed: '- (Optional) Determines whether the SAML assertion is digitally signed.'
+            attribute_statements: '- (Optional) List of SAML Attribute statements.'
+            audience: '- (Optional) Audience restriction.'
+            authentication_policy: '- (Optional) The ID of the associated app_signon_policy. If this property is removed from the application the default sign-on-policy will be associated with this application.'
+            authn_context_class_ref: '- (Optional) Identifies the SAML authentication context class for the assertion’s authentication statement.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar. Default is: false'
+            certificate: '- The raw signing certificate.'
+            created: '- Date created.'
+            default_relay_state: '- (Optional) Identifies a specific application resource in an IDP initiated SSO scenario.'
+            destination: '- (Optional) Identifies the location where the SAML response is intended to be sent inside the SAML assertion.'
+            digest_algorithm: '- (Optional) Determines the digest algorithm used to digitally sign the SAML assertion and response.'
+            e: '- RSA exponent.'
+            embed_url: '- Url that can be used to embed this application into another portal.'
+            enduser_note: '- (Optional) Application notes for end users.'
+            entity_key: '- Entity ID, the ID portion of the entity_url.'
+            entity_url: '- Entity URL for instance http://www.okta.com/exk1fcia6d6EMsf331d8.'
+            expires_at: '- Date the key expires.'
+            features: '- (Optional) features enabled. Notice: you can''t currently configure provisioning features via the API.'
+            filter_type: '- (Optional) Type of group attribute filter. Valid values are: "STARTS_WITH", "EQUALS", "CONTAINS", or "REGEX"'
+            filter_value: '- (Optional) Filter value to use.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app. Default is: false'
+            hide_web: '- (Optional) Do not display application icon to users. Default is: false'
+            honor_force_authn: '- (Optional) Prompt user to re-authenticate if SP asks for it. Default is: false'
+            http_post_binding: '- urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Post location from the SAML metadata.'
+            http_redirect_binding: '- urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect location from the SAML metadata.'
+            id: '- id of application.'
+            idp_issuer: '- (Optional) SAML issuer ID.'
+            implicit_assignment: '- (Optional) Early Access Property. Enables Federation Broker Mode.'
+            inline_hook_id: '- (Optional) Saml Inline Hook associated with the application.'
+            key_id: '- Certificate key ID.'
+            key_name: '- (Optional) Certificate name. This modulates the rotation of keys. New name == new key. Required to be set with key_years_valid.'
+            key_years_valid: '- (Optional) Number of years the certificate is valid (2 - 10 years).'
+            keys: '- An array of all key credentials for the application. Format of each entry is as follows:'
+            kid: '- Key ID.'
+            kty: '- Identifies the cryptographic algorithm family used with the key.'
+            label: '- (Required) label of application.'
+            last_updated: '- Date the key was last updated.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_url: '- Direct link of application logo.'
+            metadata: '- The raw SAML metadata in XML.'
+            metadata_url: '- SAML xml metadata URL.'
+            "n": '- RSA modulus.'
+            name: '- (Required) The name of the attribute statement.'
+            namespace: '- (Optional) The attribute namespace. It can be set to "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified", "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", or "urn:oasis:names:tc:SAML:2.0:attrname-format:basic".'
+            preconfigured_app: '- (Optional) name of application from the Okta Integration Network, if not included a custom app will be created.  If not provided the following arguments are required:'
+            recipient: '- (Optional) The location where the app may present the SAML assertion.'
+            request_compressed: '- (Optional) Denotes whether the request is compressed or not.'
+            response_signed: '- (Optional) Determines whether the SAML auth response message is digitally signed.'
+            saml_signed_request_enabled: '- SAML Signed Request enabled'
+            saml_version: '- (Optional) SAML version for the app''s sign-on mode. Valid values are: "2.0" or "1.1". Default is "2.0".'
+            sign_on_mode: '- Sign-on mode of application.'
+            signature_algorithm: '- (Optional) Signature algorithm used ot digitally sign the assertion and response.'
+            single_logout_certificate: '- (Optional) x509 encoded certificate that the Service Provider uses to sign Single Logout requests.  Note: should be provided without -----BEGIN CERTIFICATE----- and -----END CERTIFICATE-----, see official documentation.'
+            single_logout_issuer: '- (Optional) The issuer of the Service Provider that generates the Single Logout request.'
+            single_logout_url: '- (Optional) The location where the logout response is sent.'
+            sp_issuer: '- (Optional) SAML service provider issuer.'
+            sso_url: '- (Optional) Single Sign-on Url.'
+            status: '- (Optional) status of application.'
+            subject_name_id_format: '- (Optional) Identifies the SAML processing rules.'
+            subject_name_id_template: '- (Optional) Template for app user''s username when a user is assigned to the app.'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            type: '- (Optional) The type of attribute statement value. Valid values are: "EXPRESSION" or "GROUP". Default is "EXPRESSION".'
+            use: '- Intended use of the public key.'
+            user_name_template: '- (Optional) Username template. Default is: "${source.login}"'
+            user_name_template_push_status: '- (Optional) Push username on update. Valid values: "PUSH" and "DONT_PUSH".'
+            user_name_template_suffix: '- (Optional) Username template suffix.'
+            user_name_template_type: '- (Optional) Username template type. Default is: "BUILT_IN".'
+            values: '- (Optional) Array of values to use.'
+            x5c: '- X.509 certificate chain.'
+            x5t_s256: '- X.509 certificate SHA-256 thumbprint.'
+        importStatements: []
+    okta_app_saml_app_settings':
+        subCategory: ""
+        description: Manages app settings of the SAML application.
+        name: okta_app_saml_app_settings'
+        title: okta_app_saml_app_settings'
+        argumentDocs:
+            app_id: '- (Required) ID of the application.'
+            settings: '- (Required) Application settings in JSON format.'
+        importStatements: []
+    okta_app_secure_password_store':
+        subCategory: ""
+        description: Creates a Secure Password Store Application.
+        name: okta_app_secure_password_store'
+        title: okta_app_secure_password_store'
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            credentials_scheme: '- (Optional) Application credentials scheme. Can be set to "EDIT_USERNAME_AND_PASSWORD", "ADMIN_SETS_CREDENTIALS", "EDIT_PASSWORD_ONLY", "EXTERNAL_PASSWORD_SYNC", or "SHARED_USERNAME_AND_PASSWORD".'
+            enduser_note: '- (Optional) Application notes for end users.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            label: '- (Required) The display name of the Application.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            name: '- Name assigned to the application by Okta.'
+            optional_field1: '- (Optional) Name of optional param in the login form.'
+            optional_field1_value: '- (Optional) Name of optional value in the login form.'
+            optional_field2: '- (Optional) Name of optional param in the login form.'
+            optional_field2_value: '- (Optional) Name of optional value in the login form.'
+            optional_field3: '- (Optional) Name of optional param in the login form.'
+            optional_field3_value: '- (Optional) Name of optional value in the login form.'
+            password_field: '- (Required) Login password field.'
+            reveal_password: '- (Optional) Allow user to reveal password. It can not be set to true if credentials_scheme is "ADMIN_SETS_CREDENTIALS", "SHARED_USERNAME_AND_PASSWORD" or "EXTERNAL_PASSWORD_SYNC".'
+            shared_password: '- (Optional) Shared password, required for certain schemes.'
+            shared_username: '- (Optional) Shared username, required for certain schemes.'
+            sign_on_mode: '- Sign-on mode of application.'
+            status: '- (Optional) Status of application. By default, it is "ACTIVE".'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            url: '- (Required) Login URL.'
+            user_name_template: '- (Optional) Username template. Default: "${source.login}"'
+            user_name_template_push_status: '- (Optional) Push username on update. Valid values: "PUSH" and "DONT_PUSH".'
+            user_name_template_suffix: '- (Optional) Username template suffix.'
+            user_name_template_type: '- (Optional) Username template type. Default: "BUILT_IN".'
+            username_field: '- (Required) Login username field.'
+        importStatements: []
+    okta_app_shared_credentials':
+        subCategory: ""
+        description: Creates a SWA shared credentials app.
+        name: okta_app_shared_credentials'
+        title: okta_app_shared_credentials'
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            button_field: '- (Optional) CSS selector for the Sign-In button in the sign-in form.'
+            checkbox: '- (Optional) CSS selector for the checkbox.'
+            enduser_note: '- (Optional) Application notes for end users.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            id: '- ID of an app.'
+            label: '- (Required) The Application''s display name.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_url: '- Direct link of application logo.'
+            name: '- Name assigned to the application by Okta.'
+            password_field: '- (Optional) CSS selector for the Password field in the sign-in form.'
+            preconfigured_app: '- (Optional) name of application from the Okta Integration Network, if not included a custom app will be created.'
+            redirect_url: '- (Optional) Redirect URL. If going to the login page URL redirects to another page, then enter that URL here.'
+            shared_password: '- (Optional) Shared password, required for certain schemes.'
+            shared_username: '- (Optional) Shared username, required for certain schemes.'
+            sign_on_mode: '- Sign-on mode of the application.'
+            status: '- (Optional) The status of the application, by default, it is "ACTIVE".'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            url: '- (Optional) The URL of the sign-in page for this app.'
+            url_regex: '- (Optional) A regular expression that further restricts url to the specified regular expression.'
+            user_name_template: '- (Optional) Username template. Default: "${source.login}"'
+            user_name_template_push_status: '- (Optional) Push username on update. Valid values: "PUSH" and "DONT_PUSH".'
+            user_name_template_suffix: '- (Optional) Username template suffix.'
+            user_name_template_type: '- (Optional) Username template type. Default: "BUILT_IN".'
+            username_field: '- (Optional) CSS selector for the username field.'
+        importStatements: []
+    okta_app_signon_policy:
+        subCategory: ""
+        description: Manages a sign-on policy.
+        name: okta_app_signon_policy
+        title: okta_app_signon_policy
+        examples:
+            - name: my_app_policy
+              manifest: |-
+                {
+                  "description": "Authentication Policy to be used on my app.",
+                  "name": "My App Sign-On Policy"
+                }
+              dependencies:
+                okta_app_oauth.my_app: |-
+                    {
+                      "authentication_policy": "${okta_app_signon_policy.my_app_policy.id}",
+                      "grant_types": [
+                        "authorization_code"
+                      ],
+                      "label": "My App",
+                      "post_logout_redirect_uris": [
+                        "http://localhost:3000"
+                      ],
+                      "redirect_uris": [
+                        "http://localhost:3000"
+                      ],
+                      "response_types": [
+                        "code"
+                      ],
+                      "type": "web"
+                    }
+            - name: my_app_policy
+              manifest: |-
+                {
+                  "description": "Authentication Policy to be used on my app.",
+                  "name": "My App Sign-On Policy"
+                }
+              dependencies:
+                okta_app_signon_policy_rule.some_rule: |-
+                    {
+                      "constraints": [
+                        "${jsonencode({\n      \"knowledge\" : {\n        \"types\" : [\"password\"]\n      }\n    })}"
+                      ],
+                      "factor_mode": "1FA",
+                      "name": "Some Rule",
+                      "policy_id": "${resource.okta_app_signon_policy.my_app_policy.id}",
+                      "re_authentication_frequency": "PT43800H"
+                    }
+        argumentDocs:
+            description: '- (Required) Description of the policy.'
+            id: '- ID of the sign-on policy.'
+            name: '- (Required) Name of the policy.'
+        importStatements: []
+    okta_app_signon_policy_rule':
+        subCategory: ""
+        description: Manages a sign-on policy rules for the application.
+        name: okta_app_signon_policy_rule'
+        title: okta_app_signon_policy_rule'
+        argumentDocs:
+            access: '- (Optional) Allow or deny access based on the rule conditions. It can be set to "ALLOW" or "DENY". Default is "ALLOW".'
+            constraints: '- (Optional) - An array that contains nested Authenticator Constraint objects that are organized by the Authenticator class. Each element should be in JSON format.'
+            custom_expression: '- (Optional) This is an advanced optional setting. If the expression is formatted incorrectly or conflicts with conditions set above, the rule may not match any users.'
+            device_assurances_included: '- (Optional) List of device assurances IDs to be included.'
+            device_is_managed: |-
+                - (Optional) If the device is managed. A device is managed if it's managed by a device management
+                system. When managed is passed, device_is_registered must also be included and must be set to true.
+            device_is_registered: |-
+                - (Optional) If the device is registered. A device is registered if the User enrolls with Okta
+                Verify that is installed on the device. Can only be set to true.
+            factor_mode: '- (Optional) The number of factors required to satisfy this assurance level. It can be set to "1FA" or "2FA". Default is "2FA".'
+            groups_excluded: '- (Optional) List of groups IDs to be excluded.'
+            groups_included: '- (Optional) List of groups IDs to be included.'
+            id: '- ID of the sign-on policy rule.'
+            inactivity_period: '- (Optional) The inactivity duration after which the end user must re-authenticate. Use the ISO 8601 Period format for recurring time intervals. Default is "PT1H".'
+            name: '- (Required) Name of the policy rule.'
+            network_connection: '- (Optional) Network selection mode: "ANYWHERE", "ZONE", "ON_NETWORK", or "OFF_NETWORK".'
+            network_excludes: '- (Optional) List of network zones IDs to exclude. Conflicts with network_includes.'
+            network_includes: '- (Optional) List of network zones IDs to include. Conflicts with network_excludes.'
+            os_expression: '- (Optional) Only available and required when using os_type = "OTHER"'
+            os_type: '- (Optional) One of: "ANY", "IOS", "WINDOWS", "ANDROID", "OTHER", "OSX", "MACOS"'
+            platform_include: '- (Optional) List of particular platforms or devices to match on.'
+            policy_id: '- (Required) ID of the app sign-on policy.'
+            priority: '- (Optional) Priority of the rule.'
+            re_authentication_frequency: '- (Optional) The duration after which the end user must re-authenticate, regardless of user activity. Use the ISO 8601 Period format for recurring time intervals. "PT0S" - every sign-in attempt, "PT43800H" - once per session. Default is "PT2H".'
+            type: '- (Optional) One of: "ANY", "MOBILE", "DESKTOP"'
+            user_types_excluded: '- (Optional) List of user types IDs to be excluded.'
+            user_types_included: '- (Optional) List of user types IDs to be included.'
+            users_excluded: '- (Optional) List of users IDs to be excluded.'
+            users_included: '- (Optional) List of users IDs to be included.'
+        importStatements: []
+    okta_app_swa':
+        subCategory: ""
+        description: Creates a SWA Application.
+        name: okta_app_swa'
+        title: okta_app_swa'
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            app_links_json: '- (Optional) Displays specific appLinks for the app. The value for each application link should be boolean.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            button_field: '- (Required) Login button field.'
+            checkbox: '- (Optional) CSS selector for the checkbox.'
+            enduser_note: '- (Optional) Application notes for end users.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            label: '- (Required) The display name of the Application.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_url: '- Direct link of application logo.'
+            name: '- Name assigned to the application by Okta.'
+            password_field: '- (Optional) Login password field.'
+            preconfigured_app: '- (Optional) name of application from the Okta Integration Network, if not included a custom app will be created.'
+            redirect_url: '- (Optional) Redirect URL. If going to the login page URL redirects to another page, then enter that URL here.'
+            sign_on_mode: '- Sign-on mode of application.'
+            status: '- (Optional) Status of application. By default, it is "ACTIVE".'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            url: '- (Optional) The URL of the sign-in page for this app.'
+            url_regex: '- (Optional) A regular expression that further restricts url to the specified regular expression.'
+            user_name_template: '- (Optional) Username template. Default: "${source.login}"'
+            user_name_template_push_status: '- (Optional) Push username on update. Valid values: "PUSH" and "DONT_PUSH".'
+            user_name_template_suffix: '- (Optional) Username template suffix.'
+            user_name_template_type: '- (Optional) Username template type. Default: "BUILT_IN".'
+            username_field: '- (Optional) Login username field.'
+        importStatements: []
+    okta_app_three_field':
+        subCategory: ""
+        description: Creates a Three Field Application.
+        name: okta_app_three_field'
+        title: okta_app_three_field'
+        argumentDocs:
+            accessibility_error_redirect_url: '- (Optional) Custom error page URL.'
+            accessibility_login_redirect_url: '- (Optional) Custom login page for this application.'
+            accessibility_self_service: '- (Optional) Enable self-service. By default, it is false.'
+            admin_note: '- (Optional) Application notes for admins.'
+            auto_submit_toolbar: '- (Optional) Display auto submit toolbar.'
+            button_selector: '- (Required) Login button field CSS selector.'
+            credentials_scheme: '- (Optional) Application credentials scheme. Can be set to "EDIT_USERNAME_AND_PASSWORD", "ADMIN_SETS_CREDENTIALS", "EDIT_PASSWORD_ONLY", "EXTERNAL_PASSWORD_SYNC", or "SHARED_USERNAME_AND_PASSWORD".'
+            enduser_note: '- (Optional) Application notes for end users.'
+            extra_field_selector: '- (Required) Extra field CSS selector.'
+            extra_field_value: '- (Required) Value for extra form field.'
+            hide_ios: '- (Optional) Do not display application icon on mobile app.'
+            hide_web: '- (Optional) Do not display application icon to users.'
+            label: '- (Required) The display name of the Application.'
+            logo: '- (Optional) Local file path to the logo. The file must be in PNG, JPG, or GIF format, and less than 1 MB in size.'
+            logo_url: '- Direct link of application logo.'
+            name: '- Name assigned to the application by Okta.'
+            password_selector: '- (Required) Login password field CSS selector.'
+            reveal_password: '- (Optional) Allow user to reveal password. It can not be set to true if credentials_scheme is "ADMIN_SETS_CREDENTIALS", "SHARED_USERNAME_AND_PASSWORD" or "EXTERNAL_PASSWORD_SYNC".'
+            shared_password: '- (Optional) Shared password, required for certain schemes.'
+            shared_username: '- (Optional) Shared username, required for certain schemes.'
+            sign_on_mode: '- Sign-on mode of application.'
+            status: '- (Optional) Status of application. By default, it is "ACTIVE".'
+            timeouts.create: '- Create timeout (default 1 hour).'
+            timeouts.read: '- Read timeout (default 1 hour).'
+            timeouts.update: '- Update timeout (default 1 hour).'
+            url: '- (Required) Login URL.'
+            url_regex: '- (Optional) A regex that further restricts URL to the specified regex.'
+            user_name_template: '- (Optional) Username template. Default: "${source.login}"'
+            user_name_template_push_status: '- (Optional) Push username on update. Valid values: "PUSH" and "DONT_PUSH".'
+            user_name_template_suffix: '- (Optional) Username template suffix.'
+            user_name_template_type: '- (Optional) Username template type. Default: "BUILT_IN".'
+            username_selector: '- (Required) Login username field CSS selector.'
+        importStatements: []
+    okta_app_user':
+        subCategory: ""
+        description: Creates an Application User.
+        name: okta_app_user'
+        title: okta_app_user'
+        argumentDocs:
+            app_id: '- (Required) App to associate user with.'
+            id: '- The ID of the app user.'
+            password: '- (Optional) The password to use.'
+            profile: '- (Optional) The JSON profile of the App User.'
+            retain_assignment: '- (Optional) Retain the user association on destroy. If set to true, the resource will be removed from state but not from the Okta app.'
+            user_id: '- (Required) User to associate the application with.'
+            username: |-
+                - (Optional) The username to use for the app user. In case the user is assigned to the app with
+                'SHARED_USERNAME_AND_PASSWORD' credentials scheme, this field will be computed and should not be set.
+        importStatements: []
+    okta_app_user_base_schema':
+        subCategory: ""
+        description: Manages an Application User Base Schema property.
+        name: okta_app_user_base_schema'
+        title: okta_app_user_base_schema'
+        argumentDocs:
+            app_id: '- (Required) The Application''s ID the user schema property should be assigned to.'
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER" or "OKTA".'
+            pattern: '- (Optional) The validation pattern to use for the subschema, only available for login property. Must be in form of .+, or [<pattern>]+.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this application''s users.'
+            title: '- (Required) The property display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+        importStatements: []
+    okta_app_user_base_schema_property':
+        subCategory: ""
+        description: Manages an Application User Base Schema property.
+        name: okta_app_user_base_schema_property'
+        title: okta_app_user_base_schema_property'
+        argumentDocs:
+            app_id: '- (Required) The Application''s ID the user schema property should be assigned to.'
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER" or "OKTA".'
+            pattern: '- (Optional) The validation pattern to use for the subschema, only available for login property. Must be in form of .+, or [<pattern>]+.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this application''s users.'
+            title: '- (Required) The property display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            user_type: '- User type ID. By default, it is "default".'
+        importStatements: []
+    okta_app_user_schema':
+        subCategory: ""
+        description: Creates an Application User Schema property.
+        name: okta_app_user_schema'
+        title: okta_app_user_schema'
+        argumentDocs:
+            app_id: '- (Required) The Application''s ID the user custom schema property should be assigned to.'
+            array_enum: '- (Optional) Array of values that an array property''s items can be set to.'
+            array_one_of: '- (Optional) Display name and value an enum array can be set to.'
+            array_type: '- (Optional) The type of the array elements if type is set to "array".'
+            const: '- (Required) value mapping to member of enum.'
+            description: '- (Optional) The description of the user schema property.'
+            enum: '- (Optional) Array of values a primitive property can be set to. See array_enum for arrays.'
+            external_name: '- (Optional) External name of the user schema property.'
+            external_namespace: '- (Optional) External namespace of the user schema property.'
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER" or "OKTA".'
+            max_length: '- (Optional) The maximum length of the user property value. Only applies to type "string".'
+            min_length: '- (Optional) The minimum length of the user property value. Only applies to type "string".'
+            one_of: '- (Optional) Array of maps containing a mapping for display name to enum value.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this application''s users.'
+            scope: '- (Optional) determines whether an app user attribute can be set at the Individual or Group Level.'
+            title: '- (Required) The display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            union: '- (Optional) Used to assign attribute group priority. Can not be set to ''true'' if scope is set to Individual level.'
+        importStatements: []
+    okta_app_user_schema_property':
+        subCategory: ""
+        description: Creates an Application User Schema property.
+        name: okta_app_user_schema_property'
+        title: okta_app_user_schema_property'
+        argumentDocs:
+            app_id: '- (Required) The Application''s ID the user custom schema property should be assigned to.'
+            array_enum: '- (Optional) Array of values that an array property''s items can be set to.'
+            array_one_of: '- (Optional) Display name and value an enum array can be set to.'
+            array_type: '- (Optional) The type of the array elements if type is set to "array".'
+            const: '- (Required) value mapping to member of enum.'
+            description: '- (Optional) The description of the user schema property.'
+            enum: '- (Optional) Array of values a primitive property can be set to. See array_enum for arrays.'
+            external_name: '- (Optional) External name of the user schema property.'
+            external_namespace: '- (Optional) External namespace of the user schema property.'
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER" or "OKTA".'
+            max_length: '- (Optional) The maximum length of the user property value. Only applies to type "string".'
+            min_length: '- (Optional) The minimum length of the user property value. Only applies to type "string".'
+            one_of: '- (Optional) Array of maps containing a mapping for display name to enum value.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this application''s users.'
+            scope: '- (Optional) determines whether an app user attribute can be set at the Personal "SELF" or Group "NONE" level. Default value is "NONE".'
+            title: '- (Required) The display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            union: '- (Optional) If type is set to "array", used to set whether attribute value is determined by group priority false, or combine values across groups true. Can not be set to true if scope is set to "SELF".'
+        importStatements: []
+    okta_auth_server':
+        subCategory: ""
+        description: Creates an Authorization Server.
+        name: okta_auth_server'
+        title: okta_auth_server'
+        argumentDocs:
+            audiences: '- (Required) The recipients that the tokens are intended for. This becomes the aud claim in an access token.'
+            credentials_last_rotated: '- The timestamp when the authorization server started to use the kid for signing tokens.'
+            credentials_next_rotation: '- The timestamp when the authorization server changes the key for signing tokens. Only returned when credentials_rotation_mode is "AUTO".'
+            credentials_rotation_mode: '- (Optional) The key rotation mode for the authorization server. Can be "AUTO" or "MANUAL".'
+            description: '- (Optional) The description of the authorization server.'
+            id: '- ID of the authorization server.'
+            issuer: '- The complete URL for a Custom Authorization Server. This becomes the iss claim in an access token.'
+            issuer_mode: '- (Optional) Allows you to use a custom issuer URL. It can be set to "CUSTOM_URL","ORG_URL" or "DYNAMIC".'
+            kid: '- The ID of the JSON Web Key used for signing tokens issued by the authorization server.'
+            name: '- (Required) The name of the authorization server.'
+            status: '- (Optional) The status of the auth server. It defaults to "ACTIVE"'
+        importStatements: []
+    okta_auth_server_claim':
+        subCategory: ""
+        description: Creates an Authorization Server Claim.
+        name: okta_auth_server_claim'
+        title: okta_auth_server_claim'
+        argumentDocs:
+            always_include_in_token: '- (Optional) Specifies whether to include claims in token, by default it is set to true.'
+            auth_server_id: '- (Required) ID of the authorization server.'
+            claim_type: '- (Required) Specifies whether the claim is for an access token "RESOURCE" or ID token "IDENTITY".'
+            group_filter_type: '- (Optional) Specifies the type of group filter if value_type is "GROUPS". Can be set to one of the following "STARTS_WITH", "EQUALS", "CONTAINS", "REGEX".'
+            id: '- The ID for the auth server claim.'
+            name: '- (Required) The name of the claim.'
+            scopes: '- (Optional) The list of scopes the auth server claim is tied to.'
+            status: '- (Optional) The status of the application. It defaults to "ACTIVE".'
+            value: '- (Required) The value of the claim.'
+            value_type: '- (Optional) The type of value of the claim. It can be set to "EXPRESSION" or "GROUPS". It defaults to "EXPRESSION".'
+        importStatements: []
+    okta_auth_server_claim_default':
+        subCategory: ""
+        description: Configures Default Authorization Server Claim
+        name: okta_auth_server_claim_default'
+        title: okta_auth_server_claim_default'
+        argumentDocs:
+            always_include_in_token: '- Specifies whether to include claims in token.'
+            auth_server_id: '- (Required) ID of the authorization server.'
+            claim_type: '- Specifies whether the claim is for an access token "RESOURCE" or ID token "IDENTITY".'
+            id: '- The ID for the auth server claim.'
+            name: |-
+                - (Required) The name of the claim. Can be set to "sub", "address", "birthdate", "email",
+                "email_verified", "family_name", "gender", "given_name", "locale", "middle_name", "name", "nickname",
+                "phone_number", "picture", "preferred_username", "profile", "updated_at", "website", "zoneinfo".
+            scopes: '- The list of scopes the auth server claim is tied to.'
+            status: '- The status of the application.'
+            value: '- (Optional/Required) The value of the claim. Only required for "sub" claim.'
+            value_type: '- The type of value of the claim.'
+        importStatements: []
+    okta_auth_server_default':
+        subCategory: ""
+        description: Configures Default Authorization Server.
+        name: okta_auth_server_default'
+        title: okta_auth_server_default'
+        argumentDocs:
+            audiences: '- (Optional) The recipients that the tokens are intended for. This becomes the aud claim in an access token.'
+            credentials_last_rotated: '- The timestamp when the authorization server started to use the kid for signing tokens.'
+            credentials_next_rotation: '- The timestamp when the authorization server changes the key for signing tokens. Only returned when credentials_rotation_mode is "AUTO".'
+            credentials_rotation_mode: '- (Optional) The key rotation mode for the authorization server. Can be "AUTO" or "MANUAL".'
+            description: '- (Optional) The description of the authorization server.'
+            id: '- ID of the authorization server.'
+            issuer: '- The complete URL for a Custom Authorization Server. This becomes the iss claim in an access token.'
+            issuer_mode: '- (Optional) Allows you to use a custom issuer URL. It can be set to "CUSTOM_URL", "ORG_URL", or "DYNAMIC".'
+            kid: '- The ID of the JSON Web Key used for signing tokens issued by the authorization server.'
+            name: '- (Optional) The name of the authorization server. Not necessary but left for backwards capacity with legacy implementation.'
+            status: '- (Optional) The status of the auth server.'
+        importStatements: []
+    okta_auth_server_policy':
+        subCategory: ""
+        description: Creates an Authorization Server Policy.
+        name: okta_auth_server_policy'
+        title: okta_auth_server_policy'
+        argumentDocs:
+            auth_server_id: '- (Required) The ID of the Auth Server.'
+            client_whitelist: '- (Required) The clients to whitelist the policy for. ["ALL_CLIENTS"] is a special value that can be used to whitelist all clients, otherwise it is a list of client ids.'
+            description: '- (Required) The description of the Auth Server Policy.'
+            id: '- (Required) The ID of the authorization server policy.'
+            name: '- (Required) The name of the Auth Server Policy.'
+            priority: '- (Required) The priority of the Auth Server Policy.'
+            status: '- (Optional) The status of the Auth Server Policy.'
+        importStatements: []
+    okta_auth_server_policy_rule':
+        subCategory: ""
+        description: Creates an Authorization Server Policy Rule.
+        name: okta_auth_server_policy_rule'
+        title: okta_auth_server_policy_rule'
+        argumentDocs:
+            access_token_lifetime_minutes: '- (Optional) Lifetime of access token. Can be set to a value between 5 and 1440 minutes. Default is 60.'
+            auth_server_id: '- (Required) Auth Server ID.'
+            grant_type_whitelist: |-
+                - (Required) Accepted grant type values, "authorization_code", "implicit", "password", "client_credentials",
+                "urn:ietf:params:oauth:grant-type:saml2-bearer" (Early Access Property), "urn:ietf:params:oauth:grant-type:token-exchange" (Early Access Property),
+                "urn:ietf:params:oauth:grant-type:device_code" (Early Access Property), "interaction_code" (OIE only). For "implicit" value either user_whitelist or group_whitelist should be set.
+            group_blacklist: '- (Optional) Specifies a set of Groups whose Users are to be excluded.'
+            group_whitelist: '- (Optional) Specifies a set of Groups whose Users are to be included. Can be set to Group ID or to the following: "EVERYONE".'
+            id: '- (Required) The ID of the Auth Server Policy Rule.'
+            inline_hook_id: '- (Optional) The ID of the inline token to trigger.'
+            name: '- (Required) Auth Server Policy Rule name.'
+            policy_id: '- (Required) Auth Server Policy ID.'
+            priority: '- (Required) Priority of the auth server policy rule.'
+            refresh_token_lifetime_minutes: '- (Optional) Lifetime of refresh token.'
+            refresh_token_window_minutes: |-
+                - (Optional) Window in which a refresh token can be used. It can be a value between 5 and 2628000 (5 years) minutes. Default is 10080 (7 days).
+                "refresh_token_window_minutes" must be between "access_token_lifetime_minutes" and "refresh_token_lifetime_minutes".
+            scope_whitelist: '- (Required) Scopes allowed for this policy rule. They can be whitelisted by name or all can be whitelisted with "*".'
+            status: '- (Optional) The status of the Auth Server Policy Rule.'
+            type: '- The type of the Auth Server Policy Rule.'
+            user_blacklist: '- (Optional) Specifies a set of Users to be excluded.'
+            user_whitelist: '- (Optional) Specifies a set of Users to be included.'
+        importStatements: []
+    okta_auth_server_scope':
+        subCategory: ""
+        description: Creates an Authorization Server Scope.
+        name: okta_auth_server_scope'
+        title: okta_auth_server_scope'
+        argumentDocs:
+            auth_server_id: '- (Required) Auth Server ID.'
+            consent: '- (Optional) Indicates whether a consent dialog is needed for the scope. It can be set to "REQUIRED" or "IMPLICIT".'
+            default: '- (Optional) A default scope will be returned in an access token when the client omits the scope parameter in a token request, provided this scope is allowed as part of the access policy rule.'
+            description: '- (Optional) Description of the Auth Server Scope.'
+            display_name: '- (Optional) Name of the end user displayed in a consent dialog box.'
+            id: '- ID of the Auth Server Scope.'
+            metadata_publish: '- (Optional) Whether to publish metadata or not. It can be set to "ALL_CLIENTS" or "NO_CLIENTS".'
+            name: '- (Required) Auth Server scope name.'
+            optional: '- (Optional) Whether the scope optional'
+            system: '- Whether Okta created the Scope'
+        importStatements: []
+    okta_authenticator':
+        subCategory: ""
+        description: Manages Okta Authenticator
+        name: okta_authenticator'
+        title: okta_authenticator'
+        argumentDocs:
+            id: '- ID of the authenticator.'
+            key: '(Required) A human-readable string that identifies the authenticator. Some authenticators are available by feature flag on the organization. Possible values inclue: duo, external_idp, google_otp, okta_email, okta_password, okta_verify, onprem_mfa, phone_number, rsa_token, security_question, webauthn'
+            name: '- (Required) Name of the authenticator.'
+            provider_auth_port: '- (Optional) The RADIUS server port (for example 1812). This is defined when the On-Prem RADIUS server is configured. Used only for authenticators with type "security_key".  Conflicts with provider_json argument.'
+            provider_host: '- (Optional) (DUO specific) - The Duo Security API hostname". Conflicts with provider_json argument.'
+            provider_hostname: '- (Optional) Server host name or IP address. Default is "localhost". Used only for authenticators with type "security_key".  Conflicts with provider_json argument.'
+            provider_instance_id: '- App Instance ID.'
+            provider_integration_key: '- (Optional) (DUO specific) - The Duo Security integration key.  Conflicts with provider_json argument.'
+            provider_json: |-
+                - (Optional) Provider JSON allows for expressive provider
+                values. This argument conflicts with the other provider_xxx arguments.  The
+                Create
+                Provider
+                illustrates detailed provider values for a Duo authenticator.  Provider
+                values
+                are listed in Okta API.
+            provider_secret_key: '- (Optional) (DUO specific) - The Duo Security secret key.  Conflicts with provider_json argument.'
+            provider_shared_secret: '- (Optional) An authentication key that must be defined when the RADIUS server is configured, and must be the same on both the RADIUS client and server. Used only for authenticators with type "security_key".  Conflicts with provider_json argument.'
+            provider_type: '- Provider type. Supported value for Duo: DUO. Supported value for Custom App: PUSH'
+            provider_user_name_template: '- (Optional) Username template expected by the provider. Used only for authenticators with type "security_key".  Conflicts with provider_json argument.'
+            settings: '- (Optional) Settings for the authenticator. The settings JSON contains values based on Authenticator key. It is not used for authenticators with type "security_key".'
+            status: '- (Optional) Status of the authenticator. Default is ACTIVE.'
+            type: '- The type of Authenticator. Values include: "password", "security_question", "phone", "email", "app", "federated", and "security_key".'
+        importStatements: []
+    okta_behavior':
+        subCategory: ""
+        description: Creates different types of behavior.
+        name: okta_behavior'
+        title: okta_behavior'
+        argumentDocs:
+            id: '- ID of the behavior.'
+            location_granularity_type: |-
+                - (Optional) Determines the method and level of detail used to evaluate the behavior.
+                Required for "ANOMALOUS_LOCATION" behavior type. Can be set to "LAT_LONG", "CITY", "COUNTRY"
+                or "SUBDIVISION".
+            name: '- (Required) Name of the behavior.'
+            number_of_authentications: |-
+                - (Optional) The number of recent authentications used to evaluate the behavior. Required
+                for "ANOMALOUS_LOCATION", "ANOMALOUS_DEVICE" and "ANOMALOUS_IP" behavior types.
+            radius_from_location: |-
+                - (Optional) Radius from location (in kilometers). Should be at least 5. Required
+                when location_granularity_type is set to "LAT_LONG".
+            status: '- (Optional) The status of the behavior. By default, it is"ACTIVE".'
+            type: |-
+                - (Required) Type of the behavior. Can be set to "ANOMALOUS_LOCATION", "ANOMALOUS_DEVICE", "ANOMALOUS_IP"
+                or "VELOCITY". Resource will be recreated when the type changes.
+            velocity: |-
+                - (Optional) Velocity (in kilometers per hour). Should be at least 1. Required for "VELOCITY" behavior
+                type.
+        importStatements: []
+    okta_brand':
+        subCategory: ""
+        description: Gets, updates, an Okta Brand.
+        name: okta_brand'
+        title: okta_brand'
+        argumentDocs:
+            DEPRECATED: ': Please stop using this field as it has become noop.'
+            agree_to_custom_privacy_policy: '- (Optional) Is a required input flag with when changing custom_privacy_url, shouldn''t be considered as a readable property'
+            brand_id: '- (Read-only) Brand ID, used for read (faux-create). Setting brand_id to default is equivalent to importing the default brand by its ID.'
+            custom_privacy_policy_url: '- (Optional) Custom privacy policy URL'
+            default_app_app_instance_id: '- (Optional) Default app app instance id'
+            default_app_app_link_name: '- (Optional) Default app app link name'
+            default_app_classic_application_uri: '- (Optional) Default app classic application uri'
+            email_domain_id: '- (Optional) Email Domain ID tied to this brand'
+            id: '- (Read-only) Brand ID'
+            is_default: '- (Read-only) Is this the default brand'
+            links: '- (Read-only) Link relations for this object - JSON HAL - Discoverable resources related to the brand'
+            locale: '- (Optional) The language specified as an IETF BCP 47 language tag'
+            name: '- (Required) Name of the brand'
+            remove_powered_by_okta: '- (Optional) Removes "Powered by Okta" from the Okta-hosted sign-in page, and "© 2021 Okta, Inc." from the Okta End-User Dashboard'
+        importStatements: []
+    okta_captcha':
+        subCategory: ""
+        description: Creates different types of captcha.
+        name: okta_captcha'
+        title: okta_captcha'
+        argumentDocs:
+            id: '- ID of the captcha.'
+            name: '- (Required) Name of the captcha.'
+            secret_key: '- (Required) Secret key issued from the CAPTCHA vendor to perform server-side validation for a CAPTCHA token.'
+            site_key: '- (Required) Site key issued from the CAPTCHA vendor to render a CAPTCHA on a page.'
+            type: '- (Required) Type of the captcha. Valid values: "HCAPTCHA", "RECAPTCHA_V2".'
+        importStatements: []
+    okta_captcha_org_wide_settings':
+        subCategory: ""
+        description: Manages Org-Wide CAPTCHA settings
+        name: okta_captcha_org_wide_settings'
+        title: okta_captcha_org_wide_settings'
+        argumentDocs:
+            captcha_id: (Optional) The ID of the CAPTCHA.
+            enabled_for: '(Optional) Array of pages that have CAPTCHA enabled. Valid values: "SSR", "SSPR" and "SIGN_IN".'
+        importStatements: []
+    okta_domain':
+        subCategory: ""
+        description: Manages custom domain for your organization.
+        name: okta_domain'
+        title: okta_domain'
+        argumentDocs:
+            OKTA_MANAGED: requires a feature flag to be enabled.
+            brand_id: '- (Optional) The Brand ID of the domain'
+            certificate_source_type: '- (Optional) Certificate source type that indicates whether the certificate is provided by the user or Okta. Accepted values: MANUAL, OKTA_MANAGED. Default value = MANUAL'
+            dns_records: '- TXT and CNAME records to be registered for the Domain.'
+            expiration: '- TXT record expiration.'
+            fqdn: '- DNS record name.'
+            id: '- Domain ID'
+            name: '- (Required) Custom Domain name.'
+            record_type: '- Record type can be TXT or CNAME.'
+            validation_status: '- Status of the domain.'
+            values: '- DNS verification value'
+        importStatements: []
+    okta_domain_certificate':
+        subCategory: ""
+        description: Manages certificate for the domain.
+        name: okta_domain_certificate'
+        title: okta_domain_certificate'
+        argumentDocs:
+            certificate: '- (Required) Certificate content.'
+            certificate_chain: '- (Required) Certificate certificate chain.'
+            domain_id: '- (Required) Domain ID.'
+            private_key: '- (Required) Certificate private key.'
+            type: '- (Required) Certificate type. Valid value is "PEM".'
+        importStatements: []
+    okta_domain_verification':
+        subCategory: ""
+        description: Verifies the Domain.
+        name: okta_domain_verification'
+        title: okta_domain_verification'
+        argumentDocs:
+            domain_id: '- (Required) Domain ID.'
+        importStatements: []
+    okta_email_customization':
+        subCategory: ""
+        description: Create an email customization of an email template belonging to a brand in an Okta organization.
+        name: okta_email_customization'
+        title: okta_email_customization'
+        argumentDocs:
+            '"AccountLockout"': |-
+                ,
+                "ADForgotPassword",
+                "ADForgotPasswordDenied",
+                "ADSelfServiceUnlock",
+                "ADUserActivation",
+                "AuthenticatorEnrolled",
+                "AuthenticatorReset",
+                "ChangeEmailConfirmation",
+                "EmailChallenge",
+                "EmailChangeConfirmation",
+                "EmailFactorVerification",
+                "ForgotPassword",
+                "ForgotPasswordDenied",
+                "IGAReviewerEndNotification",
+                "IGAReviewerNotification",
+                "IGAReviewerPendingNotification",
+                "IGAReviewerReassigned",
+                "LDAPForgotPassword",
+                "LDAPForgotPasswordDenied",
+                "LDAPSelfServiceUnlock",
+                "LDAPUserActivation",
+                "MyAccountChangeConfirmation",
+                "NewSignOnNotification",
+                "OktaVerifyActivation",
+                "PasswordChanged",
+                "PasswordResetByAdmin",
+                "PendingEmailChange",
+                "RegistrationActivation",
+                "RegistrationEmailVerification",
+                "SelfServiceUnlock",
+                "SelfServiceUnlockOnUnlockedAccount",
+                "UserActivation"
+            '"cs"': |-
+                ,
+                "da",
+                "de",
+                "el",
+                "en",
+                "es",
+                "fi",
+                "fr",
+                "hu",
+                "id",
+                "it",
+                "ja",
+                "ko",
+                "ms",
+                "nb",
+                "nl-NL",
+                "pl",
+                "pt-BR",
+                "ro",
+                "ru",
+                "sv",
+                "th",
+                "tr",
+                "uk",
+                "vi",
+                "zh-CN",
+                "zh-TW"
+            body: '- The body of the customization'
+            brand_id: '- (Required) Brand ID'
+            force_is_default: (Deprecated) force_is_default is deprecated and now is a no-op in behavior. Rely upon the depends_on meta argument to force dependency of secondary templates to the default template",
+            id: '- Customization ID'
+            is_default: '- Whether the customization is the default'
+            language: '- The language supported by the customization'
+            links: '- Link relations for this object - JSON HAL - Discoverable resources related to the email template'
+            subject: '- The subject of the customization'
+            template_name: '- (Required) Template Name'
+        importStatements: []
+    okta_email_domain':
+        subCategory: ""
+        description: Creates email domain.
+        name: okta_email_domain'
+        title: okta_email_domain'
+        argumentDocs:
+            brand_id: '- (Required) Brand id of the email domain.'
+            display_name: '- (Required) Display name of the email domain.'
+            dns_validation_records: '- TXT and CNAME records to be registered for the domain.'
+            domain: '- (Required) Mail domain to send from.'
+            'expiration ': '- (Deprecated) This field has been removed in the newest go sdk version and has become noop'
+            fqdn: '- DNS record name.'
+            id: '- ID of the sender.'
+            record_type: '- Record type can be TXT or cname.'
+            user_name: '- (Required) User name of the email domain.'
+            validation_status: '- Status of the email domain (shows whether the domain is verified).'
+            value: '- DNS record value'
+        importStatements: []
+    okta_email_domain_verification':
+        subCategory: ""
+        description: Verifies the email domain.
+        name: okta_email_domain_verification'
+        title: okta_email_domain_verification'
+        argumentDocs:
+            email_domain_id: '- (Required) Email domain ID.'
+        importStatements: []
+    okta_email_sender':
+        subCategory: ""
+        description: Creates custom email sender.
+        name: okta_email_sender'
+        title: okta_email_sender'
+        argumentDocs:
+            dns_records: '- TXT and CNAME records to be registered for the domain.'
+            fqdn: '- DNS record name.'
+            from_address: '- (Required) Email address to send from.'
+            from_name: '- (Required) Name of sender.'
+            id: '- ID of the sender.'
+            record_type: '- Record type can be TXT or CNAME.'
+            status: '- Status of the sender (shows whether the sender is verified).'
+            subdomain: '- (Required) Mail domain to send from.'
+            value: '- DNS verification value'
+        importStatements: []
+    okta_email_sender_verification':
+        subCategory: ""
+        description: Verifies the email sender.
+        name: okta_email_sender_verification'
+        title: okta_email_sender_verification'
+        argumentDocs:
+            sender_id: '- (Required) Email sender ID.'
+        importStatements: []
+    okta_event_hook:
+        subCategory: ""
+        description: Creates an event hook.
+        name: okta_event_hook
+        title: okta_event_hook
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "auth": {
+                    "key": "Authorization",
+                    "type": "HEADER",
+                    "value": "123"
+                  },
+                  "channel": {
+                    "type": "HTTP",
+                    "uri": "https://example.com/test",
+                    "version": "1.0.0"
+                  },
+                  "events": [
+                    "user.lifecycle.create",
+                    "user.lifecycle.delete.initiated"
+                  ],
+                  "name": "example"
+                }
+        argumentDocs:
+            auth: '- (Optional) Authentication required for event hook request.'
+            channel: '- (Required) Details of the endpoint the event hook will hit.'
+            events: '- (Required) The events that will be delivered to this hook. See here for a list of supported events.'
+            headers: '- (Optional) Map of headers to send along in event hook request.'
+            id: '- The ID of the event hooks.'
+            key: '- (Required) Key to use for authentication, usually the header name, for example "Authorization".'
+            name: '- (Required) The event hook display name.'
+            type: '- (Optional) Auth type. Currently, the only supported type is "HEADER".'
+            uri: '- (Required) The URI the hook will hit.'
+            value: '- (Required) Authentication secret.'
+            version: '- (Required) The version of the channel. The currently-supported version is "1.0.0".'
+        importStatements: []
+    okta_event_hook_verification':
+        subCategory: ""
+        description: Verifies the Event Hook.
+        name: okta_event_hook_verification'
+        title: okta_event_hook_verification'
+        argumentDocs:
+            event_hook_id: '- (Required) Event Hook ID.'
+        importStatements: []
+    okta_factor':
+        subCategory: ""
+        description: Allows you to manage the activation of Okta MFA methods.
+        name: okta_factor'
+        title: okta_factor'
+        argumentDocs:
+            active: '- (Optional) Whether to activate the provider, by default, it is set to true.'
+            provider_id: |-
+                - (Required) The MFA provider name.
+                Allowed values are "duo", "fido_u2f", "fido_webauthn", "google_otp", "okta_call", "okta_otp", "okta_password", "okta_push", "okta_question", "okta_sms", "okta_email", "rsa_token", "symantec_vip", "yubikey_token", or "hotp".
+        importStatements: []
+    okta_factor_totp':
+        subCategory: ""
+        description: Allows you to manage the time-based one-time password (TOTP) factors.
+        name: okta_factor_totp'
+        title: okta_factor_totp'
+        argumentDocs:
+            clock_drift_interval: |-
+                - (Optional) - Clock drift interval. This setting allows you to build in tolerance for any
+                drift between the token's current time and the server's current time. Valid values: 3, 5, 10. Default is 3.
+            hmac_algorithm: |-
+                - (Optional) - HMAC Algorithm. Valid values: "HMacSHA1", "HMacSHA256", "HMacSHA512". Default
+                is "HMacSHA512".
+            id: '- ID of the TOTP factor.'
+            name: '- (Required) The TOTP name.'
+            otp_length: '- (Optional) Length of the password. Default is 6.'
+            shared_secret_encoding: |-
+                - (Optional) - Shared secret encoding. Valid values: "base32", "base64", "hexadecimal".
+                Default is "base32".
+            time_step: '- (Optional) - Time step in seconds. Valid values: 15, 30, 60. Default is 15.'
+        importStatements: []
+    okta_group':
+        subCategory: ""
+        description: Creates an Okta Group.
+        name: okta_group'
+        title: okta_group'
+        argumentDocs:
+            custom_profile_attributes: '- (Optional) raw JSON containing all custom profile attributes.'
+            description: '- (Optional) The description of the Okta Group.'
+            id: '- The ID of the Okta Group.'
+            name: '- (Required) The name of the Okta Group.'
+        importStatements: []
+    okta_group_memberships:
+        subCategory: ""
+        description: Resource to manage a set of memberships for a specific group.
+        name: okta_group_memberships
+        title: okta_group_memberships
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "group_id": "${okta_group.test.id}",
+                  "users": [
+                    "${okta_user.test1.id}",
+                    "${okta_user.test2.id}"
+                  ]
+                }
+              references:
+                group_id: okta_group.test.id
+              dependencies:
+                okta_group.test: |-
+                    {
+                      "description": "testing, testing",
+                      "name": "testAcc_replace_with_uuid"
+                    }
+        argumentDocs:
+            group_id: '- (Required) Okta group ID.'
+            track_all_users: '- (Optional) The resource will concern itself with all users added/deleted to the group; even those managed outside of the resource.'
+            users: '- (Required) The list of Okta user IDs which the group should have membership managed for.'
+        importStatements: []
+    okta_group_role':
+        subCategory: ""
+        description: Assigns Admin roles to Okta Groups.
+        name: okta_group_role'
+        title: okta_group_role'
+        argumentDocs:
+            '"APP_ADMIN"': .
+            '"USER_ADMIN"': is the Group Administrator.
+            GROUP_MEMBERSHIP_ADMIN: ', HELP_DESK_ADMIN, or USER_ADMIN.'
+            disable_notifications: |-
+                - (Optional) When this setting is enabled, the admins won't receive any of the default Okta
+                administrator emails. These admins also won't have access to contact Okta Support and open support cases on behalf of your org.
+            group_id: '- (Required) The ID of group to attach admin roles to.'
+            id: '- The ID of the Group Role Assignment.'
+            role_type: |-
+                - (Required) Admin role assigned to the group. It can be any one of the following values:
+                "API_ADMIN",
+                "APP_ADMIN",
+                "CUSTOM",
+                "GROUP_MEMBERSHIP_ADMIN",
+                "HELP_DESK_ADMIN",
+                "MOBILE_ADMIN",
+                "ORG_ADMIN",
+                "READ_ONLY_ADMIN",
+                "REPORT_ADMIN",
+                "SUPER_ADMIN",
+                "USER_ADMIN"
+                . See API Docs.
+            target_app_list: |-
+                - (Optional) A list of app names (name represents set of app instances, like 'salesforce' or '
+                facebook'), or a combination of app name and app instance ID (like 'facebook.0oapsqQ6dv19pqyEo0g3') you would like as
+                the targets of the admin role.
+            target_group_list: '- (Optional) A list of group IDs you would like as the targets of the admin role.'
+        importStatements: []
+    okta_group_rule':
+        subCategory: ""
+        description: Creates an Okta Group Rule.
+        name: okta_group_rule'
+        title: okta_group_rule'
+        argumentDocs:
+            expression_type: |-
+                - (Optional) The expression type to use to invoke the rule. The default
+                is "urn:okta:expression:1.0".
+            expression_value: '- (Required) The expression value.'
+            group_assignments: '- (Required) The list of group ids to assign the users to.'
+            id: '- The ID of the Group Rule.'
+            name: '- (Required) The name of the Group Rule (min character 1; max characters 50).'
+            remove_assigned_users: |-
+                - (Optional) This tells the provider to remove users added by this rule from the assigned
+                group after destroying this resource. Default is false.
+            status: '- (Optional) The status of the group rule.'
+            users_excluded: '- (Optional) The list of user IDs that would be excluded when rules are processed.'
+        importStatements: []
+    okta_group_schema_property':
+        subCategory: ""
+        description: Creates a Group Schema property.
+        name: okta_group_schema_property'
+        title: okta_group_schema_property'
+        argumentDocs:
+            array_enum: '- (Optional) Array of values that an array property''s items can be set to.'
+            array_one_of: '- (Optional) Display name and value an enum array can be set to.'
+            array_type: '- (Optional) The type of the array elements if type is set to "array".'
+            const: '- (Required) value mapping to member of enum.'
+            description: '- (Optional) The description of the group schema property.'
+            enum: '- (Optional) Array of values a primitive property can be set to. See array_enum for arrays.'
+            external_name: '- (Optional) External name of the group schema property.'
+            external_namespace: '- (Optional) External name of the group schema property.'
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the group schema property. It can be set to "PROFILE_MASTER", "OVERRIDE" or "OKTA".'
+            master_override_priority: '- (Optional) Prioritized list of profile sources (required when master is "OVERRIDE").'
+            max_length: '- (Optional) The maximum length of the group property value. Only applies to type "string".'
+            min_length: '- (Optional) The minimum length of the group property value. Only applies to type "string".'
+            one_of: '- (Optional) Array of maps containing a mapping for display name to enum value.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this group.'
+            scope: '- (Optional) determines whether an app user attribute can be set at the Individual or Group Level.'
+            title: '- (Required) The display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            unique: '- (Optional) Whether the property should be unique. It can be set to "UNIQUE_VALIDATED" or "NOT_UNIQUE".'
+            value: '- (Required) - ID of profile source.'
+        importStatements: []
+    okta_idp_oidc':
+        subCategory: ""
+        description: Creates an OIDC Identity Provider.
+        name: okta_idp_oidc'
+        title: okta_idp_oidc'
+        argumentDocs:
+            account_link_action: '- (Optional) Specifies the account linking action for an IdP user.'
+            account_link_group_include: '- (Optional) Group memberships to determine link candidates.'
+            authorization_binding: '- (Required) The method of making an authorization request. It can be set to "HTTP-POST" or "HTTP-REDIRECT".'
+            authorization_url: '- (Required) IdP Authorization Server (AS) endpoint to request consent from the user and obtain an authorization code grant.'
+            client_id: '- (Required) Unique identifier issued by AS for the Okta IdP instance.'
+            client_secret: '- (Required) Client secret issued by AS for the Okta IdP instance.'
+            deprovisioned_action: '- (Optional) Action for a previously deprovisioned IdP user during authentication. Can be "NONE" or "REACTIVATE".'
+            groups_action: '- (Optional) Provisioning action for IdP user''s group memberships. It can be "NONE", "SYNC", "APPEND", or "ASSIGN".'
+            groups_assignment: '- (Optional) List of Okta Group IDs to add an IdP user as a member with the "ASSIGN" groups_action.'
+            groups_attribute: '- (Optional) IdP user profile attribute name (case-insensitive) for an array value that contains group memberships.'
+            groups_filter: '- (Optional) Whitelist of Okta Group identifiers that are allowed for the "APPEND" or "SYNC" groups_action.'
+            id: '- ID of the IdP.'
+            issuer_mode: '- (Optional) Indicates whether Okta uses the original Okta org domain URL, a custom domain URL, or dynamic. It can be "ORG_URL", "CUSTOM_URL", or "DYNAMIC".'
+            issuer_url: '- (Required) URI that identifies the issuer.'
+            jwks_binding: '- (Required) The method of making a request for the OIDC JWKS. It can be set to "HTTP-POST" or "HTTP-REDIRECT".'
+            jwks_url: '- (Required) Endpoint where the keys signer publishes its keys in a JWK Set.'
+            max_clock_skew: '- (Optional) Maximum allowable clock-skew when processing messages from the IdP.'
+            name: '- (Required) The Application''s display name.'
+            profile_master: '- (Optional) Determines if the IdP should act as a source of truth for user profile attributes.'
+            protocol_type: '- (Optional) The type of protocol to use. It can be "OIDC" or "OAUTH2".'
+            provisioning_action: '- (Optional) Provisioning action for an IdP user during authentication.'
+            request_signature_algorithm: '- (Optional) The HMAC Signature Algorithm used when signing an authorization request. Defaults to "HS256". It can be "HS256", "HS384", "HS512", "SHA-256". "RS256", "RS384", or "RS512". NOTE: "SHA-256" an undocumented legacy value and not continue to be valid. See API docs https://developer.okta.com/docs/reference/api/idps/#oidc-request-signature-algorithm-object'
+            request_signature_scope: '- (Optional) Specifies whether to digitally sign an AuthnRequest messages to the IdP. Defaults to "REQUEST". It can be "REQUEST" or "NONE".'
+            scopes: '- (Required) The scopes of the IdP.'
+            status: '- (Optional) Status of the IdP.'
+            subject_match_attribute: '- (Optional) Okta user profile attribute for matching transformed IdP username. Only for matchType "CUSTOM_ATTRIBUTE".'
+            subject_match_type: '- (Optional) Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username. By default, it is set to "USERNAME". It can be set to "USERNAME", "EMAIL", "USERNAME_OR_EMAIL" or "CUSTOM_ATTRIBUTE".'
+            suspended_action: '- (Optional) Action for a previously suspended IdP user during authentication. Can be set to "NONE" or "UNSUSPEND"'
+            token_binding: '- (Required) The method of making a token request. It can be set to "HTTP-POST" or "HTTP-REDIRECT".'
+            token_url: '- (Required) IdP Authorization Server (AS) endpoint to exchange the authorization code grant for an access token.'
+            type: '- Type of OIDC IdP.'
+            user_info_binding: '- (Optional)'
+            user_info_url: '- (Optional) Protected resource endpoint that returns claims about the authenticated user.'
+            user_type_id: '- User type ID. Can be used as target_id in the okta_profile_mapping resource.'
+            username_template: '- (Optional) Okta EL Expression to generate or transform a unique username for the IdP user.'
+        importStatements: []
+    okta_idp_saml':
+        subCategory: ""
+        description: Creates a SAML Identity Provider.
+        name: okta_idp_saml'
+        title: okta_idp_saml'
+        argumentDocs:
+            account_link_action: '- (Optional) Specifies the account linking action for an IdP user.'
+            account_link_group_include: '- (Optional) Group memberships to determine link candidates.'
+            acs_type: '- (Optional) The type of ACS. It can be "INSTANCE" or "ORG".'
+            audience: '- The audience restriction for the IdP.'
+            deprovisioned_action: '- (Optional) Action for a previously deprovisioned IdP user during authentication. Can be "NONE" or "REACTIVATE".'
+            groups_action: '- (Optional) Provisioning action for IdP user''s group memberships. It can be "NONE", "SYNC", "APPEND", or "ASSIGN".'
+            groups_assignment: '- (Optional) List of Okta Group IDs to add an IdP user as a member with the "ASSIGN" groups_action.'
+            groups_attribute: '- (Optional) IdP user profile attribute name (case-insensitive) for an array value that contains group memberships.'
+            groups_filter: '- (Optional) Whitelist of Okta Group identifiers that are allowed for the "APPEND" or "SYNC" groups_action.'
+            id: '- ID of the IdP.'
+            issuer: '- (Required) URI that identifies the issuer.'
+            issuer_mode: '- (Optional) Indicates whether Okta uses the original Okta org domain URL, or a custom domain URL. It can be "ORG_URL" or "CUSTOM_URL".'
+            kid: '- (Required) The ID of the signing key.'
+            max_clock_skew: '- (Optional) Maximum allowable clock-skew when processing messages from the IdP.'
+            name: '- (Required) The Application''s display name.'
+            name_format: '- (Optional) The name identifier format to use. By default "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified".'
+            profile_master: '- (Optional) Determines if the IdP should act as a source of truth for user profile attributes.'
+            provisioning_action: '- (Optional) Provisioning action for an IdP user during authentication.'
+            request_signature_algorithm: '- (Optional) The XML digital signature algorithm used when signing an AuthnRequest message. It can be "SHA-256" or "SHA-1".'
+            request_signature_scope: '- (Optional) Specifies whether to digitally sign an AuthnRequest messages to the IdP. It can be "REQUEST" or "NONE".'
+            response_signature_algorithm: '- (Optional) The minimum XML digital signature algorithm allowed when verifying a SAMLResponse message or Assertion element. It can be "SHA-256" or "SHA-1".'
+            response_signature_scope: '- (Optional) Specifies whether to verify a SAMLResponse message or Assertion element XML digital signature. It can be "RESPONSE", "ASSERTION", or "ANY".'
+            sso_binding: '- (Optional) The method of making an SSO request. It can be set to "HTTP-POST" or "HTTP-REDIRECT".'
+            sso_destination: '- (Optional) URI reference indicating the address to which the AuthnRequest message is sent.'
+            sso_url: '- (Required) URL of binding-specific endpoint to send an AuthnRequest message to IdP.'
+            status: '- (Optional) Status of the IdP.'
+            subject_filter: '- (Optional) Optional regular expression pattern used to filter untrusted IdP usernames.'
+            subject_format: '- (Optional) The name format. By default "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified".'
+            subject_match_attribute: '- (Optional) Okta user profile attribute for matching transformed IdP username. Only for matchType "CUSTOM_ATTRIBUTE".'
+            subject_match_type: '- (Optional) Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username. By default, it is set to "USERNAME". It can be set to "USERNAME", "EMAIL", "USERNAME_OR_EMAIL" or "CUSTOM_ATTRIBUTE".'
+            suspended_action: '- (Optional) Action for a previously suspended IdP user during authentication. Can be set to "NONE" or "UNSUSPEND"'
+            type: '- Type of the IdP.'
+            user_type_id: '- User type ID. Can be used as target_id in the okta_profile_mapping resource.'
+            username_template: '- (Optional) Okta EL Expression to generate or transform a unique username for the IdP user.'
+        importStatements: []
+    okta_idp_saml_key':
+        subCategory: ""
+        description: Creates a SAML Identity Provider Signing Key.
+        name: okta_idp_saml_key'
+        title: okta_idp_saml_key'
+        argumentDocs:
+            created: '- Date created.'
+            expires_at: '- Date the cert expires.'
+            id: '- Key ID.'
+            kid: '- Key ID.'
+            kty: '- Identifies the cryptographic algorithm family used with the key.'
+            use: '- Intended use of the public key.'
+            x5c: '- (Required) base64-encoded X.509 certificate chain with DER encoding.'
+            x5t_s256: '- base64url-encoded SHA-256 thumbprint of the DER encoding of an X.509 certificate.'
+        importStatements: []
+    okta_idp_social':
+        subCategory: ""
+        description: Creates an Social Identity Provider.
+        name: okta_idp_social'
+        title: okta_idp_social'
+        argumentDocs:
+            account_link_action: '- (Optional) Specifies the account linking action for an IdP user.'
+            account_link_group_include: '- (Optional) Group memberships to determine link candidates.'
+            apple_kid: '- (Optional, for Apple IdP only) The Key ID that you obtained from Apple when you created the private key for the client.'
+            apple_private_key: |-
+                - (Optional, for Apple IdP only) The Key ID that you obtained from Apple when you created the private
+                key for the client. PrivateKey is required when resource is first created. For all consecutive updates, it can be empty/omitted
+                and keeps the existing value if it is empty/omitted. PrivateKey isn't returned when importing this resource.
+            apple_team_id: '- (Optional, for Apple IdP only) The Team ID associated with your Apple developer account.'
+            authorization_binding: '- (Optional) The method of making an authorization request. It can be set to "HTTP-POST" or "HTTP-REDIRECT".'
+            authorization_url: '- (Optional) IdP Authorization Server (AS) endpoint to request consent from the user and obtain an authorization code grant.'
+            client_id: '- (Optional) Unique identifier issued by AS for the Okta IdP instance.'
+            client_secret: '- (Optional) Client secret issued by AS for the Okta IdP instance.'
+            deprovisioned_action: '- (Optional) Action for a previously deprovisioned IdP user during authentication. Can be "NONE" or "REACTIVATE".'
+            groups_action: '- (Optional) Provisioning action for IdP user''s group memberships. It can be "NONE", "SYNC", "APPEND", or "ASSIGN".'
+            groups_assignment: '- (Optional) List of Okta Group IDs to add an IdP user as a member with the "ASSIGN" groups_action.'
+            groups_attribute: '- (Optional) IdP user profile attribute name (case-insensitive) for an array value that contains group memberships.'
+            groups_filter: '- (Optional) Whitelist of Okta Group identifiers that are allowed for the "APPEND" or "SYNC" groups_action.'
+            id: '- ID of the IdP.'
+            issuer_mode: '- (Optional) Indicates whether Okta uses the original Okta org domain URL, or a custom domain URL. It can be "ORG_URL" or "CUSTOM_URL".'
+            max_clock_skew: '- (Optional) Maximum allowable clock-skew when processing messages from the IdP.'
+            name: '- (Required) The Application''s display name.'
+            profile_master: '- (Optional) Determines if the IdP should act as a source of truth for user profile attributes.'
+            protocol_type: '- (Optional) The type of protocol to use. It can be "OIDC" or "OAUTH2".'
+            provisioning_action: '- (Optional) Provisioning action for an IdP user during authentication.'
+            request_signature_algorithm: '- (Optional) The XML digital signature algorithm used when signing an AuthnRequest message.'
+            request_signature_scope: '- (Optional) Specifies whether to digitally sign an AuthnRequest messages to the IdP. It can be "REQUEST" or "NONE".'
+            response_signature_algorithm: '- (Optional) The minimum XML digital signature algorithm allowed when verifying a SAMLResponse message or Assertion element.'
+            response_signature_scope: '- (Optional) Specifies whether to verify a SAMLResponse message or Assertion element XML digital signature. It can be "RESPONSE", "ASSERTION", or "ANY".'
+            scopes: '- (Required) The scopes of the IdP.'
+            status: '- (Optional) Status of the IdP.'
+            subject_match_attribute: '- (Optional) Okta user profile attribute for matching transformed IdP username. Only for matchType "CUSTOM_ATTRIBUTE".'
+            subject_match_type: '- (Optional) Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed IdP username. By default, it is set to "USERNAME". It can be set to "USERNAME", "EMAIL", "USERNAME_OR_EMAIL" or "CUSTOM_ATTRIBUTE".'
+            suspended_action: '- (Optional) Action for a previously suspended IdP user during authentication. Can be set to "NONE" or "UNSUSPEND"'
+            token_binding: '- (Optional) The method of making a token request. It can be set to "HTTP-POST" or "HTTP-REDIRECT".'
+            token_url: '- (Optional) IdP Authorization Server (AS) endpoint to exchange the authorization code grant for an access token.'
+            type: '- (Required) The type of Social IdP. See API docs Identity Provider Type'
+            username_template: '- (Optional) Okta EL Expression to generate or transform a unique username for the IdP user.'
+        importStatements: []
+    okta_inline_hook:
+        subCategory: ""
+        description: Creates an inline hook.
+        name: okta_inline_hook
+        title: okta_inline_hook
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "auth": {
+                    "key": "Authorization",
+                    "type": "HEADER",
+                    "value": "secret"
+                  },
+                  "channel": {
+                    "method": "POST",
+                    "uri": "https://example.com/test",
+                    "version": "1.0.0"
+                  },
+                  "name": "example",
+                  "type": "com.okta.oauth2.tokens.transform",
+                  "version": "1.0.0"
+                }
+        argumentDocs:
+            auth: '- (Optional) Authentication required for inline hook request.'
+            channel: '- (Required) Details of the endpoint the inline hook will hit.'
+            headers: '- (Optional) Map of headers to send along in inline hook request.'
+            id: '- The ID of the inline hooks.'
+            key: '- (Required) Key to use for authentication, usually the header name, for example "Authorization".'
+            method: '- (Optional) The request method to use. Default is "POST".'
+            name: '- (Required) The inline hook display name.'
+            type: '- (Required) The type of hook to create. See here for supported types.'
+            uri: '- (Required) The URI the hook will hit.'
+            value: '- (Required) Authentication secret.'
+            version: '- (Required) The version of the hook. The currently-supported version is "1.0.0".'
+        importStatements: []
+    okta_link_definition':
+        subCategory: ""
+        description: Manages the creation and removal of the link definitions.
+        name: okta_link_definition'
+        title: okta_link_definition'
+        argumentDocs:
+            associated_description: '- (Required) Description of the associated relationship.'
+            associated_name: '- (Required) API name of the associated link.'
+            associated_title: '- (Required) Display name of the associated link.'
+            id: '- Name of the primary link.'
+            primary_description: '- (Required) Description of the primary relationship.'
+            primary_name: '- (Required) API name of the primary link.'
+            primary_title: '- (Required) Display name of the primary link.'
+        importStatements: []
+    okta_link_value':
+        subCategory: ""
+        description: Manages users relationships
+        name: okta_link_value'
+        title: okta_link_value'
+        argumentDocs:
+            associated_user_ids: '- (Optional) Set of User IDs or login values of the users to be assigned the ''associated'' relationship.'
+            id: '- ID of this resource in primary_name/primary_user_id format.'
+            primary_name: '- (Required) Name of the primary relationship being assigned.'
+            primary_user_id: '- (Required) User ID to be assigned to primary for the associated user in the specified relationship.'
+        importStatements: []
+    okta_network_zone':
+        subCategory: ""
+        description: Creates an Okta Network Zone.
+        name: okta_network_zone'
+        title: okta_network_zone'
+        argumentDocs:
+            asns: '- (Optional) Array of Autonomous System Numbers (each element is a string representation of an ASN numeric value).'
+            dynamic_locations: |-
+                - (Optional) Array of locations ISO-3166-1
+                and ISO-3166-2. Format code: countryCode OR countryCode-regionCode.
+            dynamic_proxy_type: '- (Optional) Type of proxy being controlled by this dynamic network zone - can be one of Any, TorAnonymizer or NotTorAnonymizer.'
+            gateways: '- (Optional) Array of values in CIDR/range form.'
+            id: '- Network Zone ID.'
+            name: '- (Required) Name of the Network Zone Resource.'
+            proxies: '- (Optional) Array of values in CIDR/range form. Can not be set if usage is set to "BLOCKLIST".'
+            status: '- (Optional) Network Status - can either be ACTIVE or INACTIVE only.'
+            type: '- (Required) Type of the Network Zone - can either be "IP" or "DYNAMIC" only.'
+            usage: '- (Optional) Usage of the Network Zone - can be either "POLICY" or "BLOCKLIST". By default, it is "POLICY".'
+        importStatements: []
+    okta_org_configuration':
+        subCategory: ""
+        description: Manages org settings, logo, support and communication.
+        name: okta_org_configuration'
+        title: okta_org_configuration'
         argumentDocs: {}
+        importStatements: []
+    okta_org_support':
+        subCategory: ""
+        description: Manages Okta Support access your org
+        name: okta_org_support'
+        title: okta_org_support'
+        argumentDocs:
+            expiration: '- Expiration of Okta Support'
+            extend_by: '- (Optional) Number of days the support should be extended by in addition to the standard eight hours.'
+            status: '- Status of Okta Support'
+        importStatements: []
+    okta_policy_device_assurance_android':
+        subCategory: ""
+        description: Manages a device assurance policy for android.
+        name: okta_policy_device_assurance_android'
+        title: okta_policy_device_assurance_android'
+        argumentDocs:
+            created_by: '- Created by of the device assurance policy.'
+            created_date: '- Created date of the device assurance policy.'
+            disk_encryption_type: '- (Optional) List of disk encryption type of the device assurance policy.'
+            id: '- ID of the device assurance policy.'
+            jailbreak: '- (Optional)  Is the device jailbroken in the device assurance policy.'
+            last_update: '- Last update of the device assurance policy.'
+            last_updated_by: '- Last updated by of the device assurance policy.'
+            name: '- (Required) Name of the device assurance policy.'
+            os_version: '- (Optional) Minimum os version of the device in the device assurance policy.'
+            platform: '- Platform of the device assurance policy.'
+            screenlock_type: '- (Optional) List of screen lock type of the device assurance policy.'
+            secure_hardware_present: '- (Optional) Is the device secure with hardware in the device assurance policy.'
+        importStatements: []
+    okta_policy_device_assurance_chromeos':
+        subCategory: ""
+        description: Manages a device assurance policy for chromeos.
+        name: okta_policy_device_assurance_chromeos'
+        title: okta_policy_device_assurance_chromeos'
+        argumentDocs:
+            created_by: '- Created by of the device assurance policy.'
+            created_date: '- Created date of the device assurance policy.'
+            id: '- ID of the device assurance policy.'
+            last_update: '- Last update of the device assurance policy.'
+            last_updated_by: '- Last updated by of the device assurance policy.'
+            name: '- (Required) Name of the device assurance policy.'
+            platform: '- Platform of the device assurance policy.'
+            tpsp_allow_screen_lock: '- (Optional) Third party signal provider allow screen lock.'
+            tpsp_browser_version: '- (Optional) Third party signal provider minimum browser version.'
+            tpsp_builtin_dns_client_enabled: '- (Optional) Third party signal provider builtin dns client enabled.'
+            tpsp_chrome_remote_desktop_app_blocked: '- (Optional) Third party signal provider chrome remote desktop app blocked.'
+            tpsp_device_enrollment_domain: '- (Optional) Third party signal provider device enrollment domain.'
+            tpsp_disk_encrypted: '- (Optional) Third party signal provider disk encrypted.'
+            tpsp_key_trust_level: '- (Optional) Third party signal provider key trust level.'
+            tpsp_os_firewall: '- (Optional) Third party signal provider os firewall.'
+            tpsp_os_version: '- (Optional) Third party signal provider minimum os version.'
+            tpsp_password_proctection_warning_trigger: '- (Optional) Third party signal provider password protection warning trigger.'
+            tpsp_realtime_url_check_mode: '- (Optional) Third party signal provider realtime url check mode.'
+            tpsp_safe_browsing_protection_level: '- (Optional) Third party signal provider safe browsing protection level.'
+            tpsp_screen_lock_secured: '- (Optional) Third party signal provider screen lock secure.'
+            tpsp_site_isolation_enabled: '- (Optional) Third party signal provider site isolation enabled.'
+        importStatements: []
+    okta_policy_device_assurance_ios':
+        subCategory: ""
+        description: Manages a device assurance policy for ios.
+        name: okta_policy_device_assurance_ios'
+        title: okta_policy_device_assurance_ios'
+        argumentDocs:
+            created_by: '- Created by of the device assurance policy.'
+            created_date: '- Created date of the device assurance policy.'
+            id: '- ID of the device assurance policy.'
+            jailbreak: '- (Optional)  Is the device jailbroken in the device assurance policy.'
+            last_update: '- Last update of the device assurance policy.'
+            last_updated_by: '- Last updated by of the device assurance policy.'
+            name: '- (Required) Name of the device assurance policy.'
+            os_version: '- (Optional) Minimum os version of the device in the device assurance policy.'
+            platform: '- Platform of the device assurance policy.'
+            screenlock_type: '- (Optional) List of screen lock type of the device assurance policy.'
+        importStatements: []
+    okta_policy_device_assurance_macos':
+        subCategory: ""
+        description: Manages a device assurance policy for macos.
+        name: okta_policy_device_assurance_macos'
+        title: okta_policy_device_assurance_macos'
+        argumentDocs:
+            created_by: '- Created by of the device assurance policy.'
+            created_date: '- Created date of the device assurance policy.'
+            disk_encryption_type: '- (Optional) List of disk encryption type of the device assurance policy.'
+            id: '- ID of the device assurance policy.'
+            last_update: '- Last update of the device assurance policy.'
+            last_updated_by: '- Last updated by of the device assurance policy.'
+            name: '- (Required) Name of the device assurance policy.'
+            os_version: '- (Optional) Minimum os version of the device in the device assurance policy.'
+            platform: '- Platform of the device assurance policy.'
+            screenlock_type: '- (Optional) List of screen lock type of the device assurance policy.'
+            secure_hardware_present: '- (Optional) Is the device secure with hardware in the device assurance policy.'
+            third_party_signal_providers: '- (Optional) Indicate where the device assurance is using third party signal provider. Must be set if you want to use other tpsp value'
+            tpsp_browser_version: '- (Optional) Third party signal provider minimum browser version.'
+            tpsp_builtin_dns_client_enabled: '- (Optional) Third party signal provider builtin dns client enabled.'
+            tpsp_chrome_remote_desktop_app_blocked: '- (Optional) Third party signal provider chrome remote desktop app blocked.'
+            tpsp_device_enrollment_domain: '- (Optional) Third party signal provider device enrollment domain.'
+            tpsp_disk_encrypted: '- (Optional) Third party signal provider disk encrypted.'
+            tpsp_key_trust_level: '- (Optional) Third party signal provider key trust level.'
+            tpsp_os_firewall: '- (Optional) Third party signal provider os firewall.'
+            tpsp_os_version: '- (Optional) Third party signal provider minimum os version.'
+            tpsp_password_proctection_warning_trigger: '- (Optional) Third party signal provider password protection warning trigger.'
+            tpsp_realtime_url_check_mode: '- (Optional) Third party signal provider realtime url check mode.'
+            tpsp_safe_browsing_protection_level: '- (Optional) Third party signal provider safe browsing protection level.'
+            tpsp_screen_lock_secured: '- (Optional) Third party signal provider screen lock secure.'
+            tpsp_site_isolation_enabled: '- (Optional) Third party signal provider site isolation enabled.'
+        importStatements: []
+    okta_policy_device_assurance_windows':
+        subCategory: ""
+        description: Manages a device assurance policy for windows.
+        name: okta_policy_device_assurance_windows'
+        title: okta_policy_device_assurance_windows'
+        argumentDocs:
+            created_by: '- Created by of the device assurance policy.'
+            created_date: '- Created date of the device assurance policy.'
+            disk_encryption_type: '- (Optional) List of disk encryption type of the device assurance policy.'
+            id: '- ID of the device assurance policy.'
+            last_update: '- Last update of the device assurance policy.'
+            last_updated_by: '- Last updated by of the device assurance policy.'
+            name: '- (Required) Name of the device assurance policy.'
+            os_version: '- (Optional) Minimum os version of the device in the device assurance policy.'
+            platform: '- Platform of the device assurance policy.'
+            screenlock_type: '- (Optional) List of screen lock type of the device assurance policy.'
+            secure_hardware_present: '- (Optional) Is the device secure with hardware in the device assurance policy.'
+            third_party_signal_providers: '- (Optional) Indicate where the device assurance is using third party signal provider. Must be set if you want to use other tpsp value'
+            tpsp_browser_version: '- (Optional) Third party signal provider minimum browser version.'
+            tpsp_builtin_dns_client_enabled: '- (Optional) Third party signal provider builtin dns client enabled.'
+            tpsp_chrome_remote_desktop_app_blocked: '- (Optional) Third party signal provider chrome remote desktop app blocked.'
+            tpsp_crowd_strike_agent_id: '- (Optional) Third party signal provider crowdstrike agent id.'
+            tpsp_crowd_strike_customer_id: '- (Optional) Third party signal provider crowdstrike customer id.'
+            tpsp_device_enrollment_domain: '- (Optional) Third party signal provider device enrollment domain.'
+            tpsp_disk_encrypted: '- (Optional) Third party signal provider disk encrypted.'
+            tpsp_key_trust_level: '- (Optional) Third party signal provider key trust level.'
+            tpsp_os_firewall: '- (Optional) Third party signal provider os firewall.'
+            tpsp_os_version: '- (Optional) Third party signal provider minimum os version.'
+            tpsp_password_proctection_warning_trigger: '- (Optional) Third party signal provider password protection warning trigger.'
+            tpsp_realtime_url_check_mode: '- (Optional) Third party signal provider realtime url check mode.'
+            tpsp_safe_browsing_protection_level: '- (Optional) Third party signal provider safe browsing protection level.'
+            tpsp_screen_lock_secured: '- (Optional) Third party signal provider screen lock secure.'
+            tpsp_secure_boot_enabled: '- (Optional) Third party signal provider secure boot enabled.'
+            tpsp_site_isolation_enabled: '- (Optional) Third party signal provider site isolation enabled.'
+            tpsp_third_party_blocking_enabled: '- (Optional) Third party signal provider third party blocking enabled.'
+            tpsp_windows_machine_domain: '- (Optional) Third party signal provider windows machine domain.'
+            tpsp_windows_user_domain: '- (Optional) Third party signal provider windows user domain.'
+        importStatements: []
+    okta_policy_mfa':
+        subCategory: ""
+        description: Creates an MFA Policy.
+        name: okta_policy_mfa'
+        title: okta_policy_mfa'
+        argumentDocs:
+            consent_type: |-
+                - (Optional) User consent type required before enrolling in the factor: "NONE" or "TERMS_OF_SERVICE". By default, it is "NONE".
+                ~> NOTE: Only applicable when using Classic mode with Factors (not OIE). When using OIE, consent_type is not used
+            constraints: '- (Optional) webauthn argument.'
+            description: '- (Optional) Policy Description.'
+            duo: '- (Optional) DUO MFA policy settings (✓ Classic, ✓ OIE).'
+            enroll: '- (Optional) Requirements for user initiated enrollment. Can be "NOT_ALLOWED", "OPTIONAL", or "REQUIRED". By default, it is "OPTIONAL".'
+            external_idp: '- (Optional) External IDP MFA policy settings (✓ OIE).'
+            fido_u2f: '- (Optional) Fido U2F MFA policy settings (✓ Classic).'
+            fido_webauthn: '- (Optional) Fido Web Authn MFA policy settings (✓ Classic).'
+            google_otp: '- (Optional) Google OTP MFA policy settings (✓ Classic, ✓ OIE).'
+            groups_included: '- (Optional) List of Group IDs to Include.'
+            hotp: '- (Optional) HMAC-based One-Time Password MFA policy settings (✓ Classic).'
+            id: '- ID of the Policy.'
+            is_oie: |-
+                - (Optional) Boolean that specifies whether to use the newer Okta Identity Engine (OIE) with policy authenticators instead of the classic engine with Factors. This value determines which of the following policy factor settings can be configured. (Default = false)
+                ~> WARNING: Tenant must have the Okta Identity Engine enabled in order to use this feature.
+            name: '- (Required) Policy Name.'
+            okta_call: '- (Optional) Okta Call MFA policy settings (✓ Classic).'
+            okta_email: '- (Optional) Okta Email MFA policy settings (✓ Classic, ✓ OIE).'
+            okta_otp: '- (Optional) Okta OTP (via the Okta Verify app) MFA policy settings (✓ Classic).'
+            okta_password: '- (Optional) Okta Password MFA policy settings (✓ Classic, ✓ OIE).'
+            okta_push: '- (Optional) Okta Push MFA policy settings (✓ Classic).'
+            okta_question: '- (Optional) Okta Question MFA policy settings (✓ Classic).'
+            okta_sms: '- (Optional) Okta SMS MFA policy settings (✓ Classic).'
+            okta_verify: '- (Optional) Okta Verify MFA policy settings (✓ OIE).'
+            onprem_mfa: '- (Optional) On-Prem MFA MFA policy settings (✓ OIE).'
+            phone_number: '- (Optional) Phone Number MFA policy settings (✓ OIE).'
+            priority: '- (Optional) Priority of the policy.'
+            rsa_token: '- (Optional) RSA Token MFA policy settings (✓ Classic, ✓ OIE).'
+            security_question: '- (Optional) Security Question MFA policy settings (✓ OIE).'
+            status: '- (Optional) Policy Status: "ACTIVE" or "INACTIVE".'
+            symantec_vip: '- (Optional) Symantec VIP MFA policy settings (✓ Classic).'
+            webauthn: '- (Optional) FIDO2 (WebAuthn) MFA policy settings (✓ OIE).'
+            yubikey_token: '- (Optional) Yubikey Token MFA policy settings (✓ Classic, ✓ OIE).'
+        importStatements: []
+    okta_policy_mfa_default':
+        subCategory: ""
+        description: Configures default MFA Policy.
+        name: okta_policy_mfa_default'
+        title: okta_policy_mfa_default'
+        argumentDocs:
+            consent_type: |-
+                - (Optional) User consent type required before enrolling in the factor: "NONE" or "TERMS_OF_SERVICE". By default, it is "NONE".
+                ~> NOTE: Only applicable when using Classic mode with Factors (not OIE). When using OIE, consent_type is not used
+            default_included_group_id: '- ID of the default Okta group.'
+            description: '- Default policy description.'
+            duo: '- (Optional) DUO MFA policy settings (✓ Classic, ✓ OIE).'
+            enroll: '- (Optional) Requirements for user initiated enrollment. Can be "NOT_ALLOWED", "OPTIONAL", or "REQUIRED". By default, it is "OPTIONAL".'
+            external_idp: '- (Optional) External IDP MFA policy settings (✓ OIE).'
+            fido_u2f: '- (Optional) Fido U2F MFA policy settings (✓ Classic).'
+            fido_webauthn: '- (Optional) Fido Web Authn MFA policy settings (✓ Classic).'
+            google_otp: '- (Optional) Google OTP MFA policy settings (✓ Classic, ✓ OIE).'
+            hotp: '- (Optional) HMAC-based One-Time Password MFA policy settings (✓ Classic).'
+            id: '- ID of the default policy.'
+            is_oie: |-
+                - (Optional) Boolean that specifies whether to use the newer Okta Identity Engine (OIE) with policy authenticators instead of the classic engine with Factors. This value determines which of the following policy factor settings can be configured. (Default = false)
+                ~> WARNING: Tenant must have the Okta Identity Engine enabled in order to use this feature.
+            name: '- Default policy name.'
+            okta_call: '- (Optional) Okta Call MFA policy settings (✓ Classic).'
+            okta_email: '- (Optional) Okta Email MFA policy settings (✓ Classic, ✓ OIE).'
+            okta_otp: '- (Optional) Okta OTP (via the Okta Verify app) MFA policy settings (✓ Classic).'
+            okta_password: '- (Optional) Okta Password MFA policy settings (✓ Classic, ✓ OIE).'
+            okta_push: '- (Optional) Okta Push MFA policy settings (✓ Classic).'
+            okta_question: '- (Optional) Okta Question MFA policy settings (✓ Classic).'
+            okta_sms: '- (Optional) Okta SMS MFA policy settings (✓ Classic).'
+            okta_verify: '- (Optional) Okta Verify MFA policy settings (✓ OIE).'
+            onprem_mfa: '- (Optional) On-Prem MFA MFA policy settings (✓ OIE).'
+            phone_number: '- (Optional) Phone Number MFA policy settings (✓ OIE).'
+            priority: '- Default policy priority.'
+            rsa_token: '- (Optional) RSA Token MFA policy settings (✓ Classic, ✓ OIE).'
+            security_question: '- (Optional) Security Question MFA policy settings (✓ OIE).'
+            status: '- Default policy status.'
+            symantec_vip: '- (Optional) Symantec VIP MFA policy settings (✓ Classic).'
+            webauthn: '- (Optional) FIDO2 (WebAuthn) MFA policy settings (✓ OIE).'
+            yubikey_token: '- (Optional) Yubikey Token MFA policy settings (✓ Classic, ✓ OIE).'
+        importStatements: []
+    okta_policy_password':
+        subCategory: ""
+        description: Creates a Password Policy.
+        name: okta_policy_password'
+        title: okta_policy_password'
+        argumentDocs:
+            auth_provider: '- (Optional) Authentication Provider: "OKTA", "ACTIVE_DIRECTORY" or "LDAP". Default is "OKTA". Type "string"'
+            call_recovery: '- (Optional) Enable or disable voice call password recovery: ACTIVE or INACTIVE.  Type "string"'
+            description: '- (Optional) Policy Description. Type "string"'
+            email_recovery: '- (Optional) Enable or disable email password recovery: ACTIVE or INACTIVE. Type "string"'
+            groups_included: '- (Optional) List of Group IDs to Include. Type "list(string)"'
+            id: '- ID of the Policy.'
+            name: '- (Required) Policy Name. Type "string"'
+            password_auto_unlock_minutes: '- (Optional) Number of minutes before a locked account is unlocked: 0 = no limit.  Type "number"'
+            password_dictionary_lookup: '- (Optional) Check Passwords Against Common Password Dictionary. Type "bool"'
+            password_exclude_first_name: '- (Optional) User firstName attribute must be excluded from the password. Type "bool"'
+            password_exclude_last_name: '- (Optional) User lastName attribute must be excluded from the password. Type "bool"'
+            password_exclude_username: '- (Optional) If the username must be excluded from the password. Type "bool"'
+            password_expire_warn_days: '- (Optional) Length in days a user will be warned before password expiry: 0 = no warning.  Type "number"'
+            password_history_count: '- (Optional) Number of distinct passwords that must be created before they can be reused: 0 = none.  Type "number"'
+            password_lockout_notification_channels: '- (Optional) Notification channels to use to notify a user when their account has been locked. Type "set(string)"'
+            password_max_age_days: '- (Optional) Length in days a password is valid before expiry: 0 = no limit.  Type "number"'
+            password_max_lockout_attempts: '- (Optional) Number of unsuccessful login attempts allowed before lockout: 0 = no limit.  Type "number"'
+            password_min_age_minutes: '- (Optional) Minimum time interval in minutes between password changes: 0 = no limit.  Type "number"'
+            password_min_length: '- (Optional) Minimum password length. Default is 8. Type "number"'
+            password_min_lowercase: '- (Optional) Minimum number of lower case characters in a password. Type "number"'
+            password_min_number: '- (Optional) Minimum number of numbers in a password. Type "number"'
+            password_min_symbol: '- (Optional) Minimum number of symbols in a password. Type "number"'
+            password_min_uppercase: '- (Optional) Minimum number of upper case characters in a password. Type "number"'
+            password_show_lockout_failures: '- (Optional) If a user should be informed when their account is locked.  Type "bool"'
+            priority: '- (Optional) Priority of the policy. Type "number"'
+            question_min_length: '- (Optional) Min length of the password recovery question answer.  Type "number"'
+            question_recovery: '- (Optional) Enable or disable security question password recovery: ACTIVE or INACTIVE. Type "string"'
+            recovery_email_token: '- (Optional) Lifetime in minutes of the recovery email token.  Type "number"'
+            skip_unlock: '- (Optional) When an Active Directory user is locked out of Okta, the Okta unlock operation should also attempt to unlock the user''s Windows account. Type "bool"'
+            sms_recovery: '- (Optional) Enable or disable SMS password recovery: ACTIVE or INACTIVE. Type "string"'
+            status: '- (Optional) Policy Status: "ACTIVE" or "INACTIVE". Type "string"'
+        importStatements: []
+    okta_policy_password_default':
+        subCategory: ""
+        description: Configures default password policy.
+        name: okta_policy_password_default'
+        title: okta_policy_password_default'
+        argumentDocs:
+            call_recovery: '- (Optional) Enable or disable voice call password recovery: ACTIVE or INACTIVE.'
+            default_auth_provider: '- Default authentication provider.'
+            default_included_group_id: '- ID of the default Okta group.'
+            description: '- Default policy description.'
+            email_recovery: '- (Optional) Enable or disable email password recovery: ACTIVE or INACTIVE.'
+            id: '- ID of the default policy.'
+            name: '- Default policy name.'
+            password_auto_unlock_minutes: '- (Optional) Number of minutes before a locked account is unlocked: 0 = no limit.'
+            password_dictionary_lookup: '- (Optional) Check Passwords Against Common Password Dictionary.'
+            password_exclude_first_name: '- (Optional) User firstName attribute must be excluded from the password.'
+            password_exclude_last_name: '- (Optional) User lastName attribute must be excluded from the password.'
+            password_exclude_username: '- (Optional) If the username must be excluded from the password.'
+            password_expire_warn_days: '- (Optional) Length in days a user will be warned before password expiry: 0 = no warning.'
+            password_history_count: |-
+                - (Optional) Number of distinct passwords that must be created before they can be reused: 0 =
+                none.
+            password_lockout_notification_channels: |-
+                - (Optional) Notification channels to use to notify a user when their account
+                has been locked.
+            password_max_age_days: '- (Optional) Length in days a password is valid before expiry: 0 = no limit.,'
+            password_max_lockout_attempts: |-
+                - (Optional) Number of unsuccessful login attempts allowed before lockout: 0 = no
+                limit.
+            password_min_age_minutes: '- (Optional) Minimum time interval in minutes between password changes: 0 = no limit.'
+            password_min_length: '- (Optional) Minimum password length. Default is 8.'
+            password_min_lowercase: '- (Optional) Minimum number of lower case characters in a password.'
+            password_min_number: '- (Optional) Minimum number of numbers in a password.'
+            password_min_symbol: '- (Optional) Minimum number of symbols in a password.'
+            password_min_uppercase: '- (Optional) Minimum number of upper case characters in a password.'
+            password_show_lockout_failures: '- (Optional) If a user should be informed when their account is locked.'
+            priority: '- Default policy priority.'
+            question_min_length: '- (Optional) Min length of the password recovery question answer.'
+            question_recovery: '- (Optional) Enable or disable security question password recovery: ACTIVE or INACTIVE.'
+            recovery_email_token: '- (Optional) Lifetime in minutes of the recovery email token.'
+            skip_unlock: |-
+                - (Optional) When an Active Directory user is locked out of Okta, the Okta unlock operation should also
+                attempt to unlock the user's Windows account.
+            sms_recovery: '- (Optional) Enable or disable SMS password recovery: ACTIVE or INACTIVE.'
+            status: '- Default policy status.'
+        importStatements: []
+    okta_policy_profile_enrollment':
+        subCategory: ""
+        description: Creates a Profile Enrollment Policy
+        name: okta_policy_profile_enrollment'
+        title: okta_policy_profile_enrollment'
+        argumentDocs:
+            id: '- ID of the Policy.'
+            name: '- (Required) Policy Name.'
+            status: '- (Optional) Status of the policy.'
+        importStatements: []
+    okta_policy_profile_enrollment_apps':
+        subCategory: ""
+        description: Manages Profile Enrollment Policy Apps
+        name: okta_policy_profile_enrollment_apps'
+        title: okta_policy_profile_enrollment_apps'
+        argumentDocs:
+            apps: '- (Optional) List of app IDs to be added to this policy.'
+            default_policy_id: '- ID of the default enrollment policy.'
+            depends_on: |-
+                in the policy to which the app will be assigned. This is necessary to avoid
+                unexpected behavior, since if the app is unassigned from the policy it is just assigned to the Default one.
+            id: '- ID of the enrollment policy.'
+            policy_id: '- (Required) ID of the enrollment policy.'
+        importStatements: []
+    okta_policy_rule_idp_discovery':
+        subCategory: ""
+        description: Creates an IdP Discovery Policy Rule.
+        name: okta_policy_rule_idp_discovery'
+        title: okta_policy_rule_idp_discovery'
+        argumentDocs:
+            app_exclude: '- (Optional) Applications to exclude in discovery. See app_include for details.'
+            app_include: '- (Optional) Applications to include in discovery rule.'
+            id: '- (Optional) Use if type is "APP" to indicate the application id to include.'
+            idp_id: '- (Optional) The identifier for the Idp the rule should route to if all conditions are met.'
+            idp_type: '- (Optional) Type of Idp. One of: "SAML2", "IWA", "AgentlessDSSO", "X509", "FACEBOOK", "GOOGLE", "LINKEDIN", "MICROSOFT", "OIDC"'
+            match_type: '- (Optional) The kind of pattern. For regex, use "EXPRESSION". For simple string matches, use one of the following: "SUFFIX", "EQUALS", "STARTS_WITH", "CONTAINS"'
+            name: '- (Required) Policy rule name.'
+            network_connection: '- (Optional) The network selection mode. One of "ANYWEHRE" or "ZONE".'
+            network_excludes: '- Required if network_connection = "ZONE". Indicates the network zones to exclude.'
+            network_includes: '- Required if network_connection = "ZONE". Indicates the network zones to include.'
+            os_expression: '- (Optional) Only available when using os_type = "OTHER"'
+            os_type: '- (Optional) One of: "ANY", "IOS", "WINDOWS", "ANDROID", "OTHER", "OSX"'
+            platform_include: '- (Optional)'
+            policy_id: '- (Required) Policy ID.'
+            priority: '- (Optional) Idp rule priority. This attribute can be set to a valid priority. To avoid an endless diff situation an error is thrown if an invalid property is provided. The Okta API defaults to the last (lowest) if not provided.'
+            status: '- (Optional) Idp rule status: "ACTIVE" or "INACTIVE". By default, it is "ACTIVE".'
+            type: '- (Required) One of: "APP", "APP_TYPE"'
+            user_identifier_attribute: '- (Optional) Profile attribute matching can only have a single value that describes the type indicated in user_identifier_type. This is the attribute or identifier that the user_identifier_patterns are checked against.'
+            user_identifier_patterns: '- (Optional) Specifies a User Identifier pattern condition to match against. If match_type of "EXPRESSION" is used, only a single element can be set, otherwise multiple elements of matching patterns may be provided.'
+            user_identifier_type: '- (Optional) One of: "IDENTIFIER", "ATTRIBUTE"'
+            value: '- (Optional) The regex or simple match string to match against.'
+        importStatements: []
+    okta_policy_rule_mfa':
+        subCategory: ""
+        description: Creates an MFA Policy Rule.
+        name: okta_policy_rule_mfa'
+        title: okta_policy_rule_mfa'
+        argumentDocs:
+            app_exlcude: '- (Optional) Applications to exclude from the discovery rule. IMPORTANT: this field is only available in Classic Organizations.'
+            app_include: '- (Optional) Applications to include in discovery rule. IMPORTANT: this field is only available in Classic Organizations.'
+            enroll: '- (Optional) When a user should be prompted for MFA. It can be "CHALLENGE", "LOGIN", or "NEVER".'
+            id: '- (Optional) Use if type is "APP" to indicate the application id to include.'
+            name: '- (Required) Policy Rule Name.'
+            network_connection: '- (Optional) Network selection mode: "ANYWHERE", "ZONE", "ON_NETWORK", or "OFF_NETWORK".'
+            network_excludes: '- (Optional) The network zones to exclude. Conflicts with network_includes.'
+            network_includes: '- (Optional) The network zones to include. Conflicts with network_excludes.'
+            policy_id: '- (Required) Policy ID.'
+            priority: '- (Optional) Policy Rule Priority, this attribute can be set to a valid priority. To avoid endless diff situation we error if an invalid priority is provided. API defaults it to the last (lowest) if not there.'
+            status: '- (Optional) Policy Rule Status: "ACTIVE" or "INACTIVE".'
+            type: '- (Required) One of: "APP", "APP_TYPE"'
+        importStatements: []
+    okta_policy_rule_password':
+        subCategory: ""
+        description: Creates a Password Policy Rule.
+        name: okta_policy_rule_password'
+        title: okta_policy_rule_password'
+        argumentDocs:
+            id: '- ID of the Rule.'
+            name: '- (Required) Policy Rule Name. Type "string"'
+            network_connection: '- (Optional) Network selection mode: "ANYWHERE", "ZONE", "ON_NETWORK", or "OFF_NETWORK". Type "string"'
+            network_excludes: '- (Optional) The network zones to exclude. Conflicts with network_includes. Type "list(string)"'
+            network_includes: '- (Optional) The network zones to include. Conflicts with network_excludes. Type "list(string)"'
+            password_change: '- (Optional) Allow or deny a user to change their password: "ALLOW" or "DENY". By default, it is "ALLOW". Type "string"'
+            password_reset: '- (Optional) Allow or deny a user to reset their password: "ALLOW" or "DENY". By default, it is "ALLOW". Type "string"'
+            password_unlock: '- (Optional) Allow or deny a user to unlock: "ALLOW" or "DENY". By default, it is "DENY", Type "string"'
+            policy_id: '- (Required) Policy ID.'
+            priority: '- (Optional) Policy Rule Priority, this attribute can be set to a valid priority. To avoid endless diff situation we error if an invalid priority is provided. API defaults it to the last (lowest) if not there. Type "number"'
+            status: '- (Optional) Policy Rule Status: "ACTIVE" or "INACTIVE". Type "string"'
+            users_excluded: '- (Optional) The users to exclude. Type "set(string)"'
+        importStatements: []
+    okta_policy_rule_profile_enrollment':
+        subCategory: ""
+        description: Creates a Profile Enrollment Policy Rule.
+        name: okta_policy_rule_profile_enrollment'
+        title: okta_policy_rule_profile_enrollment'
+        argumentDocs:
+            access: '- (Optional) Allow or deny access based on the rule conditions. Valid values are: "ALLOW", "DENY". Default is "ALLOW".'
+            email_verification: '- (Optional) Indicates whether email verification should occur before access is granted. Default is true.'
+            id: '- ID of the Rule.'
+            inline_hook_id: '- (Optional) ID of a Registration Inline Hook.'
+            label: '- (Required) A display-friendly label for this property'
+            name: '- (Required) The name of a User Profile property'
+            policy_id: '- (Required) Policy ID.'
+            profile_attributes: '- (Required) A list of attributes to prompt the user during registration or progressive profiling. Where defined on the User schema, these attributes are persisted in the User profile. Non-schema attributes may also be added, which aren''t persisted to the User''s profile, but are included in requests to the registration inline hook. A maximum of 10 Profile properties is supported.'
+            required: '- (Required) Indicates if this property is required for enrollment. Default is false.'
+            status: '- Status of the Rule.'
+            target_group_id: '- (Optional) The ID of a Group that this User should be added to.'
+            ui_schema_id: '- (Required if present) Value created by the backend. If present all policy updates must include this attribute/value.'
+            unknown_user_action: '- (Required) Which action should be taken if this User is new. Valid values are: "DENY", "REGISTER".'
+        importStatements: []
+    okta_policy_rule_signon':
+        subCategory: ""
+        description: Creates a Sign On Policy Rule.
+        name: okta_policy_rule_signon'
+        title: okta_policy_rule_signon'
+        argumentDocs:
+            access: '- (Optional) Allow or deny access based on the rule conditions: "ALLOW", "DENY" or "CHALLENGE". The default is "ALLOW".'
+            authtype: '- (Optional) Authentication entrypoint: "ANY", "LDAP_INTERFACE" or "RADIUS".'
+            behaviors: '- (Optional) List of behavior IDs.'
+            factor_sequence: '- (Optional) Auth factor sequences. Should be set if access = "CHALLENGE".'
+            factor_type: '- (Required) Factor type of the additional authentication step.'
+            id: '- ID of the Rule.'
+            identity_provider: '- (Optional) Defines the identity provider for this rule. Valid values are "ANY", "OKTA", and "SPECIFIC_IDP".'
+            identity_provider_ids: '- (Optional) When identity_provider is "SPECIFIC_IDP" then this is the list of IdP IDs to apply the rule on.'
+            mfa_lifetime: '- (Optional) Elapsed time before the next MFA challenge.'
+            mfa_prompt: '- (Optional) Prompt for MFA based on the device used, a factor session lifetime, or every sign-on attempt: "DEVICE", "SESSION" or "ALWAYS".'
+            mfa_remember_device: '- (Optional) Remember MFA device. The default false.'
+            mfa_required: '- (Optional) Require MFA. By default is false.'
+            name: '- (Required) Policy Rule Name.'
+            network_connection: '- (Optional) Network selection mode: "ANYWHERE", "ZONE", "ON_NETWORK", or "OFF_NETWORK".'
+            network_excludes: '- (Optional) The network zones to exclude. Conflicts with network_includes.'
+            network_includes: '- (Optional) The network zones to include. Conflicts with network_excludes.'
+            policy_id: '- (Required) Policy ID.'
+            primary_criteria_factor_type: '- (Required) Primary factor type of the auth section.'
+            primary_criteria_provider: '- (Required) Primary provider of the auth section.'
+            primary_factor: |-
+                - (Optional) Rule's primary factor. WARNING Ony works as a part of the Identity Engine. Valid values:
+                "PASSWORD_IDP_ANY_FACTOR", "PASSWORD_IDP".
+            priority: '- (Optional) Policy Rule Priority, this attribute can be set to a valid priority. To avoid endless diff situation we error if an invalid priority is provided. API defaults it to the last (lowest) if not there.'
+            provider: '- (Required) Provider of the additional authentication step.'
+            risc_level: |-
+                - (Optional) Risc level: "ANY", "LOW", "MEDIUM" or "HIGH". Default is "ANY". It can be also
+                set to an empty string in case RISC_SCORING org feature flag is disabled.
+            secondary_criteria: '- (Optional) Additional authentication steps.'
+            session_idle: '- (Optional) Max minutes a session can be idle.,'
+            session_lifetime: '- (Optional) Max minutes a session is active: Disable = 0.'
+            session_persistent: '- (Optional) Whether session cookies will last across browser sessions. Okta Administrators can never have persistent session cookies.'
+            status: '- (Optional) Policy Rule Status: "ACTIVE" or "INACTIVE".'
+            users_excluded: '- (Optional) The list of user IDs that would be excluded when rules are processed.'
+        importStatements: []
+    okta_policy_signon':
+        subCategory: ""
+        description: Creates a Sign On Policy.
+        name: okta_policy_signon'
+        title: okta_policy_signon'
+        argumentDocs:
+            description: '- (Optional) Policy Description.'
+            groups_included: '- List of Group IDs to Include.'
+            id: '- ID of the Policy.'
+            name: '- (Required) Policy Name.'
+            priority: '- (Optional) Priority of the policy.'
+            status: '- (Optional) Policy Status: "ACTIVE" or "INACTIVE".'
+        importStatements: []
+    okta_profile_mapping':
+        subCategory: ""
+        description: Manages a profile mapping.
+        name: okta_profile_mapping'
+        title: okta_profile_mapping'
+        argumentDocs:
+            always_apply: (Optional) Whether apply the changes to all users with this profile after updating or creating the these mappings.
+            delete_when_absent: '- (Optional) Tells the provider whether to attempt to delete missing mappings under profile mapping.'
+            expression: '- (Required) Combination or single source properties that will be mapped to the target property.'
+            id: '- (Required) Key of mapping.'
+            mappings: '- (Optional) Priority of the policy.'
+            push_status: '- (Optional) Whether to update target properties on user create & update or just on create.'
+            source_id: '- (Required) Source id of the profile mapping.'
+            source_name: '- Name of the mapping source.'
+            source_type: '- ID of the mapping source.'
+            target_id: '- ID of the mapping target.'
+            target_name: '- Name of the mapping target.'
+            target_type: '- ID of the mapping target.'
+        importStatements: []
+    okta_rate_limiting':
+        subCategory: ""
+        description: Manages rate limiting.
+        name: okta_rate_limiting'
+        title: okta_rate_limiting'
+        argumentDocs:
+            authorize: |-
+                - (Required) Called during authentication. Valid values: "ENFORCE" (Enforce limit and
+                log per client (recommended)), "DISABLE" (Do nothing (not recommended)), "PREVIEW" (Log per client).
+            communications_enabled: '- (Optional) Enable or disable rate limiting communications. By default, it is true.'
+            login: |-
+                - (Required) Called when accessing the Okta hosted login page. Valid values: "ENFORCE" (Enforce limit and
+                log per client (recommended)), "DISABLE" (Do nothing (not recommended)), "PREVIEW" (Log per client).
+        importStatements: []
+    okta_resource_set':
+        subCategory: ""
+        description: Manages Resource Sets as custom collections of resources.
+        name: okta_resource_set'
+        title: okta_resource_set'
+        argumentDocs:
+            description: '- (Required) A description of the Resource Set.'
+            id: '- ID of the resource set.'
+            label: '- (Required) Unique name given to the Resource Set.'
+            resources: |-
+                - (Optional) The endpoints that reference the resources to be included in the new Resource Set. At least one
+                endpoint must be specified when creating resource set.
+        importStatements: []
+    okta_role_subscription':
+        subCategory: ""
+        description: Manages group subscription.
+        name: okta_role_subscription'
+        title: okta_role_subscription'
+        argumentDocs:
+            '"AD_AGENT"': '- Disconnects and reconnects: AD agent.'
+            '"AGENT_AUTO_UPDATE_NOTIFICATION"': '- Agent auto-update notifications: AD Agent.'
+            '"APP_IMPORT"': '- App user import status.'
+            '"CONNECTOR_AGENT"': '-  Disconnects and reconnects: On-prem provisioning, on-prem MFA agents, and RADIUS server agent.'
+            '"IWA_AGENT"': '- Disconnects and reconnects: IWA agent.'
+            '"LDAP_AGENT"': '- Disconnects and reconnects: LDAP agent.'
+            '"OKTA_ANNOUNCEMENT"': '- Okta release notes and announcements.'
+            '"OKTA_ISSUE"': '- Trust incidents and updates.'
+            '"OKTA_UPDATE"': '- Scheduled system updates.'
+            '"RATELIMIT_NOTIFICATION"': '- Rate limit warning and violation.'
+            '"REPORT_SUSPICIOUS_ACTIVITY"': '- User reporting of suspicious activity.'
+            '"USER_DEPROVISION"': '- User deprovisions.'
+            '"USER_LOCKED_OUT"': '- User lockouts.'
+            id: '- ID of the resource. Same a notification_type.'
+            notification_type: '- (Required) Type of the notification. Valid values:'
+            role_type: |-
+                - (Required) Type of the role. Valid values:
+                "API_ADMIN",
+                "APP_ADMIN",
+                "CUSTOM",
+                "GROUP_MEMBERSHIP_ADMIN",
+                "HELP_DESK_ADMIN",
+                "MOBILE_ADMIN",
+                "ORG_ADMIN",
+                "READ_ONLY_ADMIN",
+                "REPORT_ADMIN",
+                "SUPER_ADMIN",
+                "USER_ADMIN"
+                . See API docs
+            status: '- (Optional) Subscription status. Valid values: "subscribed", "unsubscribed".'
+        importStatements: []
+    okta_security_notification_emails':
+        subCategory: ""
+        description: Manages Security Notification Emails
+        name: okta_security_notification_emails'
+        title: okta_security_notification_emails'
+        argumentDocs:
+            report_suspicious_activity_enabled: (Optional) - Notifies end users about suspicious or unrecognized activity from their account. Default is true.
+            send_email_for_factor_enrollment_enabled: (Optional) - Notifies end users of any activity on their account related to MFA factor enrollment. Default is true.
+            send_email_for_factor_reset_enabled: (Optional) - Notifies end users that one or more factors have been reset for their account. Default is true.
+            send_email_for_new_device_enabled: (Optional) - Notifies end users about new sign-on activity. Default is true.
+            send_email_for_password_changed_enabled: (Optional) - Notifies end users that the password for their account has changed. Default is true.
+        importStatements: []
+    okta_template_sms':
+        subCategory: ""
+        description: Creates an Okta SMS Template.
+        name: okta_template_sms'
+        title: okta_template_sms'
+        argumentDocs:
+            id: '- ID of the SMS Template.'
+            language: '- (Required) The language to map the template to.'
+            template: '- (Required) Default SMS message'
+            translations: '- (Required) Set of translations for a particular template.'
+            type: '- (Required) SMS template type'
+        importStatements: []
+    okta_theme':
+        subCategory: ""
+        description: Gets, updates, a single Theme of a Brand of an Okta Organization.
+        name: okta_theme'
+        title: okta_theme'
+        argumentDocs:
+            background_image: '- (Optional) Local path to background image file. Setting the value to the blank string "" will delete the favicon on the theme at Okta but will not delete the local file.'
+            background_image_url: '- (Read-Only) Background image URL'
+            brand_id: '- (Required) Brand ID'
+            email_template_touch_point_variant: '- (Required) Variant for email templates. Valid values: (OKTA_DEFAULT, FULL_THEME)'
+            end_user_dashboard_touch_point_variant: '- (Required) Variant for the Okta End-User Dashboard. Valid values: (OKTA_DEFAULT, WHITE_LOGO_BACKGROUND, FULL_THEME, LOGO_ON_FULL_WHITE_BACKGROUND)'
+            error_page_touch_point_variant: '- (Required) Variant for the error page. Valid values: (OKTA_DEFAULT, BACKGROUND_SECONDARY_COLOR, BACKGROUND_IMAGE)'
+            favicon: '- (Optional) Local path to favicon file. Setting the value to the blank string "" will delete the favicon on the theme at Okta but will not delete the local file.'
+            favicon_url: '- (Read-Only) Favicon URL'
+            id: '- (Read-Only) Theme URL'
+            links: '- Link relations for this object - JSON HAL - (Read-Only) Discoverable resources related to the brand'
+            logo: '- (Optional) Local path to logo file. Setting the value to the blank string "" will delete the logo on the theme at Okta but will not delete the local file.'
+            logo_url: '- (Read-Only) Logo URL'
+            primary_color_contrast_hex: '- (Optional) Primary color contrast hex code'
+            primary_color_hex: '- (Required) Primary color hex code'
+            secondary_color_contrast_hex: (Optional) Secondary color contrast hex code
+            secondary_color_hex: '- (Required) Secondary color hex code'
+            sign_in_page_touch_point_variant: '- (Required) Variant for the Okta Sign-In Page. Valid values: (OKTA_DEFAULT, BACKGROUND_SECONDARY_COLOR, BACKGROUND_IMAGE)'
+            theme_id: '- (Optional) Theme ID, used for read (faux-create)'
+        importStatements: []
+    okta_threat_insight_settings':
+        subCategory: ""
+        description: Manages Okta Threat Insight Settings
+        name: okta_threat_insight_settings'
+        title: okta_threat_insight_settings'
+        argumentDocs:
+            action: |-
+                - (Required) Specifies how Okta responds to authentication requests from suspicious IPs. Valid values
+                are "none", "audit", or "block". A value of "none" indicates that ThreatInsight is disabled. A value of "audit"
+                indicates that Okta logs suspicious requests in the System Log. A value of "block" indicates that Okta logs suspicious
+                requests in the System Log and blocks the requests.
+            network_excludes: |-
+                - (Optional) Accepts a list of Network Zone IDs. Can only accept zones of "IP" type.
+                IPs in the excluded Network Zones aren't logged or blocked by Okta ThreatInsight and proceed to Sign On rules evaluation.
+                This ensures that traffic from known, trusted IPs isn't accidentally logged or blocked. The ordering of the network zone
+                is not guarantee from the API sides
+        importStatements: []
+    okta_trusted_origin':
+        subCategory: ""
+        description: Creates a Trusted Origin.
+        name: okta_trusted_origin'
+        title: okta_trusted_origin'
+        argumentDocs:
+            active: '- (Optional) Whether the Trusted Origin is active or not - can only be issued post-creation. By default, it is ''true''.'
+            id: '- The ID of the Trusted Origin.'
+            name: '- (Required) Unique name for this trusted origin.'
+            origin: '- (Required) Unique origin URL for this trusted origin.'
+            scopes: '- (Required) Scopes of the Trusted Origin - can be "CORS" and/or "REDIRECT".'
+        importStatements: []
+    okta_user':
+        subCategory: ""
+        description: Creates an Okta User.
+        name: okta_user'
+        title: okta_user'
+        argumentDocs:
+            algorithm": '- (Required) The algorithm used to generate the hash using the password (and salt, when applicable). Must be set to BCRYPT, SHA-512, SHA-256, SHA-1 or MD5.'
+            city: '- (Optional) User profile property.'
+            cost_center: '- (Optional) User profile property.'
+            country_code: '- (Optional) User profile property.'
+            custom_profile_attributes: '- (Optional) raw JSON containing all custom profile attributes.'
+            custom_profile_attributes_to_ignore: |-
+                - (Optional) List of custom_profile_attribute keys that should be excluded from being
+                managed by Terraform. This is useful in situations where specific custom fields may contain sensitive information and
+                should be managed outside of Terraform.
+            department: '- (Optional) User profile property.'
+            display_name: '- (Optional) User profile property.'
+            division: '- (Optional) User profile property.'
+            email: '- (Required) User profile property.'
+            employee_number: '- (Optional) User profile property.'
+            expire_password_on_create: |-
+                - (Optional) If set to true, the user will have to change the password at the next login. This property will be used
+                when user is being created and works only when password field is set. Default is false.
+            first_name: '- (Required) User''s First Name, required by default.'
+            honorific_prefix: '- (Optional) User profile property.'
+            honorific_suffix: '- (Optional) User profile property.'
+            id: '- (Optional) ID of the User schema property.'
+            last_name: '- (Required) User''s Last Name, required by default.'
+            locale: '- (Optional) User profile property.'
+            login: '- (Required) User profile property.'
+            manager: '- (Optional) User profile property.'
+            manager_id: '- (Optional) User profile property.'
+            middle_name: '- (Optional) User profile property.'
+            mobile_phone: '- (Optional) User profile property.'
+            nick_name: '- (Optional) User profile property.'
+            old_password: |-
+                - (Optional) Old user password. IMPORTANT: Should be ONLY set in case the password was changed
+                outside the provider. After successful password change this field should be removed and password field should be used
+                for further changes.
+            organization: '- (Optional) User profile property.'
+            password: '- (Optional) User password.'
+            password hash: '- (Optional) Specifies a hashed password to import into Okta. When updating a user with a hashed password the user must be in the STAGED status.'
+            password_inline_hook: |-
+                (Optional) Specifies that a Password Import Inline Hook should be triggered to handle verification
+                of the user's password the first time the user logs in. This allows an existing password to be imported into Okta directly
+                from some other store. When updating a user with a password hook the user must be in the STAGED status. The password
+                field should not be specified when using Password Import Inline Hook.
+            postal_address: '- (Optional) User profile property.'
+            preferred_language: '- (Optional) User profile property.'
+            primary_phone: '- (Optional) User profile property.'
+            profile_url: '- (Optional) User profile property.'
+            recovery_answer: '- (Optional) User password recovery answer.'
+            recovery_question: '- (Optional) User password recovery question.'
+            salt: |-
+                - (Optional) Only required for salted hashes. For BCRYPT, this specifies the radix64-encoded salt used to generate
+                the hash, which must be 22 characters long. For other salted hashes, this specifies the base64-encoded salt used to generate the hash.
+            salt_order: '- (Optional) Specifies whether salt was pre- or postfixed to the password before hashing. Only required for salted algorithms.'
+            second_email: '- (Optional) User profile property.'
+            state: '- (Optional) User profile property.'
+            status: '- (Optional) User profile property. Valid values are "ACTIVE", "DEPROVISIONED", "STAGED", "SUSPENDED"'
+            street_address: '- (Optional) User profile property.'
+            timezone: '- (Optional) User profile property.'
+            title: '- (Optional) User profile property.'
+            user_type: '- (Optional) User profile property.'
+            value: |-
+                - (Optional) For SHA-512, SHA-256, SHA-1, MD5, this is the actual base64-encoded hash of the password (and salt, if used).
+                This is the Base64 encoded value of the SHA-512/SHA-256/SHA-1/MD5 digest that was computed by either pre-fixing or post-fixing
+                the salt to the password, depending on the saltOrder. If a salt was not used in the source system, then this should just be
+                the Base64 encoded value of the password's SHA-512/SHA-256/SHA-1/MD5 digest. For BCRYPT, This is the actual radix64-encoded hashed password.
+            work_factor: '- (Optional) Governs the strength of the hash and the time required to compute it. Only required for BCRYPT algorithm. Minimum value is 1, and maximum is 20.'
+            zip_code: '- (Optional) User profile property.'
+        importStatements: []
+    okta_user_admin_roles:
+        subCategory: ""
+        description: Resource to manage a set of admin roles for a specific user.
+        name: okta_user_admin_roles
+        title: okta_user_admin_roles
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "admin_roles": [
+                    "APP_ADMIN"
+                  ],
+                  "user_id": "${okta_user.test.id}"
+                }
+              references:
+                user_id: okta_user.test.id
+              dependencies:
+                okta_user.test: |-
+                    {
+                      "email": "testAcc-replace_with_uuid@example.com",
+                      "first_name": "TestAcc",
+                      "last_name": "Smith",
+                      "login": "testAcc-replace_with_uuid@example.com"
+                    }
+        argumentDocs:
+            admin_roles: '- (Required) The list of Okta user admin roles, e.g. ["APP_ADMIN", "USER_ADMIN"] See API Docs.'
+            disable_notifications: |-
+                - (Optional) When this setting is enabled, the admins won't receive any of the default Okta
+                administrator emails. These admins also won't have access to contact Okta Support and open support cases on behalf of your org.
+            user_id: '- (Required) Okta user ID.'
+        importStatements: []
+    okta_user_base_schema':
+        subCategory: ""
+        description: Manages a User Base Schema property.
+        name: okta_user_base_schema'
+        title: okta_user_base_schema'
+        argumentDocs:
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER" or "OKTA".'
+            pattern: '- (Optional) The validation pattern to use for the subschema, only available for login property. Must be in form of .+, or [<pattern>]+.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this application''s users.'
+            title: '- (Required) The property display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            user_type: '- (Optional) User type ID'
+        importStatements: []
+    okta_user_base_schema_property':
+        subCategory: ""
+        description: Manages a User Base Schema property.
+        name: okta_user_base_schema_property'
+        title: okta_user_base_schema_property'
+        argumentDocs:
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER" or "OKTA".'
+            pattern: '- (Optional) The validation pattern to use for the subschema, only available for login property. Must be in form of .+, or [<pattern>]+.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this application''s users.'
+            title: '- (Required) The property display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            user_type: '- (Optional) User type ID.'
+        importStatements: []
+    okta_user_factor_question':
+        subCategory: ""
+        description: Creates security question factor for a user.
+        name: okta_user_factor_question'
+        title: okta_user_factor_question'
+        argumentDocs:
+            answer: '- (Required) Security question answer. Note here that answer won''t be set during the resource import.'
+            id: '- ID of the security question factor.'
+            key: '- (Required) Security question unique key.'
+            status: '- The status of the security question factor.'
+            text: '- Display text for security question.'
+            user_id: '- (Required) ID of the user. Resource will be recreated when user_id changes.'
+        importStatements: []
+    okta_user_group_memberships:
+        subCategory: ""
+        description: Resource to manage a set of group memberships for a specific user.
+        name: okta_user_group_memberships
+        title: okta_user_group_memberships
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "groups": [
+                    "${okta_group.test_1.id}",
+                    "${okta_group.test_2.id}"
+                  ],
+                  "user_id": "${okta_user.test.id}"
+                }
+              references:
+                user_id: okta_user.test.id
+              dependencies:
+                okta_user.test: |-
+                    {
+                      "email": "testAcc-replace_with_uuid@example.com",
+                      "first_name": "TestAcc",
+                      "last_name": "Smith",
+                      "login": "testAcc-replace_with_uuid@example.com"
+                    }
+        argumentDocs:
+            groups: '- (Required) The list of Okta group IDs which the user should have membership managed for.'
+            user_id: '- (Required) Okta user ID.'
+        importStatements: []
+    okta_user_schema':
+        subCategory: ""
+        description: Creates a User Schema property.
+        name: okta_user_schema'
+        title: okta_user_schema'
+        argumentDocs:
+            array_enum: '- (Optional) Array of values that an array property''s items can be set to.'
+            array_one_of: '- (Optional) Display name and value an enum array can be set to.'
+            array_type: '- (Optional) The type of the array elements if type is set to "array".'
+            const: '- (Required) value mapping to member of enum.'
+            description: '- (Optional) The description of the user schema property.'
+            enum: '- (Optional) Array of values a primitive property can be set to. See array_enum for arrays.'
+            external_name: '- (Optional) External name of the user schema property.'
+            external_namespace: '- (Optional) External name of the user schema property.'
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER", "OVERRIDE" or "OKTA".'
+            master_override_priority: '- (Optional) Prioritized list of profile sources (required when master is "OVERRIDE").'
+            max_length: '- (Optional) The maximum length of the user property value. Only applies to type "string".'
+            min_length: '- (Optional) The minimum length of the user property value. Only applies to type "string".'
+            one_of: '- (Optional) Array of maps containing a mapping for display name to enum value.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for this application''s users.'
+            scope: '- (Optional) determines whether an app user attribute can be set at the Individual or Group Level.'
+            title: '- (Required) The display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            unique: '- (Optional) Whether the property should be unique. It can be set to "UNIQUE_VALIDATED" or "NOT_UNIQUE".'
+            user_type: '- (Optional) User type ID'
+            value: '- (Required) - ID of profile source.'
+        importStatements: []
+    okta_user_schema_property':
+        subCategory: ""
+        description: Creates a User Schema property.
+        name: okta_user_schema_property'
+        title: okta_user_schema_property'
+        argumentDocs:
+            array_enum: '- (Optional) Array of values that an array property''s items can be set to.'
+            array_one_of: '- (Optional) Display name and value an enum array can be set to.'
+            array_type: '- (Optional) The type of the array elements if type is set to "array".'
+            const: '- (Required) value mapping to member of enum.'
+            description: '- (Optional) The description of the user schema property.'
+            enum: '- (Optional) Array of values a primitive property can be set to. See array_enum for arrays.'
+            external_name: '- (Optional) External name of the user schema property.'
+            external_namespace: '- (Optional) External name of the user schema property.'
+            index: '- (Required) The property name.'
+            master: '- (Optional) Master priority for the user schema property. It can be set to "PROFILE_MASTER", "OVERRIDE" or "OKTA".'
+            master_override_priority: '- (Optional) Prioritized list of profile sources (required when master is "OVERRIDE").'
+            max_length: '- (Optional) The maximum length of the user property value. Only applies to type "string".'
+            min_length: '- (Optional) The minimum length of the user property value. Only applies to type "string".'
+            one_of: '- (Optional) Array of maps containing a mapping for display name to enum value.'
+            permissions: '- (Optional) Access control permissions for the property. It can be set to "READ_WRITE", "READ_ONLY", "HIDE".'
+            required: '- (Optional) Whether the property is required for these users.'
+            scope: '- (Optional) determines whether an app user attribute can be set at the Individual or Group Level.'
+            title: '- (Required) The display name.'
+            type: '- (Required) The type of the schema property. It can be "string", "boolean", "number", "integer", "array", or "object".'
+            unique: '- (Optional) Whether the property should be unique. It can be set to "UNIQUE_VALIDATED" or "NOT_UNIQUE".'
+            user_type: '- (Optional) User type ID'
+            value: '- (Required) - ID of profile source.'
+        importStatements: []
+    okta_user_type':
+        subCategory: ""
+        description: Creates a User Type.
+        name: okta_user_type'
+        title: okta_user_type'
+        argumentDocs:
+            description: '- (Optional) Description of the User Type.'
+            display_name: '- (Required) Display Name of the User Type.'
+            id: '- The ID of the User Type.'
+            name: '- (Required) Name of the User Type.'
         importStatements: []

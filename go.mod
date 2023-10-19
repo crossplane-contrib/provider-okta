@@ -1,4 +1,4 @@
-module github.com/upbound/upjet-provider-template
+module github.com/healthcarecom/provider-okta
 
 go 1.19
 

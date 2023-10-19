@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
-  name: resources.null.template.upbound.io
+  name: groups.group.upbound.io
 spec:
-  group: null.template.upbound.io
+  group: group.upbound.io
   names:
     categories:
     - crossplane
     - managed
-    - template
-    kind: Resource
-    listKind: ResourceList
-    plural: resources
-    singular: resource
+    - okta
+    kind: Group
+    listKind: GroupList
+    plural: groups
+    singular: group
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Resource is the Schema for the Resources API. <no value>
+        description: Group is the Schema for the Groups API. <no value>
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ResourceSpec defines the desired state of Resource
+            description: GroupSpec defines the desired state of Group
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,13 +67,20 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  triggers:
-                    additionalProperties:
-                      type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                  customProfileAttributes:
+                    description: JSON formatted custom attributes for a group. It
+                      must be JSON due to various types Okta allows.
+                    type: string
+                  description:
+                    description: Group description
+                    type: string
+                  name:
+                    description: Group name
+                    type: string
+                  skipUsers:
+                    description: Ignore users sync. This is a temporary solution until
+                      'users' field is supported in all the app-like resources
+                    type: boolean
                 type: object
               managementPolicy:
                 default: FullControl
@@ -261,20 +268,30 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
-            description: ResourceStatus defines the observed state of Resource.
+            description: GroupStatus defines the observed state of Group.
             properties:
               atProvider:
                 properties:
+                  customProfileAttributes:
+                    description: JSON formatted custom attributes for a group. It
+                      must be JSON due to various types Okta allows.
+                    type: string
+                  description:
+                    description: Group description
+                    type: string
                   id:
                     type: string
-                  triggers:
-                    additionalProperties:
-                      type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                  name:
+                    description: Group name
+                    type: string
+                  skipUsers:
+                    description: Ignore users sync. This is a temporary solution until
+                      'users' field is supported in all the app-like resources
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
