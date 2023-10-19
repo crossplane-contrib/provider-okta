@@ -10,9 +10,9 @@ import (
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
-	"github.com/healthcarecom/provider-okta/config/app_group_assignment"
+	"github.com/healthcarecom/provider-okta/config/appgroupassignment"
 	"github.com/healthcarecom/provider-okta/config/group"
-	"github.com/healthcarecom/provider-okta/config/group_memberships"
+	"github.com/healthcarecom/provider-okta/config/groupmemberships"
 	"github.com/healthcarecom/provider-okta/config/user"
 )
 
@@ -40,8 +40,8 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		group.Configure,
 		user.Configure,
-		group_memberships.Configure,
-		app_group_assignment.Configure,
+		groupmemberships.Configure,
+		appgroupassignment.Configure,
 	} {
 		configure(pc)
 	}
