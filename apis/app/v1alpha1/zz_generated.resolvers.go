@@ -22,7 +22,7 @@ func (mg *GroupAssignment) ResolveReferences(ctx context.Context, c client.Reade
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GroupID),
-		Extract:      reference.ExternalName(),
+		Extract:      v1alpha1.GroupID(),
 		Reference:    mg.Spec.ForProvider.GroupIDRef,
 		Selector:     mg.Spec.ForProvider.GroupIDSelector,
 		To: reference.To{
