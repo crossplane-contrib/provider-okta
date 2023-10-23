@@ -24,7 +24,7 @@ func (mg *Memberships) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GroupID),
-		Extract:      reference.ExternalName(),
+		Extract:      v1alpha1.GroupID(),
 		Reference:    mg.Spec.ForProvider.GroupIDRef,
 		Selector:     mg.Spec.ForProvider.GroupIDSelector,
 		To: reference.To{
@@ -40,7 +40,7 @@ func (mg *Memberships) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Users),
-		Extract:       reference.ExternalName(),
+		Extract:       v1alpha11.UserID(),
 		References:    mg.Spec.ForProvider.UsersRefs,
 		Selector:      mg.Spec.ForProvider.UsersSelector,
 		To: reference.To{

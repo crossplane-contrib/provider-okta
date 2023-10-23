@@ -35,6 +35,7 @@ type MembershipsParameters struct {
 	// Okta group ID.
 	// ID of a Okta group.
 	// +crossplane:generate:reference:type=github.com/healthcarecom/provider-okta/apis/group/v1alpha1.Group
+	// +crossplane:generate:reference:extractor=github.com/healthcarecom/provider-okta/apis/group/v1alpha1.GroupID()
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
@@ -54,6 +55,7 @@ type MembershipsParameters struct {
 	// The list of Okta user IDs which the group should have membership managed for.
 	// The list of Okta user IDs which the group should have membership managed for.
 	// +crossplane:generate:reference:type=github.com/healthcarecom/provider-okta/apis/user/v1alpha1.User
+	// +crossplane:generate:reference:extractor=github.com/healthcarecom/provider-okta/apis/user/v1alpha1.UserID()
 	// +kubebuilder:validation:Optional
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 
