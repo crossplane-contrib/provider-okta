@@ -3,10 +3,15 @@ kind: Provider
 metadata:
   name: provider-okta
   annotations:
-    meta.crossplane.io/maintainer: <ADD EMAIL>
+    meta.crossplane.io/maintainer: Healthcare <devops@healthcare.com>
     meta.crossplane.io/source: github.com/crossplane-contrib/provider-okta
     meta.crossplane.io/license: Apache-2.0
     meta.crossplane.io/description: |
       A Crossplane provider that exposes managed resources for the Okta API.
     meta.crossplane.io/readme: |
-      <ADD DETAILED README>
+      Provider Okta is a crossplane provider for [Okta](https://okta.com) that allows
+      the creation of kubernetes objects for:
+      - Okta Users
+      - Okta Groups
+      - Assigning Users to Groups
+      - Assigning Apps to Groups
