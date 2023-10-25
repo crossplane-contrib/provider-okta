@@ -2,3 +2,11 @@ apiVersion: meta.pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-okta
+  annotations:
+    meta.crossplane.io/maintainer: <ADD EMAIL>
+    meta.crossplane.io/source: github.com/crossplane-contrib/provider-okta
+    meta.crossplane.io/license: Apache-2.0
+    meta.crossplane.io/description: |
+      A Crossplane provider that exposes managed resources for the Okta API.
+    meta.crossplane.io/readme: |
+      <ADD DETAILED README>
