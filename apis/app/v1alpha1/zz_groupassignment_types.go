@@ -41,6 +41,7 @@ type GroupAssignmentParameters struct {
 
 	// Group associated with the application
 	// +crossplane:generate:reference:type=github.com/healthcarecom/provider-okta/apis/group/v1alpha1.Group
+	// +crossplane:generate:reference:extractor=github.com/healthcarecom/provider-okta/apis/group/v1alpha1.GroupID()
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
