@@ -15,8 +15,7 @@ func OauthClientID() reference.ExtractValueFn {
 		if o.Status.AtProvider.ClientID == nil {
 			return ""
 		}
-		clientId := *o.Status.AtProvider.ClientID
-		return clientId
+		return *o.Status.AtProvider.ClientID
 	}
 }
 
