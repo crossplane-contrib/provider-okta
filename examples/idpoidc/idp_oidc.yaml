@@ -1,0 +1,24 @@
+apiVersion: idp.okta.upbound.io/v1alpha1
+kind: Oidc
+metadata:
+  name: example-oidc
+spec:
+  forProvider:
+    name: example
+    authorizationUrl: "https://idp.example.com/authorize"
+    authorizationBinding: "HTTP-REDIRECT"
+    tokenUrl: "https://idp.example.com/token"
+    tokenBinding: "HTTP-POST"
+    userInfoUrl: "https://idp.example.com/userinfo"
+    userInfoBinding: "HTTP-REDIRECT"
+    jwksUrl: "https://ipd.example.com/keys"
+    jwksBinding: "HTTP-REDIRECT"
+    scopes:
+      - "openid"
+    clientId: "efg456"
+    clientSecretSecretRef:
+      key: "key"
+      name: "name"
+      namespace: "namespace"
+    issuerUrl: "https://idp.example.com"
+    usernameTemplate: "idpuser.email"

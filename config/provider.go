@@ -18,7 +18,20 @@ import (
 	"github.com/healthcarecom/provider-okta/config/appsharedcredentials"
 	"github.com/healthcarecom/provider-okta/config/appswa"
 	"github.com/healthcarecom/provider-okta/config/appthreefield"
-
+	"github.com/healthcarecom/provider-okta/config/authserver"
+	"github.com/healthcarecom/provider-okta/config/authserverclaim"
+	"github.com/healthcarecom/provider-okta/config/authserverclaimdefault"
+	"github.com/healthcarecom/provider-okta/config/authserverdefault"
+	"github.com/healthcarecom/provider-okta/config/authserverpolicy"
+	"github.com/healthcarecom/provider-okta/config/authserverpolicyrule"
+	"github.com/healthcarecom/provider-okta/config/authserverscope"
+	"github.com/healthcarecom/provider-okta/config/behavior"
+	"github.com/healthcarecom/provider-okta/config/grouprole"
+	"github.com/healthcarecom/provider-okta/config/grouprule"
+	"github.com/healthcarecom/provider-okta/config/idpoidc"
+	"github.com/healthcarecom/provider-okta/config/idpsaml"
+	"github.com/healthcarecom/provider-okta/config/useradminroles"
+	"github.com/healthcarecom/provider-okta/config/userbaseschemaproperty"
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/healthcarecom/provider-okta/config/adminroletargets"
@@ -70,6 +83,20 @@ func GetProvider() *ujconfig.Provider {
 		appsharedcredentials.Configure,
 		appswa.Configure,
 		appthreefield.Configure,
+		authserver.Configure,
+		authserverclaim.Configure,
+		authserverclaimdefault.Configure,
+		authserverdefault.Configure,
+		authserverpolicy.Configure,
+		authserverpolicyrule.Configure,
+		authserverscope.Configure,
+		behavior.Configure,
+		grouprole.Configure,
+		grouprule.Configure,
+		idpoidc.Configure,
+		idpsaml.Configure,
+		useradminroles.Configure,
+		userbaseschemaproperty.Configure,
 	} {
 		configure(pc)
 	}

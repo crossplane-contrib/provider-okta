@@ -24,9 +24,23 @@ import (
 	sharedcredentials "github.com/healthcarecom/provider-okta/internal/controller/app/sharedcredentials"
 	swa "github.com/healthcarecom/provider-okta/internal/controller/app/swa"
 	threefield "github.com/healthcarecom/provider-okta/internal/controller/app/threefield"
+	server "github.com/healthcarecom/provider-okta/internal/controller/auth/server"
+	serverclaim "github.com/healthcarecom/provider-okta/internal/controller/auth/serverclaim"
+	serverclaimdefault "github.com/healthcarecom/provider-okta/internal/controller/auth/serverclaimdefault"
+	serverdefault "github.com/healthcarecom/provider-okta/internal/controller/auth/serverdefault"
+	serverpolicy "github.com/healthcarecom/provider-okta/internal/controller/auth/serverpolicy"
+	serverpolicyrule "github.com/healthcarecom/provider-okta/internal/controller/auth/serverpolicyrule"
+	serverscope "github.com/healthcarecom/provider-okta/internal/controller/auth/serverscope"
 	group "github.com/healthcarecom/provider-okta/internal/controller/group/group"
+	role "github.com/healthcarecom/provider-okta/internal/controller/group/role"
+	rule "github.com/healthcarecom/provider-okta/internal/controller/group/rule"
 	memberships "github.com/healthcarecom/provider-okta/internal/controller/groupmembership/memberships"
+	oidc "github.com/healthcarecom/provider-okta/internal/controller/idp/oidc"
+	samlidp "github.com/healthcarecom/provider-okta/internal/controller/idp/saml"
+	behavior "github.com/healthcarecom/provider-okta/internal/controller/okta/behavior"
 	providerconfig "github.com/healthcarecom/provider-okta/internal/controller/providerconfig"
+	adminroles "github.com/healthcarecom/provider-okta/internal/controller/user/adminroles"
+	baseschemaproperty "github.com/healthcarecom/provider-okta/internal/controller/user/baseschemaproperty"
 	user "github.com/healthcarecom/provider-okta/internal/controller/user/user"
 )
 
@@ -49,9 +63,23 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sharedcredentials.Setup,
 		swa.Setup,
 		threefield.Setup,
+		server.Setup,
+		serverclaim.Setup,
+		serverclaimdefault.Setup,
+		serverdefault.Setup,
+		serverpolicy.Setup,
+		serverpolicyrule.Setup,
+		serverscope.Setup,
 		group.Setup,
+		role.Setup,
+		rule.Setup,
 		memberships.Setup,
+		oidc.Setup,
+		samlidp.Setup,
+		behavior.Setup,
 		providerconfig.Setup,
+		adminroles.Setup,
+		baseschemaproperty.Setup,
 		user.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

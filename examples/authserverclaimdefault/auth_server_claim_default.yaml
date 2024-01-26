@@ -1,0 +1,10 @@
+apiVersion: auth.okta.upbound.io/v1alpha1
+kind: ServerClaimDefault
+metadata:
+  name: default-server-claim
+spec:
+  forProvider:
+    authServerIdRef:
+      name: auth-server
+    name: sub
+    value: "(appuser != null) ? appuser.userName : app.clientId"

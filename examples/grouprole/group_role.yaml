@@ -1,0 +1,9 @@
+apiVersion: group.okta.upbound.io/v1alpha1
+kind: Role
+metadata:
+  name: admin-role
+spec:
+  forProvider:
+    groupIdRef:
+      name: example-group
+    roleType: "READ_ONLY_ADMIN"

@@ -28,6 +28,20 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"okta_app_shared_credentials":       config.IdentifierFromProvider,
 	"okta_app_swa":                      config.IdentifierFromProvider,
 	"okta_app_three_field":              config.IdentifierFromProvider,
+	"okta_auth_server":                  config.IdentifierFromProvider,
+	"okta_auth_server_claim":            config.IdentifierFromProvider,
+	"okta_auth_server_claim_default":    config.IdentifierFromProvider,
+	"okta_auth_server_default":          config.IdentifierFromProvider,
+	"okta_auth_server_policy":           config.IdentifierFromProvider,
+	"okta_auth_server_policy_rule":      config.IdentifierFromProvider,
+	"okta_auth_server_scope":            config.IdentifierFromProvider,
+	"okta_behavior":                     config.IdentifierFromProvider,
+	"okta_group_role":                   config.IdentifierFromProvider,
+	"okta_group_rule":                   config.IdentifierFromProvider,
+	"okta_idp_oidc":                     config.IdentifierFromProvider,
+	"okta_idp_saml":                     config.IdentifierFromProvider,
+	"okta_user_admin_roles":             config.IdentifierFromProvider,
+	"okta_user_base_schema_property":    config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

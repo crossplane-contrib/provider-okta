@@ -1,0 +1,16 @@
+apiVersion: idp.okta.upbound.io/v1alpha1
+kind: SAML
+metadata:
+  name: saml-idp
+spec:
+  forProvider:
+    name: "test-saml-idp"
+    acsType: "INSTANCE"
+    ssoUrl: "https://idp.example.com"
+    ssoDestination: "https://idp.example.com"
+    ssoBinding: "HTTP-POST"
+    usernameTemplate: "idpuser.email"
+    kid: "${okta_idp_saml_key.test.id}"
+    issuer: "https://idp.example.com"
+    requestSignatureScope: "REQUEST"
+    requestSignatureAlgorithm: "ANY"

@@ -1,0 +1,10 @@
+apiVersion: user.okta.upbound.io/v1alpha1
+kind: AdminRoles
+metadata:
+  name: admin
+spec:
+  forProvider:
+    userIdRef:
+      name: example-user
+    adminRoles:
+      - "APP_ADMIN"

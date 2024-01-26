@@ -1,0 +1,9 @@
+apiVersion: auth.okta.upbound.io/v1alpha1
+kind: ServerDefault
+metadata:
+  name: server-defaults
+spec:
+  forProvider:
+    audiences:
+      - "api://default"
+    description: "Default Authorization Server for all Apps"
