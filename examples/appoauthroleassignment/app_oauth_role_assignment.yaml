@@ -1,0 +1,8 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: OauthRoleAssignment
+metadata:
+  name: example-oauth-role-assignment
+spec:
+  forProvider:
+    clientId: "<client_id>"
+    type: "HELP_DESK_ADMIN"

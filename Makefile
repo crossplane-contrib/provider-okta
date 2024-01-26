@@ -8,9 +8,9 @@ export TERRAFORM_VERSION ?= 1.2.1
 
 export TERRAFORM_PROVIDER_SOURCE := okta/okta
 export TERRAFORM_PROVIDER_REPO := https://github.com/okta/terraform-provider-okta
-export TERRAFORM_PROVIDER_VERSION := 4.5.0
+export TERRAFORM_PROVIDER_VERSION := 4.6.3
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-okta
-export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-okta.4.5.0
+export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-okta.4.6.3
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/okta/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)/
 export TERRAFORM_DOCS_PATH := website/docs/r
 

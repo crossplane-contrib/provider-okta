@@ -1,0 +1,8 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: Bookmark
+metadata:
+  name: example-bookmark-app
+spec:
+  forProvider:
+    label: "Example App"
+    url: "https://example.com"

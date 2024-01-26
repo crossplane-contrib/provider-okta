@@ -1,0 +1,30 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: SAML
+metadata:
+  annotations:
+    meta.upbound.io/example-id: app/v1alpha1/saml
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    attributeStatements:
+    - filterType: REGEX
+      filterValue: .*
+      name: groups
+      type: GROUP
+    audience: https://example.com/audience
+    authnContextClassRef: urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport
+    destination: https://example.com
+    digestAlgorithm: SHA256
+    honorForceAuthn: false
+    label: example
+    recipient: https://example.com
+    responseSigned: true
+    signatureAlgorithm: RSA_SHA256
+    ssoUrl: https://example.com
+    subjectNameIdFormat: urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
+    subjectNameIdTemplate: ${user.userName}
+
+---
+

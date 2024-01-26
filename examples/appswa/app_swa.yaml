@@ -1,0 +1,11 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: Swa
+metadata:
+  name: example-swa
+spec:
+  forProvider:
+    label: Example
+    buttonField: "btn-login"
+    usernameField: "username"
+    passwordField: "password"
+    url: "https://example.com/login.html"

@@ -1,0 +1,15 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: SAML
+metadata:
+  name: example-saml
+spec:
+  forProvider:
+    label: "SAML App Name"
+    ssoUrl: "https://example.com"
+    recipient: "https://example.com"
+    destination: "https://example.com"
+    audience: "https://example.com/audience"
+    subjectNameIdTemplate: "$${user.userName}}"
+    subjectNameIdFormat: "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+    responseSigned: true
+    signatureAlgorithm: "RSA_SHA256"

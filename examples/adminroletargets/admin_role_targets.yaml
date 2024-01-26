@@ -1,0 +1,11 @@
+apiVersion: admin.okta.upbound.io/v1alpha1
+kind: RoleTargets
+metadata:
+  name: example-role-target
+spec:
+  forProvider:
+    apps:
+      - "example_app"
+    roleType: "APP_ADMIN"
+    userIdRef:
+      name: "example-user"

@@ -319,7 +319,7 @@ resources:
         name: okta_app_oauth_post_logout_redirect_uri'
         title: okta_app_oauth_post_logout_redirect_uri'
         argumentDocs:
-            app_id: '- (Required) OAuth application ID.'
+            app_id: '- (Required) OAuth application ID. Note: app_id can not be changed once set.'
             id: '- ID of the resource, equals to uri.'
             uri: '- (Required) Post Logout Redirect URI to append to Okta OIDC application.'
         importStatements: []
@@ -329,7 +329,7 @@ resources:
         name: okta_app_oauth_redirect_uri'
         title: okta_app_oauth_redirect_uri'
         argumentDocs:
-            app_id: '- (Required) OAuth application ID.'
+            app_id: '- (Required) OAuth application ID. Note: app_id can not be changed once set.'
             id: '- ID of the resource, equals to uri.'
             uri: '- (Required) Redirect URI to append to Okta OIDC application.'
         importStatements: []
@@ -702,6 +702,8 @@ resources:
             policy_id: '- (Required) ID of the app sign-on policy.'
             priority: '- (Optional) Priority of the rule.'
             re_authentication_frequency: '- (Optional) The duration after which the end user must re-authenticate, regardless of user activity. Use the ISO 8601 Period format for recurring time intervals. "PT0S" - every sign-in attempt, "PT43800H" - once per session. Default is "PT2H".'
+            risk_score: '- (Optional) - The risk score specifies a particular level of risk to match on. Valid values are: "ANY", "LOW", "MEDIUM", "HIGH". Default is "ANY".'
+            system: '- Often the "Catch-all Rule" this rule is the system (default) rule for its associated policy.'
             type: '- (Optional) One of: "ANY", "MOBILE", "DESKTOP"'
             user_types_excluded: '- (Optional) List of user types IDs to be excluded.'
             user_types_included: '- (Optional) List of user types IDs to be included.'
@@ -996,6 +998,7 @@ resources:
                 "refresh_token_window_minutes" must be between "access_token_lifetime_minutes" and "refresh_token_lifetime_minutes".
             scope_whitelist: '- (Required) Scopes allowed for this policy rule. They can be whitelisted by name or all can be whitelisted with "*".'
             status: '- (Optional) The status of the Auth Server Policy Rule.'
+            system: '- The rule is the system (default) rule for its associated policy.'
             type: '- The type of the Auth Server Policy Rule.'
             user_blacklist: '- (Optional) Specifies a set of Users to be excluded.'
             user_whitelist: '- (Optional) Specifies a set of Users to be included.'
@@ -1086,7 +1089,7 @@ resources:
             default_app_app_instance_id: '- (Optional) Default app app instance id'
             default_app_app_link_name: '- (Optional) Default app app link name'
             default_app_classic_application_uri: '- (Optional) Default app classic application uri'
-            email_domain_id: '- (Optional) Email Domain ID tied to this brand'
+            email_domain_id: '- (Read-only) Email Domain ID tied to this brand'
             id: '- (Read-only) Brand ID'
             is_default: '- (Read-only) Is this the default brand'
             links: '- (Read-only) Link relations for this object - JSON HAL - Discoverable resources related to the brand'
@@ -1605,10 +1608,6 @@ resources:
             profile_master: '- (Optional) Determines if the IdP should act as a source of truth for user profile attributes.'
             protocol_type: '- (Optional) The type of protocol to use. It can be "OIDC" or "OAUTH2".'
             provisioning_action: '- (Optional) Provisioning action for an IdP user during authentication.'
-            request_signature_algorithm: '- (Optional) The XML digital signature algorithm used when signing an AuthnRequest message.'
-            request_signature_scope: '- (Optional) Specifies whether to digitally sign an AuthnRequest messages to the IdP. It can be "REQUEST" or "NONE".'
-            response_signature_algorithm: '- (Optional) The minimum XML digital signature algorithm allowed when verifying a SAMLResponse message or Assertion element.'
-            response_signature_scope: '- (Optional) Specifies whether to verify a SAMLResponse message or Assertion element XML digital signature. It can be "RESPONSE", "ASSERTION", or "ANY".'
             scopes: '- (Required) The scopes of the IdP.'
             status: '- (Optional) Status of the IdP.'
             subject_match_attribute: '- (Optional) Okta user profile attribute for matching transformed IdP username. Only for matchType "CUSTOM_ATTRIBUTE".'
@@ -2121,6 +2120,7 @@ resources:
             name: '- (Required) The name of a User Profile property'
             policy_id: '- (Required) Policy ID.'
             profile_attributes: '- (Required) A list of attributes to prompt the user during registration or progressive profiling. Where defined on the User schema, these attributes are persisted in the User profile. Non-schema attributes may also be added, which aren''t persisted to the User''s profile, but are included in requests to the registration inline hook. A maximum of 10 Profile properties is supported.'
+            progressive_profiling_action: '- (Optional) Enabled or disabled progressive profiling action rule conditions. Valid values are: "ENABLED", "DISABLED". Default is "DISABLED".'
             required: '- (Required) Indicates if this property is required for enrollment. Default is false.'
             status: '- Status of the Rule.'
             target_group_id: '- (Optional) The ID of a Group that this User should be added to.'

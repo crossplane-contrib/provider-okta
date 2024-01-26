@@ -10,10 +10,24 @@ import "github.com/upbound/upjet/pkg/config"
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"okta_group":                config.IdentifierFromProvider,
-	"okta_group_memberships":    config.IdentifierFromProvider,
-	"okta_user":                 config.IdentifierFromProvider,
-	"okta_app_group_assignment": config.IdentifierFromProvider,
+	"okta_group":                        config.IdentifierFromProvider,
+	"okta_group_memberships":            config.IdentifierFromProvider,
+	"okta_user":                         config.IdentifierFromProvider,
+	"okta_app_group_assignment":         config.IdentifierFromProvider,
+	"okta_admin_role_targets":           config.IdentifierFromProvider,
+	"okta_app_access_policy_assignment": config.IdentifierFromProvider,
+	"okta_app_auto_login":               config.IdentifierFromProvider,
+	"okta_app_basic_auth":               config.IdentifierFromProvider,
+	"okta_app_bookmark":                 config.IdentifierFromProvider,
+	"okta_app_oauth":                    config.IdentifierFromProvider,
+	"okta_app_oauth_api_scope":          config.IdentifierFromProvider,
+	"okta_app_oauth_role_assignment":    config.IdentifierFromProvider,
+	"okta_app_saml":                     config.IdentifierFromProvider,
+	"okta_app_saml_app_settings":        config.IdentifierFromProvider,
+	"okta_app_secure_password_store":    config.IdentifierFromProvider,
+	"okta_app_shared_credentials":       config.IdentifierFromProvider,
+	"okta_app_swa":                      config.IdentifierFromProvider,
+	"okta_app_three_field":              config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
