@@ -7,6 +7,7 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+
 	"github.com/healthcarecom/provider-okta/config/appbasicauth"
 	"github.com/healthcarecom/provider-okta/config/appbookmark"
 	"github.com/healthcarecom/provider-okta/config/appoauth"
