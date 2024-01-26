@@ -115,7 +115,7 @@ func (mg *ServerPolicyRule) ResolveReferences(ctx context.Context, c client.Read
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyID),
-		Extract:      AuthServerPolicyId(),
+		Extract:      AuthServerPolicyID(),
 		Reference:    mg.Spec.ForProvider.PolicyIDRef,
 		Selector:     mg.Spec.ForProvider.PolicyIDSelector,
 		To: reference.To{

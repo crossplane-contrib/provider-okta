@@ -110,7 +110,7 @@ type ServerPolicyRuleParameters struct {
 
 	// Auth server policy ID
 	// +crossplane:generate:reference:type=github.com/healthcarecom/provider-okta/apis/auth/v1alpha1.ServerPolicy
-	// +crossplane:generate:reference:extractor=github.com/healthcarecom/provider-okta/apis/auth/v1alpha1.AuthServerPolicyId()
+	// +crossplane:generate:reference:extractor=github.com/healthcarecom/provider-okta/apis/auth/v1alpha1.AuthServerPolicyID()
 	// +kubebuilder:validation:Optional
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
 

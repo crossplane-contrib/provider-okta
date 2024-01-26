@@ -11,7 +11,7 @@ func Configure(p *config.Provider) {
 		}
 		r.References["policy_id"] = config.Reference{
 			Type:      "github.com/healthcarecom/provider-okta/apis/auth/v1alpha1.ServerPolicy",
-			Extractor: "github.com/healthcarecom/provider-okta/apis/auth/v1alpha1.AuthServerPolicyId()",
+			Extractor: "github.com/healthcarecom/provider-okta/apis/auth/v1alpha1.AuthServerPolicyID()",
 		}
 	})
 }

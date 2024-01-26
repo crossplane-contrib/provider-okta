@@ -16,8 +16,8 @@ func AuthServerID() reference.ExtractValueFn {
 	}
 }
 
-// AuthServerPolicyId returns an extractor that returns the ID for a ServerPolicy
-func AuthServerPolicyId() reference.ExtractValueFn {
+// AuthServerPolicyID returns an extractor that returns the ID for a ServerPolicy
+func AuthServerPolicyID() reference.ExtractValueFn {
 	return func(mg resource.Managed) string {
 		s, ok := mg.(*ServerPolicy)
 		if !ok {
