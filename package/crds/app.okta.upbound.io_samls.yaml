@@ -1,0 +1,864 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.3
+  creationTimestamp: null
+  name: samls.app.okta.upbound.io
+spec:
+  group: app.okta.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - okta
+    kind: SAML
+    listKind: SAMLList
+    plural: samls
+    singular: saml
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: SAML is the Schema for the SAMLs API. Creates a SAML Application.
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: SAMLSpec defines the desired state of SAML
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: 'DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  accessibilityErrorRedirectUrl:
+                    description: Custom error page URL. Custom error page URL
+                    type: string
+                  accessibilityLoginRedirectUrl:
+                    description: Custom login page for this application. Custom login
+                      page URL
+                    type: string
+                  accessibilitySelfService:
+                    description: 'Enable self-service. Default is: false. Enable self
+                      service'
+                    type: boolean
+                  acsEndpoints:
+                    description: An array of ACS endpoints. You can configure a maximum
+                      of 100 endpoints. List of ACS endpoints for this SAML application
+                    items:
+                      type: string
+                    type: array
+                  adminNote:
+                    description: Application notes for admins. Application notes for
+                      admins.
+                    type: string
+                  appLinksJson:
+                    description: Displays specific appLinks for the app. The value
+                      for each application link should be boolean. Displays specific
+                      appLinks for the app
+                    type: string
+                  appSettingsJson:
+                    description: Application settings in JSON format. Application
+                      settings in JSON format
+                    type: string
+                  assertionSigned:
+                    description: Determines whether the SAML assertion is digitally
+                      signed. Determines whether the SAML assertion is digitally signed
+                    type: boolean
+                  attributeStatements:
+                    description: List of SAML Attribute statements.
+                    items:
+                      properties:
+                        filterType:
+                          description: 'Type of group attribute filter. Valid values
+                            are: "STARTS_WITH", "EQUALS", "CONTAINS", or "REGEX" Type
+                            of group attribute filter'
+                          type: string
+                        filterValue:
+                          description: Filter value to use. Filter value to use
+                          type: string
+                        name:
+                          description: The name of the attribute statement. The reference
+                            name of the attribute statement
+                          type: string
+                        namespace:
+                          description: The attribute namespace. It can be set to "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+                            "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", or
+                            "urn:oasis:names:tc:SAML:2.0:attrname-format:basic". The
+                            name format of the attribute
+                          type: string
+                        type:
+                          description: 'The type of attribute statement value. Valid
+                            values are: "EXPRESSION" or "GROUP". Default is "EXPRESSION".
+                            The type of attribute statements object'
+                          type: string
+                        values:
+                          description: Array of values to use.
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  audience:
+                    description: Audience restriction. Audience Restriction
+                    type: string
+                  authenticationPolicy:
+                    description: The ID of the associated app_signon_policy. If this
+                      property is removed from the application the default sign-on-policy
+                      will be associated with this application. Id of this apps authentication
+                      policy
+                    type: string
+                  authnContextClassRef:
+                    description: Identifies the SAML authentication context class
+                      for the assertion’s authentication statement. Identifies the
+                      SAML authentication context class for the assertion’s authentication
+                      statement
+                    type: string
+                  autoSubmitToolbar:
+                    description: 'Display auto submit toolbar. Default is: false Display
+                      auto submit toolbar'
+                    type: boolean
+                  defaultRelayState:
+                    description: Identifies a specific application resource in an
+                      IDP initiated SSO scenario. Identifies a specific application
+                      resource in an IDP initiated SSO scenario.
+                    type: string
+                  destination:
+                    description: Identifies the location where the SAML response is
+                      intended to be sent inside the SAML assertion. Identifies the
+                      location where the SAML response is intended to be sent inside
+                      of the SAML assertion
+                    type: string
+                  digestAlgorithm:
+                    description: Determines the digest algorithm used to digitally
+                      sign the SAML assertion and response. Determines the digest
+                      algorithm used to digitally sign the SAML assertion and response
+                    type: string
+                  enduserNote:
+                    description: Application notes for end users. Application notes
+                      for end users.
+                    type: string
+                  hideIos:
+                    description: 'Do not display application icon on mobile app. Default
+                      is: false Do not display application icon on mobile app'
+                    type: boolean
+                  hideWeb:
+                    description: 'Do not display application icon to users. Default
+                      is: false Do not display application icon to users'
+                    type: boolean
+                  honorForceAuthn:
+                    description: 'Prompt user to re-authenticate if SP asks for it.
+                      Default is: false Prompt user to re-authenticate if SP asks
+                      for it'
+                    type: boolean
+                  idpIssuer:
+                    description: SAML issuer ID. SAML issuer ID
+                    type: string
+                  implicitAssignment:
+                    description: Early Access Property. Enables Federation Broker
+                      Mode. *Early Access Property*. Enable Federation Broker Mode.
+                    type: boolean
+                  inlineHookId:
+                    description: Saml Inline Hook associated with the application.
+                      Saml Inline Hook setting
+                    type: string
+                  keyName:
+                    description: Certificate name. This modulates the rotation of
+                      keys. New name == new key. Required to be set with key_years_valid.
+                      Certificate name. This modulates the rotation of keys. New name
+                      == new key.
+                    type: string
+                  keyYearsValid:
+                    description: Number of years the certificate is valid (2 - 10
+                      years). Number of years the certificate is valid.
+                    type: number
+                  label:
+                    description: label of application. Pretty name of app.
+                    type: string
+                  logo:
+                    description: Local file path to the logo. The file must be in
+                      PNG, JPG, or GIF format, and less than 1 MB in size. Local path
+                      to logo of the application.
+                    type: string
+                  preconfiguredApp:
+                    description: 'name of application from the Okta Integration Network,
+                      if not included a custom app will be created.  If not provided
+                      the following arguments are required: Name of preexisting SAML
+                      application. For instance ''slack'''
+                    type: string
+                  recipient:
+                    description: The location where the app may present the SAML assertion.
+                      The location where the app may present the SAML assertion
+                    type: string
+                  requestCompressed:
+                    description: Denotes whether the request is compressed or not.
+                      Denotes whether the request is compressed or not.
+                    type: boolean
+                  responseSigned:
+                    description: Determines whether the SAML auth response message
+                      is digitally signed. Determines whether the SAML auth response
+                      message is digitally signed
+                    type: boolean
+                  samlSignedRequestEnabled:
+                    description: SAML Signed Request enabled SAML Signed Request enabled
+                    type: boolean
+                  samlVersion:
+                    description: 'SAML version for the app''s sign-on mode. Valid
+                      values are: "2.0" or "1.1". Default is "2.0". SAML version for
+                      the app''s sign-on mode'
+                    type: string
+                  signatureAlgorithm:
+                    description: Signature algorithm used ot digitally sign the assertion
+                      and response. Signature algorithm used ot digitally sign the
+                      assertion and response
+                    type: string
+                  singleLogoutCertificate:
+                    description: 'x509 encoded certificate that the Service Provider
+                      uses to sign Single Logout requests.  Note: should be provided
+                      without -----BEGIN CERTIFICATE----- and -----END CERTIFICATE-----,
+                      see official documentation. x509 encoded certificate that the
+                      Service Provider uses to sign Single Logout requests'
+                    type: string
+                  singleLogoutIssuer:
+                    description: The issuer of the Service Provider that generates
+                      the Single Logout request. The issuer of the Service Provider
+                      that generates the Single Logout request
+                    type: string
+                  singleLogoutUrl:
+                    description: The location where the logout response is sent. The
+                      location where the logout response is sent
+                    type: string
+                  spIssuer:
+                    description: SAML service provider issuer. SAML SP issuer ID
+                    type: string
+                  ssoUrl:
+                    description: Single Sign-on Url. Single Sign On URL
+                    type: string
+                  status:
+                    description: status of application. Status of application.
+                    type: string
+                  subjectNameIdFormat:
+                    description: Identifies the SAML processing rules. Identifies
+                      the SAML processing rules.
+                    type: string
+                  subjectNameIdTemplate:
+                    description: Template for app user's username when a user is assigned
+                      to the app. Template for app user's username when a user is
+                      assigned to the app
+                    type: string
+                  userNameTemplate:
+                    description: 'Username template. Default is: "${source.login}"
+                      Username template'
+                    type: string
+                  userNameTemplatePushStatus:
+                    description: 'Push username on update. Valid values: "PUSH" and
+                      "DONT_PUSH". Push username on update'
+                    type: string
+                  userNameTemplateSuffix:
+                    description: Username template suffix. Username template suffix
+                    type: string
+                  userNameTemplateType:
+                    description: 'Username template type. Default is: "BUILT_IN".
+                      Username template type'
+                    type: string
+                type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: label is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.label)
+          status:
+            description: SAMLStatus defines the observed state of SAML.
+            properties:
+              atProvider:
+                properties:
+                  accessibilityErrorRedirectUrl:
+                    description: Custom error page URL. Custom error page URL
+                    type: string
+                  accessibilityLoginRedirectUrl:
+                    description: Custom login page for this application. Custom login
+                      page URL
+                    type: string
+                  accessibilitySelfService:
+                    description: 'Enable self-service. Default is: false. Enable self
+                      service'
+                    type: boolean
+                  acsEndpoints:
+                    description: An array of ACS endpoints. You can configure a maximum
+                      of 100 endpoints. List of ACS endpoints for this SAML application
+                    items:
+                      type: string
+                    type: array
+                  adminNote:
+                    description: Application notes for admins. Application notes for
+                      admins.
+                    type: string
+                  appLinksJson:
+                    description: Displays specific appLinks for the app. The value
+                      for each application link should be boolean. Displays specific
+                      appLinks for the app
+                    type: string
+                  appSettingsJson:
+                    description: Application settings in JSON format. Application
+                      settings in JSON format
+                    type: string
+                  assertionSigned:
+                    description: Determines whether the SAML assertion is digitally
+                      signed. Determines whether the SAML assertion is digitally signed
+                    type: boolean
+                  attributeStatements:
+                    description: List of SAML Attribute statements.
+                    items:
+                      properties:
+                        filterType:
+                          description: 'Type of group attribute filter. Valid values
+                            are: "STARTS_WITH", "EQUALS", "CONTAINS", or "REGEX" Type
+                            of group attribute filter'
+                          type: string
+                        filterValue:
+                          description: Filter value to use. Filter value to use
+                          type: string
+                        name:
+                          description: The name of the attribute statement. The reference
+                            name of the attribute statement
+                          type: string
+                        namespace:
+                          description: The attribute namespace. It can be set to "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+                            "urn:oasis:names:tc:SAML:2.0:attrname-format:uri", or
+                            "urn:oasis:names:tc:SAML:2.0:attrname-format:basic". The
+                            name format of the attribute
+                          type: string
+                        type:
+                          description: 'The type of attribute statement value. Valid
+                            values are: "EXPRESSION" or "GROUP". Default is "EXPRESSION".
+                            The type of attribute statements object'
+                          type: string
+                        values:
+                          description: Array of values to use.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  audience:
+                    description: Audience restriction. Audience Restriction
+                    type: string
+                  authenticationPolicy:
+                    description: The ID of the associated app_signon_policy. If this
+                      property is removed from the application the default sign-on-policy
+                      will be associated with this application. Id of this apps authentication
+                      policy
+                    type: string
+                  authnContextClassRef:
+                    description: Identifies the SAML authentication context class
+                      for the assertion’s authentication statement. Identifies the
+                      SAML authentication context class for the assertion’s authentication
+                      statement
+                    type: string
+                  autoSubmitToolbar:
+                    description: 'Display auto submit toolbar. Default is: false Display
+                      auto submit toolbar'
+                    type: boolean
+                  certificate:
+                    description: The raw signing certificate. cert from SAML XML metadata
+                      payload
+                    type: string
+                  defaultRelayState:
+                    description: Identifies a specific application resource in an
+                      IDP initiated SSO scenario. Identifies a specific application
+                      resource in an IDP initiated SSO scenario.
+                    type: string
+                  destination:
+                    description: Identifies the location where the SAML response is
+                      intended to be sent inside the SAML assertion. Identifies the
+                      location where the SAML response is intended to be sent inside
+                      of the SAML assertion
+                    type: string
+                  digestAlgorithm:
+                    description: Determines the digest algorithm used to digitally
+                      sign the SAML assertion and response. Determines the digest
+                      algorithm used to digitally sign the SAML assertion and response
+                    type: string
+                  embedUrl:
+                    description: Url that can be used to embed this application into
+                      another portal. The url that can be used to embed this application
+                      in other portals.
+                    type: string
+                  enduserNote:
+                    description: Application notes for end users. Application notes
+                      for end users.
+                    type: string
+                  entityKey:
+                    description: Entity ID, the ID portion of the entity_url. Entity
+                      ID, the ID portion of the entity_url
+                    type: string
+                  entityUrl:
+                    description: Entity URL for instance http://www.okta.com/exk1fcia6d6EMsf331d8.
+                      Entity URL for instance http://www.okta.com/exk1fcia6d6EMsf331d8
+                    type: string
+                  features:
+                    description: 'features enabled. Notice: you can''t currently configure
+                      provisioning features via the API. features to enable'
+                    items:
+                      type: string
+                    type: array
+                  hideIos:
+                    description: 'Do not display application icon on mobile app. Default
+                      is: false Do not display application icon on mobile app'
+                    type: boolean
+                  hideWeb:
+                    description: 'Do not display application icon to users. Default
+                      is: false Do not display application icon to users'
+                    type: boolean
+                  honorForceAuthn:
+                    description: 'Prompt user to re-authenticate if SP asks for it.
+                      Default is: false Prompt user to re-authenticate if SP asks
+                      for it'
+                    type: boolean
+                  httpPostBinding:
+                    description: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Post location
+                      from the SAML metadata. urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Post
+                      location from the SAML metadata.
+                    type: string
+                  httpRedirectBinding:
+                    description: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+                      location from the SAML metadata. urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+                      location from the SAML metadata.
+                    type: string
+                  id:
+                    description: id of application.
+                    type: string
+                  idpIssuer:
+                    description: SAML issuer ID. SAML issuer ID
+                    type: string
+                  implicitAssignment:
+                    description: Early Access Property. Enables Federation Broker
+                      Mode. *Early Access Property*. Enable Federation Broker Mode.
+                    type: boolean
+                  inlineHookId:
+                    description: Saml Inline Hook associated with the application.
+                      Saml Inline Hook setting
+                    type: string
+                  keyId:
+                    description: Certificate key ID. Certificate ID
+                    type: string
+                  keyName:
+                    description: Certificate name. This modulates the rotation of
+                      keys. New name == new key. Required to be set with key_years_valid.
+                      Certificate name. This modulates the rotation of keys. New name
+                      == new key.
+                    type: string
+                  keyYearsValid:
+                    description: Number of years the certificate is valid (2 - 10
+                      years). Number of years the certificate is valid.
+                    type: number
+                  keys:
+                    description: 'An array of all key credentials for the application.
+                      Format of each entry is as follows: Application keys'
+                    items:
+                      properties:
+                        created:
+                          description: Date created.
+                          type: string
+                        e:
+                          description: RSA exponent.
+                          type: string
+                        expiresAt:
+                          description: Date the key expires.
+                          type: string
+                        kid:
+                          description: Key ID.
+                          type: string
+                        kty:
+                          description: Identifies the cryptographic algorithm family
+                            used with the key.
+                          type: string
+                        lastUpdated:
+                          description: Date the key was last updated.
+                          type: string
+                        "n":
+                          description: RSA modulus.
+                          type: string
+                        use:
+                          description: Intended use of the public key.
+                          type: string
+                        x5c:
+                          description: X.509 certificate chain.
+                          items:
+                            type: string
+                          type: array
+                        x5tS256:
+                          description: X.509 certificate SHA-256 thumbprint.
+                          type: string
+                      type: object
+                    type: array
+                  label:
+                    description: label of application. Pretty name of app.
+                    type: string
+                  logo:
+                    description: Local file path to the logo. The file must be in
+                      PNG, JPG, or GIF format, and less than 1 MB in size. Local path
+                      to logo of the application.
+                    type: string
+                  logoUrl:
+                    description: Direct link of application logo. URL of the application's
+                      logo
+                    type: string
+                  metadata:
+                    description: The raw SAML metadata in XML. SAML xml metadata payload
+                    type: string
+                  metadataUrl:
+                    description: SAML xml metadata URL. SAML xml metadata URL
+                    type: string
+                  name:
+                    description: The name of the attribute statement. Name of the
+                      app.
+                    type: string
+                  preconfiguredApp:
+                    description: 'name of application from the Okta Integration Network,
+                      if not included a custom app will be created.  If not provided
+                      the following arguments are required: Name of preexisting SAML
+                      application. For instance ''slack'''
+                    type: string
+                  recipient:
+                    description: The location where the app may present the SAML assertion.
+                      The location where the app may present the SAML assertion
+                    type: string
+                  requestCompressed:
+                    description: Denotes whether the request is compressed or not.
+                      Denotes whether the request is compressed or not.
+                    type: boolean
+                  responseSigned:
+                    description: Determines whether the SAML auth response message
+                      is digitally signed. Determines whether the SAML auth response
+                      message is digitally signed
+                    type: boolean
+                  samlSignedRequestEnabled:
+                    description: SAML Signed Request enabled SAML Signed Request enabled
+                    type: boolean
+                  samlVersion:
+                    description: 'SAML version for the app''s sign-on mode. Valid
+                      values are: "2.0" or "1.1". Default is "2.0". SAML version for
+                      the app''s sign-on mode'
+                    type: string
+                  signOnMode:
+                    description: Sign-on mode of application. Sign on mode of application.
+                    type: string
+                  signatureAlgorithm:
+                    description: Signature algorithm used ot digitally sign the assertion
+                      and response. Signature algorithm used ot digitally sign the
+                      assertion and response
+                    type: string
+                  singleLogoutCertificate:
+                    description: 'x509 encoded certificate that the Service Provider
+                      uses to sign Single Logout requests.  Note: should be provided
+                      without -----BEGIN CERTIFICATE----- and -----END CERTIFICATE-----,
+                      see official documentation. x509 encoded certificate that the
+                      Service Provider uses to sign Single Logout requests'
+                    type: string
+                  singleLogoutIssuer:
+                    description: The issuer of the Service Provider that generates
+                      the Single Logout request. The issuer of the Service Provider
+                      that generates the Single Logout request
+                    type: string
+                  singleLogoutUrl:
+                    description: The location where the logout response is sent. The
+                      location where the logout response is sent
+                    type: string
+                  spIssuer:
+                    description: SAML service provider issuer. SAML SP issuer ID
+                    type: string
+                  ssoUrl:
+                    description: Single Sign-on Url. Single Sign On URL
+                    type: string
+                  status:
+                    description: status of application. Status of application.
+                    type: string
+                  subjectNameIdFormat:
+                    description: Identifies the SAML processing rules. Identifies
+                      the SAML processing rules.
+                    type: string
+                  subjectNameIdTemplate:
+                    description: Template for app user's username when a user is assigned
+                      to the app. Template for app user's username when a user is
+                      assigned to the app
+                    type: string
+                  userNameTemplate:
+                    description: 'Username template. Default is: "${source.login}"
+                      Username template'
+                    type: string
+                  userNameTemplatePushStatus:
+                    description: 'Push username on update. Valid values: "PUSH" and
+                      "DONT_PUSH". Push username on update'
+                    type: string
+                  userNameTemplateSuffix:
+                    description: Username template suffix. Username template suffix
+                    type: string
+                  userNameTemplateType:
+                    description: 'Username template type. Default is: "BUILT_IN".
+                      Username template type'
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

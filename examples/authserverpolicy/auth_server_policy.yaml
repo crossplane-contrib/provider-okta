@@ -1,0 +1,13 @@
+apiVersion: auth.okta.upbound.io/v1alpha1
+kind: ServerPolicy
+metadata:
+  name: server-policy
+spec:
+  forProvider:
+    authServerIdRef:
+      name: auth-server
+    name: example
+    description: example
+    priority: 1
+    clientWhitelist:
+      - "ALL_CLIENTS"

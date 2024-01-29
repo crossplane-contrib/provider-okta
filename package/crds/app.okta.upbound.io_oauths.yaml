@@ -1,0 +1,761 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.3
+  creationTimestamp: null
+  name: oauths.app.okta.upbound.io
+spec:
+  group: app.okta.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - okta
+    kind: Oauth
+    listKind: OauthList
+    plural: oauths
+    singular: oauth
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Oauth is the Schema for the Oauths API. <no value>
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: OauthSpec defines the desired state of Oauth
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: 'DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  accessibilityErrorRedirectUrl:
+                    description: Custom error page URL
+                    type: string
+                  accessibilityLoginRedirectUrl:
+                    description: Custom login page URL
+                    type: string
+                  accessibilitySelfService:
+                    description: Enable self service
+                    type: boolean
+                  adminNote:
+                    description: Application notes for admins.
+                    type: string
+                  appLinksJson:
+                    description: Displays specific appLinks for the app
+                    type: string
+                  appSettingsJson:
+                    description: Application settings in JSON format
+                    type: string
+                  authenticationPolicy:
+                    description: Id of this apps authentication policy
+                    type: string
+                  autoKeyRotation:
+                    description: Requested key rotation mode.
+                    type: boolean
+                  autoSubmitToolbar:
+                    description: Display auto submit toolbar
+                    type: boolean
+                  clientBasicSecretSecretRef:
+                    description: OAuth client secret key, this can be set when token_endpoint_auth_method
+                      is client_secret_basic.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  clientId:
+                    description: OAuth client ID. If set during creation, app is created
+                      with this id.
+                    type: string
+                  clientUri:
+                    description: URI to a web page providing information about the
+                      client.
+                    type: string
+                  consentMethod:
+                    description: '*Early Access Property*. Indicates whether user
+                      consent is required or implicit. Valid values: REQUIRED, TRUSTED.
+                      Default value is TRUSTED'
+                    type: string
+                  enduserNote:
+                    description: Application notes for end users.
+                    type: string
+                  grantTypes:
+                    description: List of OAuth 2.0 grant types. Conditional validation
+                      params found here https://developer.okta.com/docs/api/resources/apps#credentials-settings-details.
+                      Defaults to minimum requirements per app type.
+                    items:
+                      type: string
+                    type: array
+                  groupsClaim:
+                    description: Groups claim for an OpenID Connect client application
+                      (argument is ignored when API auth is done with OAuth 2.0 credentials)
+                    items:
+                      properties:
+                        filterType:
+                          description: Groups claim filter. Can only be set if type
+                            is FILTER.
+                          type: string
+                        name:
+                          description: Name of the claim that will be used in the
+                            token.
+                          type: string
+                        type:
+                          description: Groups claim type.
+                          type: string
+                        value:
+                          description: Value of the claim. Can be an Okta Expression
+                            Language statement that evaluates at the time the token
+                            is minted.
+                          type: string
+                      required:
+                      - name
+                      - type
+                      - value
+                      type: object
+                    type: array
+                  hideIos:
+                    description: Do not display application icon on mobile app
+                    type: boolean
+                  hideWeb:
+                    description: Do not display application icon to users
+                    type: boolean
+                  implicitAssignment:
+                    description: '*Early Access Property*. Enable Federation Broker
+                      Mode.'
+                    type: boolean
+                  issuerMode:
+                    description: '*Early Access Property*. Indicates whether the Okta
+                      Authorization Server uses the original Okta org domain URL or
+                      a custom domain URL as the issuer of ID token for this client.'
+                    type: string
+                  jwks:
+                    items:
+                      properties:
+                        e:
+                          description: RSA Exponent
+                          type: string
+                        kid:
+                          description: Key ID
+                          type: string
+                        kty:
+                          description: Key type
+                          type: string
+                        "n":
+                          description: RSA Modulus
+                          type: string
+                        x:
+                          description: X coordinate of the elliptic curve point
+                          type: string
+                        "y":
+                          description: Y coordinate of the elliptic curve point
+                          type: string
+                      required:
+                      - kid
+                      - kty
+                      type: object
+                    type: array
+                  jwksUri:
+                    description: URL reference to JWKS
+                    type: string
+                  label:
+                    description: Pretty name of app.
+                    type: string
+                  loginMode:
+                    description: The type of Idp-Initiated login that the client supports,
+                      if any
+                    type: string
+                  loginScopes:
+                    description: List of scopes to use for the request
+                    items:
+                      type: string
+                    type: array
+                  loginUri:
+                    description: URI that initiates login.
+                    type: string
+                  logo:
+                    description: Local path to logo of the application.
+                    type: string
+                  logoUri:
+                    description: URI that references a logo for the client.
+                    type: string
+                  omitSecret:
+                    description: This tells the provider not to persist the application's
+                      secret to state. If this is ever changes from true => false
+                      your app will be recreated.
+                    type: boolean
+                  pkceRequired:
+                    description: 'Require Proof Key for Code Exchange (PKCE) for additional
+                      verification key rotation mode. See: https://developer.okta.com/docs/reference/api/apps/#oauth-credential-object'
+                    type: boolean
+                  policyUri:
+                    description: URI to web page providing client policy document.
+                    type: string
+                  postLogoutRedirectUris:
+                    description: 'List of URIs for redirection after logout. Note:
+                      see okta_app_oauth_post_logout_redirect_uri for appending to
+                      this list in a decentralized way.'
+                    items:
+                      type: string
+                    type: array
+                  profile:
+                    description: Custom JSON that represents an OAuth application's
+                      profile
+                    type: string
+                  redirectUris:
+                    description: 'List of URIs for use in the redirect-based flow.
+                      This is required for all application types except service. Note:
+                      see okta_app_oauth_redirect_uri for appending to this list in
+                      a decentralized way.'
+                    items:
+                      type: string
+                    type: array
+                  refreshTokenLeeway:
+                    description: '*Early Access Property* Grace period for token rotation,
+                      required with grant types refresh_token'
+                    type: number
+                  refreshTokenRotation:
+                    description: '*Early Access Property* Refresh token rotation behavior,
+                      required with grant types refresh_token'
+                    type: string
+                  responseTypes:
+                    description: List of OAuth 2.0 response type strings.
+                    items:
+                      type: string
+                    type: array
+                  status:
+                    description: Status of application.
+                    type: string
+                  tokenEndpointAuthMethod:
+                    description: Requested authentication method for the token endpoint.
+                    type: string
+                  tosUri:
+                    description: URI to web page providing client tos (terms of service).
+                    type: string
+                  type:
+                    description: The type of client application.
+                    type: string
+                  userNameTemplate:
+                    description: Username template
+                    type: string
+                  userNameTemplatePushStatus:
+                    description: Push username on update
+                    type: string
+                  userNameTemplateSuffix:
+                    description: Username template suffix
+                    type: string
+                  userNameTemplateType:
+                    description: Username template type
+                    type: string
+                  wildcardRedirect:
+                    description: '*Early Access Property*. Indicates if the client
+                      is allowed to use wildcard matching of redirect_uris'
+                    type: string
+                type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: label is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.label)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
+          status:
+            description: OauthStatus defines the observed state of Oauth.
+            properties:
+              atProvider:
+                properties:
+                  accessibilityErrorRedirectUrl:
+                    description: Custom error page URL
+                    type: string
+                  accessibilityLoginRedirectUrl:
+                    description: Custom login page URL
+                    type: string
+                  accessibilitySelfService:
+                    description: Enable self service
+                    type: boolean
+                  adminNote:
+                    description: Application notes for admins.
+                    type: string
+                  appLinksJson:
+                    description: Displays specific appLinks for the app
+                    type: string
+                  appSettingsJson:
+                    description: Application settings in JSON format
+                    type: string
+                  authenticationPolicy:
+                    description: Id of this apps authentication policy
+                    type: string
+                  autoKeyRotation:
+                    description: Requested key rotation mode.
+                    type: boolean
+                  autoSubmitToolbar:
+                    description: Display auto submit toolbar
+                    type: boolean
+                  clientId:
+                    description: OAuth client ID. If set during creation, app is created
+                      with this id.
+                    type: string
+                  clientUri:
+                    description: URI to a web page providing information about the
+                      client.
+                    type: string
+                  consentMethod:
+                    description: '*Early Access Property*. Indicates whether user
+                      consent is required or implicit. Valid values: REQUIRED, TRUSTED.
+                      Default value is TRUSTED'
+                    type: string
+                  enduserNote:
+                    description: Application notes for end users.
+                    type: string
+                  grantTypes:
+                    description: List of OAuth 2.0 grant types. Conditional validation
+                      params found here https://developer.okta.com/docs/api/resources/apps#credentials-settings-details.
+                      Defaults to minimum requirements per app type.
+                    items:
+                      type: string
+                    type: array
+                  groupsClaim:
+                    description: Groups claim for an OpenID Connect client application
+                      (argument is ignored when API auth is done with OAuth 2.0 credentials)
+                    items:
+                      properties:
+                        filterType:
+                          description: Groups claim filter. Can only be set if type
+                            is FILTER.
+                          type: string
+                        issuerMode:
+                          description: Issuer mode inherited from OAuth App
+                          type: string
+                        name:
+                          description: Name of the claim that will be used in the
+                            token.
+                          type: string
+                        type:
+                          description: Groups claim type.
+                          type: string
+                        value:
+                          description: Value of the claim. Can be an Okta Expression
+                            Language statement that evaluates at the time the token
+                            is minted.
+                          type: string
+                      type: object
+                    type: array
+                  hideIos:
+                    description: Do not display application icon on mobile app
+                    type: boolean
+                  hideWeb:
+                    description: Do not display application icon to users
+                    type: boolean
+                  id:
+                    type: string
+                  implicitAssignment:
+                    description: '*Early Access Property*. Enable Federation Broker
+                      Mode.'
+                    type: boolean
+                  issuerMode:
+                    description: '*Early Access Property*. Indicates whether the Okta
+                      Authorization Server uses the original Okta org domain URL or
+                      a custom domain URL as the issuer of ID token for this client.'
+                    type: string
+                  jwks:
+                    items:
+                      properties:
+                        e:
+                          description: RSA Exponent
+                          type: string
+                        kid:
+                          description: Key ID
+                          type: string
+                        kty:
+                          description: Key type
+                          type: string
+                        "n":
+                          description: RSA Modulus
+                          type: string
+                        x:
+                          description: X coordinate of the elliptic curve point
+                          type: string
+                        "y":
+                          description: Y coordinate of the elliptic curve point
+                          type: string
+                      type: object
+                    type: array
+                  jwksUri:
+                    description: URL reference to JWKS
+                    type: string
+                  label:
+                    description: Pretty name of app.
+                    type: string
+                  loginMode:
+                    description: The type of Idp-Initiated login that the client supports,
+                      if any
+                    type: string
+                  loginScopes:
+                    description: List of scopes to use for the request
+                    items:
+                      type: string
+                    type: array
+                  loginUri:
+                    description: URI that initiates login.
+                    type: string
+                  logo:
+                    description: Local path to logo of the application.
+                    type: string
+                  logoUri:
+                    description: URI that references a logo for the client.
+                    type: string
+                  logoUrl:
+                    description: URL of the application's logo
+                    type: string
+                  name:
+                    description: Name of the app.
+                    type: string
+                  omitSecret:
+                    description: This tells the provider not to persist the application's
+                      secret to state. If this is ever changes from true => false
+                      your app will be recreated.
+                    type: boolean
+                  pkceRequired:
+                    description: 'Require Proof Key for Code Exchange (PKCE) for additional
+                      verification key rotation mode. See: https://developer.okta.com/docs/reference/api/apps/#oauth-credential-object'
+                    type: boolean
+                  policyUri:
+                    description: URI to web page providing client policy document.
+                    type: string
+                  postLogoutRedirectUris:
+                    description: 'List of URIs for redirection after logout. Note:
+                      see okta_app_oauth_post_logout_redirect_uri for appending to
+                      this list in a decentralized way.'
+                    items:
+                      type: string
+                    type: array
+                  profile:
+                    description: Custom JSON that represents an OAuth application's
+                      profile
+                    type: string
+                  redirectUris:
+                    description: 'List of URIs for use in the redirect-based flow.
+                      This is required for all application types except service. Note:
+                      see okta_app_oauth_redirect_uri for appending to this list in
+                      a decentralized way.'
+                    items:
+                      type: string
+                    type: array
+                  refreshTokenLeeway:
+                    description: '*Early Access Property* Grace period for token rotation,
+                      required with grant types refresh_token'
+                    type: number
+                  refreshTokenRotation:
+                    description: '*Early Access Property* Refresh token rotation behavior,
+                      required with grant types refresh_token'
+                    type: string
+                  responseTypes:
+                    description: List of OAuth 2.0 response type strings.
+                    items:
+                      type: string
+                    type: array
+                  signOnMode:
+                    description: Sign on mode of application.
+                    type: string
+                  status:
+                    description: Status of application.
+                    type: string
+                  tokenEndpointAuthMethod:
+                    description: Requested authentication method for the token endpoint.
+                    type: string
+                  tosUri:
+                    description: URI to web page providing client tos (terms of service).
+                    type: string
+                  type:
+                    description: The type of client application.
+                    type: string
+                  userNameTemplate:
+                    description: Username template
+                    type: string
+                  userNameTemplatePushStatus:
+                    description: Push username on update
+                    type: string
+                  userNameTemplateSuffix:
+                    description: Username template suffix
+                    type: string
+                  userNameTemplateType:
+                    description: Username template type
+                    type: string
+                  wildcardRedirect:
+                    description: '*Early Access Property*. Indicates if the client
+                      is allowed to use wildcard matching of redirect_uris'
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

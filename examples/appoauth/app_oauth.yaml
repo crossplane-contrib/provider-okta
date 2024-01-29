@@ -1,0 +1,14 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: Oauth
+metadata:
+  name: example-oauth-app
+spec:
+  forProvider:
+    label: "Example"
+    type: "web"
+    grantTypes:
+      - authorization_code
+    redirectUris:
+      - "https://example.com"
+    responseTypes:
+      - code

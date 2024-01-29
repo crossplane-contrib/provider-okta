@@ -1,0 +1,8 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: AccessPolicyAssignment
+metadata:
+  name: example-policy-assignment
+spec:
+  forProvider:
+    appId: "appId"
+    policyId: "policy"

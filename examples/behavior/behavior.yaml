@@ -1,0 +1,11 @@
+apiVersion: okta.okta.upbound.io/v1alpha1
+kind: Behavior
+metadata:
+  name: location
+spec:
+  forProvider:
+    name: "Location"
+    type: ANONYMOUS_LOCATION
+    numberOfAuthentications: 50
+    locationGranularityType: "LAT_LONG"
+    radiusFromLocation: 20

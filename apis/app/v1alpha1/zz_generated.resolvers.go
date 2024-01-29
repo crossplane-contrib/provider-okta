@@ -38,3 +38,55 @@ func (mg *GroupAssignment) ResolveReferences(ctx context.Context, c client.Reade
 
 	return nil
 }
+
+// ResolveReferences of this OauthRoleAssignment.
+func (mg *OauthRoleAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClientID),
+		Extract:      OauthClientID(),
+		Reference:    mg.Spec.ForProvider.ClientIDRef,
+		Selector:     mg.Spec.ForProvider.ClientIDSelector,
+		To: reference.To{
+			List:    &OauthList{},
+			Managed: &Oauth{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClientID")
+	}
+	mg.Spec.ForProvider.ClientID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClientIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SAMLAppSettings.
+func (mg *SAMLAppSettings) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppID),
+		Extract:      SamlID(),
+		Reference:    mg.Spec.ForProvider.AppIDRef,
+		Selector:     mg.Spec.ForProvider.AppIDSelector,
+		To: reference.To{
+			List:    &SAMLList{},
+			Managed: &SAML{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AppID")
+	}
+	mg.Spec.ForProvider.AppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AppIDRef = rsp.ResolvedReference
+
+	return nil
+}

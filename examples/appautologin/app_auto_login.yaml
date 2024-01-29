@@ -1,0 +1,11 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: AutoLogin
+metadata:
+  name: example-app-autologin
+spec:
+  forProvider:
+    label: "Example App"
+    signOnUrl: "https://example.com/login.html"
+    signOnRedirectUrl: "https://example.com/login.html"
+    revealPassword: true
+    credentialsScheme: "EDIT_USERNAME_AND_PASSWORD"

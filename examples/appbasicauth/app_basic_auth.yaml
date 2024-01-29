@@ -1,0 +1,9 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: BasicAuth
+metadata:
+  name: example-basic-auth-app
+spec:
+  forProvider:
+    label: "Example Auth"
+    url: "https://example.com/login.html"
+    authUrl: "https://example.com/auth.html"

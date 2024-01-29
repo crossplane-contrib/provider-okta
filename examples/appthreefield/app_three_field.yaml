@@ -1,0 +1,15 @@
+apiVersion: app.okta.upbound.io/v1alpha1
+kind: ThreeField
+metadata:
+  name: example-app
+spec:
+  forProvider:
+    label: Example App
+    buttonSelector: "login-button"
+    passwordSelector: "password"
+    usernameSelector: "username"
+    extraFieldSelector: "extra-field"
+    extraFieldValue: "extra-field-value"
+    url: "https://example.com/login.html"
+    revealPassword: true
+    credentialsScheme: "EDIT_USERNAME_AND_PASSWORD"

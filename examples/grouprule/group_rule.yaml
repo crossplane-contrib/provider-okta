@@ -1,0 +1,11 @@
+apiVersion: group.okta.upbound.io/v1alpha1
+kind: Rule
+metadata:
+  name: example-rule
+spec:
+  forProvider:
+    name: example
+    groupAssignmentsRefs:
+      - name: example-group
+    expressionType: "urn:okta:expression:1.0"
+    expressionValue: "String.startsWith(user.firstName,\"andy\")"
