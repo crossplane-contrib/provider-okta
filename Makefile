@@ -4,7 +4,7 @@
 PROJECT_NAME ?= provider-okta
 PROJECT_REPO ?= github.com/healthcarecom/$(PROJECT_NAME)
 
-export TERRAFORM_VERSION ?= 1.2.1
+export TERRAFORM_VERSION ?= 1.7.1
 
 export TERRAFORM_PROVIDER_SOURCE := okta/okta
 export TERRAFORM_PROVIDER_REPO := https://github.com/okta/terraform-provider-okta
