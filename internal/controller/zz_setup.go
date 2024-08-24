@@ -39,6 +39,7 @@ import (
 	samlidp "github.com/healthcarecom/provider-okta/internal/controller/idp/saml"
 	behavior "github.com/healthcarecom/provider-okta/internal/controller/okta/behavior"
 	providerconfig "github.com/healthcarecom/provider-okta/internal/controller/providerconfig"
+	origin "github.com/healthcarecom/provider-okta/internal/controller/trustedorigin/origin"
 	adminroles "github.com/healthcarecom/provider-okta/internal/controller/user/adminroles"
 	baseschemaproperty "github.com/healthcarecom/provider-okta/internal/controller/user/baseschemaproperty"
 	user "github.com/healthcarecom/provider-okta/internal/controller/user/user"
@@ -78,6 +79,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		samlidp.Setup,
 		behavior.Setup,
 		providerconfig.Setup,
+		origin.Setup,
 		adminroles.Setup,
 		baseschemaproperty.Setup,
 		user.Setup,
