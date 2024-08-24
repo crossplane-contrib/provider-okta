@@ -1,0 +1,13 @@
+apiVersion: trustedorigin.okta.upbound.io/v1alpha1
+kind: Origin
+metadata:
+  name: "example-origin"
+spec:
+  forProvider:
+    name: "New example origin"
+    origin: "https://example.com"
+    scopes:
+      - "CORS"
+      - "REDIRECT"
+  providerConfigRef:
+    name: default
