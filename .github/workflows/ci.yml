@@ -13,6 +13,9 @@ env:
   GO_VERSION: '1.19'
   GOLANGCI_VERSION: 'v1.50.0'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
+  REGISTRY_ORGS: ghcr.io/eigokor
+  XPKG_REG_ORGS: ghcr.io/eigokor
+  XPKG_REG_ORGS_NO_PROMOTE: ghcr.io/eigokor
 
   # Common users. We can't run a step 'if secrets.XXX != ""' but we can run a
   # step 'if env.XXX != ""', so we copy these to succinctly test whether
