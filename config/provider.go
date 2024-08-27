@@ -41,6 +41,7 @@ import (
 	"github.com/healthcarecom/provider-okta/config/appgroupassignment"
 	"github.com/healthcarecom/provider-okta/config/group"
 	"github.com/healthcarecom/provider-okta/config/groupmemberships"
+	"github.com/healthcarecom/provider-okta/config/trustedorigin"
 	"github.com/healthcarecom/provider-okta/config/user"
 )
 
@@ -98,6 +99,7 @@ func GetProvider() *ujconfig.Provider {
 		idpsaml.Configure,
 		useradminroles.Configure,
 		userbaseschemaproperty.Configure,
+		trustedorigin.Configure,
 	} {
 		configure(pc)
 	}

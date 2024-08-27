@@ -42,6 +42,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"okta_idp_saml":                     config.IdentifierFromProvider,
 	"okta_user_admin_roles":             config.IdentifierFromProvider,
 	"okta_user_base_schema_property":    config.IdentifierFromProvider,
+	"okta_trusted_origin":               config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
