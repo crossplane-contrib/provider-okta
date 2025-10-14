@@ -6,7 +6,7 @@ organization](https://github.com/upbound/) will list their repository maintainer
 
 
 ## Maintainers
-
+* Renato Jop [rjop-hccgt](https://github.com/rjop-hccgt)
 * Alper Ulucinar <alper@upbound.com> ([ulucinar](https://github.com/ulucinar))
 * Sergen Yalcin <sergen@upbound.com> ([sergenyalcin](https://github.com/sergenyalcin))
 
